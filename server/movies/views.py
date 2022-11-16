@@ -1,0 +1,62 @@
+from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
+from rest_framework.decorators import api_view
+from .models import Movie, Genre, Actor, Director, Review
+
+from .serializers import MovieSerializer, ReviewSerializer, ActorSerializer
+from rest_framework.response import Response
+from rest_framework import status
+
+@api_view(['GET'])
+def index(request):
+    movies = Movie.objects.order_by('-popularity')
+    serializer = MovieSerializer(movies, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def detail(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    serializer = MovieSerializer(movie)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def review_create(request, movie_pk):
+    return
+
+@api_view(['GET', 'POST'])
+def review_update(request, review_pk):
+    return
+
+@api_view(['POST'])
+def review_delete(request, review_pk):
+    return
+
+@api_view(['GET'])
+def actorport(request, actor_pk):
+    # 배우의 출연영화
+    casted_movie = Movie.objects.filter(actors=actor_pk).order_by('-popularity')
+    serializer = MovieSerializer(casted_movie, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def directorport(request, director_pk):
+    # 감독의 연출영화
+    directed_movie = Movie.objects.filter(directors=director_pk).order_by('-popularity')
+    serializer = MovieSerializer(directed_movie, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def genreport(request, genre_pk):
+    # 해당장르의 인기영화
+    directed_movie = Movie.objects.filter(genrers=genre_pk).order_by('-popularity')
+    serializer = MovieSerializer(directed_movie, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+
+@api_view(['GET'])
+def test(request):
+    review = Review.objects.all()
+    serializer_reviews = ReviewSerializer(review, many=True)
+    return Response(serializer_reviews.data, status=status.HTTP_200_OK)
