@@ -47,7 +47,6 @@ export default {
     methods: {
         getMovieDetail() {
             axios({
-                method: "get",
                 url: `${API_URL}/movies/${this.$route.params.id}`,
             })
                 .then((res) => {
