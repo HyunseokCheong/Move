@@ -1,11 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import RankingView from "../views/RankingView.vue";
-import LoginView from "../views/LoginView.vue";
-import SignupView from "../views/SignupView.vue";
-import MypageView from "../views/MypageView.vue";
 import DetailView from "../views/DetailView.vue";
+import SignupView from "../views/SignupView.vue";
+import LoginView from "../views/LoginView.vue";
+import DetailUserView from "../views/DetailUserView.vue";
+import RankingView from "../views/RankingView.vue";
 
 Vue.use(VueRouter);
 
@@ -16,14 +16,9 @@ const routes = [
         component: HomeView,
     },
     {
-        path: "/ranking",
-        name: "ranking",
-        component: RankingView,
-    },
-    {
-        path: "/login",
-        name: "login",
-        component: LoginView,
+        path: "/movies/:id",
+        name: "detail",
+        component: DetailView,
     },
     {
         path: "/signup",
@@ -31,14 +26,19 @@ const routes = [
         component: SignupView,
     },
     {
-        path: "/mypage",
-        name: "mypage",
-        component: MypageView,
+        path: "/login",
+        name: "login",
+        component: LoginView,
     },
     {
-        path: "/movies/movie/:id",
-        name: "detail",
-        component: DetailView,
+        path: "/accounts/profile/:name",
+        name: "detailuser",
+        component: DetailUserView,
+    },
+    {
+        path: "/ranking",
+        name: "ranking",
+        component: RankingView,
     },
 ];
 
