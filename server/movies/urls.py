@@ -7,7 +7,6 @@ urlpatterns = [
     path('', views.index),
     path('<int:movie_pk>/', views.detail, name="detail"),
     path('<int:movie_pk>/create/', views.review_create, name='riview_create'),
-    path('<int:movie_pk>/update/<int:review_pk>', views.review_update, name='review_update'),  
     path('<int:movie_pk>/delete/<int:review_pk>', views.review_delete, name='review_delete'),
     path('actor/<int:actor_pk>/', views.actorport, name="actorport"),
     path('director/<int:director_pk>/', views.directorport, name="directorport"),

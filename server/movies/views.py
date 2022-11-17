@@ -29,6 +29,7 @@ def review_create(request, movie_pk):
         user.reviews_count += 1
         return Response(serializer.data)
 
+@api_view(['POST'])
 def review_delete(request, movie_pk, review_pk):
     user = request.user
     review = get_object_or_404(Review, pk=review_pk)
@@ -36,14 +37,6 @@ def review_delete(request, movie_pk, review_pk):
         review.delete()
         user.reviews_count -= 1
     return Response({'delete'})
-
-@api_view(['GET', 'POST'])
-def review_update(request, review_pk):
-    return
-
-@api_view(['POST'])
-def review_delete(request, review_pk):
-    return
 
 @api_view(['GET'])
 def actorport(request, actor_pk):

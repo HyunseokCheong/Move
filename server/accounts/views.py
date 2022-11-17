@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import RateMovie, User
-from .serializers import UserSerializer
+from .serializers import UserSerializer, RateMovieSerializer
 from movies.serializers import ReviewSerializer
 from movies.models import Review, Actor, Director, Genre, Movie
 from rest_framework import status
@@ -18,12 +18,16 @@ def profile(request, username):
     person = User.objects.get(username=username)
     serializer = UserSerializer(person)
     review = Review.objects.filter(reviewer=person.pk)
+    person.reviews_count = review.count()
     review_serializer = ReviewSerializer(review, many=True)
+    likemovie = RateMovie.objects.filter(rateuser=person, state=1)
+    lm_serializer = RateMovieSerializer(likemovie, many=True)
     context = {
         'profile': serializer.data,
         'reviews': review_serializer.data,
+        'likemovies': lm_serializer.data,
     }
-    return Response(context)
+    return Response(context, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def follow(request, user_pk):
