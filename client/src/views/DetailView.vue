@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="movie">
-            <p>제목 : {{ movie.title }}</p>
+            <!-- <p>제목 : {{ movie.title }}</p>
             <p>개봉일 : {{ movie.release_date }}</p>
             <img :src="poster_path" alt="..." />
             <p>내용 : {{ movie.overview }}</p>
@@ -13,7 +13,7 @@
             </div>
             <div v-for="actor in actors" :key="actor.id">
                 {{ actor.name }}
-            </div>
+            </div> -->
             <hr />
             <div>
                 <h1>리뷰 작성</h1>
@@ -62,6 +62,7 @@ export default {
             genres: [],
             actors: [],
             reviews: [],
+            reviewer: null,
             content: null,
             rate: null,
         };
@@ -80,15 +81,18 @@ export default {
                     this.directors = res.data.directors;
                     this.genres = res.data.genres;
                     this.actors = res.data.actors;
-                    console.log(res.data);
                 })
                 .catch((err) => {
                     console.log(err);
                 });
         },
         createReview() {
+            //
+            const movies = this.movie;
+            const reviewer = this.reviewer;
             const content = this.content;
             const rate = this.rate;
+            console.log(`Token ${this.$store.state.token}`);
             if (!content) {
                 alert("내용을 입력해주세요");
                 return;
@@ -100,6 +104,9 @@ export default {
                 method: "post",
                 url: `${API_URL}/movies/${this.movie.id}/create/`,
                 data: {
+                    //
+                    movies: movies,
+                    reviewer: reviewer,
                     content: content,
                     rate: rate,
                 },

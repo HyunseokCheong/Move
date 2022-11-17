@@ -1,9 +1,9 @@
 <template>
     <div>
         <div v-if="user">
-            <p>
+            <!-- <p>
                 {{ user.profile.username }}
-            </p>
+            </p> -->
             {{ user }}
         </div>
     </div>
