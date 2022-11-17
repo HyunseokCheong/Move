@@ -5,6 +5,7 @@ from accounts.models import RateMovie, User
 from .serializers import MovieSerializer, ReviewSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from django.db.models import Q
 
 @api_view(['GET'])
 def index(request):
@@ -59,42 +60,32 @@ def genreport(request, genre_pk):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-def test(request):
-    review = Review.objects.all()
-    serializer_reviews = ReviewSerializer(review, many=True)
-    return Response(serializer_reviews.data, status=status.HTTP_200_OK)
-
-@api_view(['GET'])
 def recommend(request):
     user = User.objects.get(pk=1)
     # user = request.user
-    recommendmovies = []
     excepts = []
-    cnt = 0
+    actors = []
+    directors = []
+    recommends = []
+    
     exceptmovies = RateMovie.objects.filter(rateuser=user)
-    for fav_actor in user.favorite_actors.all():
-        actor = Movie.objects.filter(actors=fav_actor.id)
-        favact = favact | actor
-
-    for fav_director in user.favorite_directors.all():
-        director = Movie.objects.filter(directors=fav_director.id)
-    print(actor.all())
-    # print('-----------')
-    # print(director.all())
-    # reco = actor | director
-    # print('-------------------')
-    # print(reco)
     for exceptmovie in exceptmovies:
-        excepts.append(exceptmovie.ratedmovie_id)
-    for movie in Movie.objects.order_by('-popularity'):
-        if movie.id not in excepts:
-            if movie not in recommendmovies:
-                recommendmovies.append(movie)
-                cnt += 1
-        if cnt > 10:
-            # print(len(recommendmovies))
-            # print(recommendmovies)
-            return Response({'dd'})
+        excepts.append(exceptmovie.ratedmovie.id)
+    for actor in user.favorite_actors.all():
+        actors.append(actor.id)
+    for director in user.favorite_directors.all():
+       directors.append(director.id)
+    rec_movies = Movie.objects.filter(~Q(id__in=excepts) & (Q(actors__in=actors) | Q(directors__in=directors))).distinct()
+    rec = len(rec_movies)
+    if rec < 20:
+        num = 20 - rec
+        for rec_movie in rec_movies:
+            recommends.append(rec_movie.id)
+        for leftmovie in Movie.objects.filter(~Q(id__in=excepts) & ~Q(actors__in=actors) & ~Q(directors__in=directors)).order_by('-popularity')[:num]:
+            recommends.append(leftmovie.id)
+        rec_movies = Movie.objects.filter(Q(id__in=recommends))
+    serializer_recommend = MovieSerializer(rec_movies, many=True)
+    return Response(serializer_recommend.data, status=status.HTTP_200_OK)
     
 
     

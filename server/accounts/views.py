@@ -110,6 +110,7 @@ def dislike_movie(request, movie_pk):
         print(rate_movie)
         return Response({'dislike add'})
 
+@api_view(['GET'])
 def ranking(request):
     users = User.objects.order_by('-reviews_count')
     serializer = UserSerializer(users, many=True)
