@@ -12,6 +12,7 @@ export default new Vuex.Store({
     state: {
         movies: [],
         token: null,
+        loggedInUser: null,
         users: [
             {
                 id: 1,
@@ -71,7 +72,11 @@ export default new Vuex.Store({
                     password2: payload.password2,
                 },
             })
-                .then((res) => context.commit("SAVE_TOKEN", res.data.key))
+                .then((res) => {
+                    this.state.loggedInUser = payload.username;
+                    console.log(this.state.loggedInUser);
+                    context.commit("SAVE_TOKEN", res.data.key);
+                })
                 .catch((err) => console.log(err));
         },
         logIn(context, payload) {
@@ -83,6 +88,8 @@ export default new Vuex.Store({
                     password: payload.password,
                 },
             }).then((res) => {
+                this.state.loggedInUser = payload.username;
+                console.log(this.state.loggedInUser);
                 context.commit("SAVE_TOKEN", res.data.key);
             });
         },

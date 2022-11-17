@@ -1,6 +1,7 @@
 <template>
     <nav>
         <div v-if="isLogin">
+            <p>안녕하세요{{ userName }}</p>
             <button @click="logOut">로그아웃버튼</button>
         </div>
         <div v-if="!isLogin">
@@ -23,10 +24,15 @@ export default {
         isLogin() {
             return this.$store.getters.isLogin;
         },
+        userName() {
+            return this.$store.state.userName;
+        },
     },
     methods: {
         logOut() {
             this.$store.state.token = null;
+            this.$store.state.userName = null;
+            console.log("logout");
         },
     },
 };
