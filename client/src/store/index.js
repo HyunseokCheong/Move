@@ -74,7 +74,6 @@ export default new Vuex.Store({
             })
                 .then((res) => {
                     this.state.loggedInUser = payload.username;
-                    console.log(this.state.loggedInUser);
                     context.commit("SAVE_TOKEN", res.data.key);
                 })
                 .catch((err) => console.log(err));
@@ -89,7 +88,6 @@ export default new Vuex.Store({
                 },
             }).then((res) => {
                 this.state.loggedInUser = payload.username;
-                console.log(this.state.loggedInUser);
                 context.commit("SAVE_TOKEN", res.data.key);
             });
         },
