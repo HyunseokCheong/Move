@@ -21,7 +21,21 @@ def detail(request, movie_pk):
 
 @api_view(['POST'])
 def review_create(request, movie_pk):
-    return
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    user = request.user
+    serializer = ReviewSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(reviewer=user, movies=movie)
+        user.reviews_count += 1
+        return Response(serializer.data)
+
+def review_delete(request, movie_pk, review_pk):
+    user = request.user
+    review = get_object_or_404(Review, pk=review_pk)
+    if review.reviewer == user:
+        review.delete()
+        user.reviews_count -= 1
+    return Response({'delete'})
 
 @api_view(['GET', 'POST'])
 def review_update(request, review_pk):

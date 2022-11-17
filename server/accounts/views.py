@@ -2,10 +2,12 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import redirect
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+from .models import RateMovie, User
 from .serializers import UserSerializer
 from movies.serializers import ReviewSerializer
-from movies.models import Review, Actor, Director, Genre
+from movies.models import Review, Actor, Director, Genre, Movie
+from rest_framework import status
+
 
 
 
@@ -39,7 +41,7 @@ def follow(request, user_pk):
                 # 팔로우
                 you.followers.add(me)
         return redirect('accounts:profile', you.username)
-    return redirect('accounts:login')
+    return Response({'follow'})
 
 @api_view(['GET'])
 def like_actor(request, actor_pk):
@@ -49,7 +51,7 @@ def like_actor(request, actor_pk):
         me.favorite_actors.remove(actor)
     else:
         me.favorite_actors.add(actor)
-    return redirect('accounts:profile', me.username)
+    return Response({'like actor'})
 
 @api_view(['GET'])
 def like_director(request, director_pk):
@@ -59,7 +61,7 @@ def like_director(request, director_pk):
         me.favorite_directors.remove(director)
     else:
         me.favorite_directors.add(director)
-    return redirect('accounts:profile', me.username)
+    return Response({'like director'})
 
 @api_view(['GET'])
 def like_genre(request, genre_pk):
@@ -69,7 +71,45 @@ def like_genre(request, genre_pk):
         me.favorite_genres.remove(genre)
     else:
         me.favorite_genres.add(genre)
-    return redirect('accounts:profile', me.username)
+    return Response({'like genre'})
 
+@api_view(['GET'])
+def like_movie(request, movie_pk):
+    me = User.objects.get(pk=1)
+    movie = Movie.objects.get(pk=movie_pk)
+    if RateMovie.objects.filter(rateuser=me, ratedmovie=movie).exists():
+        ratemovie = RateMovie.objects.get(rateuser=me, ratedmovie=movie)
+        ratemovie.delete()
+        return Response({'like delete'})
+    else:
+        rate_movie = RateMovie.objects.create(
+            rateuser = me,
+            ratedmovie = movie,
+            title = movie.title,
+            state = 1
+        )
+        print(rate_movie)
+        return Response({'like add'})
 
+@api_view(['GET'])
+def dislike_movie(request, movie_pk):
+    me = User.objects.get(pk=1)
+    movie = Movie.objects.get(pk=movie_pk)
+    if RateMovie.objects.filter(rateuser=me, ratedmovie=movie).exists():
+        ratemovie = RateMovie.objects.get(rateuser=me, ratedmovie=movie)
+        ratemovie.delete()
+        return Response({'dislike delete'})
+    else:
+        rate_movie = RateMovie.objects.create(
+            rateuser = me,
+            ratedmovie = movie,
+            title = movie.title,
+            state = 2
+        )
+        print(rate_movie)
+        return Response({'dislike add'})
 
+def ranking(request):
+    users = User.objects.order_by('-reviews_count')
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
