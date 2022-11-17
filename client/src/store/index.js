@@ -13,23 +13,7 @@ export default new Vuex.Store({
         movies: [],
         token: null,
         loggedInUser: null,
-        users: [
-            {
-                id: 1,
-                name: "CHS",
-                cnt: 10,
-            },
-            {
-                id: 2,
-                name: "KWW",
-                cnt: 5,
-            },
-            {
-                id: 3,
-                name: "JJY",
-                cnt: 100,
-            },
-        ],
+        users: [],
     },
     getters: {
         isLogin(state) {
@@ -44,10 +28,8 @@ export default new Vuex.Store({
             state.token = token;
             router.push({ name: "home" });
         },
-        SET_USERS(state) {
-            state.users.sort(function compare(a, b) {
-                return b.cnt - a.cnt;
-            });
+        SET_USERS(state, users) {
+            state.users = users;
         },
     },
     actions: {
@@ -92,7 +74,12 @@ export default new Vuex.Store({
             });
         },
         getUser(context) {
-            context.commit("SET_USERS");
+            axios({
+                method: "get",
+                url: `${API_URL}/accounts/ranking/`,
+            }).then((res) => {
+                context.commit("SET_USERS", res.data);
+            });
         },
     },
     modules: {},
