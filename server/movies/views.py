@@ -69,12 +69,32 @@ def recommend(request):
     user = User.objects.get(pk=1)
     # user = request.user
     recommendmovies = []
+    excepts = []
     cnt = 0
     exceptmovies = RateMovie.objects.filter(rateuser=user)
+    for fav_actor in user.favorite_actors.all():
+        actor = Movie.objects.filter(actors=fav_actor.id)
+        favact = favact | actor
+
+    for fav_director in user.favorite_directors.all():
+        director = Movie.objects.filter(directors=fav_director.id)
+    print(actor.all())
+    # print('-----------')
+    # print(director.all())
+    # reco = actor | director
+    # print('-------------------')
+    # print(reco)
+    for exceptmovie in exceptmovies:
+        excepts.append(exceptmovie.ratedmovie_id)
     for movie in Movie.objects.order_by('-popularity'):
-        if movie not in exceptmovies:
-            recommendmovies.append(movie)
-            cnt + 1
+        if movie.id not in excepts:
+            if movie not in recommendmovies:
+                recommendmovies.append(movie)
+                cnt += 1
         if cnt > 10:
-            break
-    print(recommendmovies)
+            # print(len(recommendmovies))
+            # print(recommendmovies)
+            return Response({'dd'})
+    
+
+    

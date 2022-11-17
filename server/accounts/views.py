@@ -10,14 +10,15 @@ from rest_framework import status
 
 @api_view(['GET'])
 def profile(request, username):
-    User = get_user_model()
-    person = User.objects.get(username=username)
+    # User = get_user_model()
+    # person = User.objects.get(username=username)
+    person = User.objects.get(pk=1)
     serializer = UserSerializer(person)
     review = Review.objects.filter(reviewer=person.pk)
     person.reviews_count = review.count()
     review_serializer = ReviewSerializer(review, many=True)
     likemovie = RateMovie.objects.filter(rateuser=person, state=1)
-    lm_serializer = RateMovieSerializer(likemovie)
+    lm_serializer = RateMovieSerializer(likemovie, many=True)
     context = {
         'profile': serializer.data,
         'reviews': review_serializer.data,
@@ -78,7 +79,7 @@ def like_movie(request, movie_pk):
     me = User.objects.get(pk=1)
     movie = Movie.objects.get(pk=movie_pk)
     if RateMovie.objects.filter(rateuser=me, ratedmovie=movie).exists():
-        ratemovie = RateMovie.objects.get(rateuser=me, ratedmovie=movie)
+        ratemovie = RateMovie.objects.filter(rateuser=me, ratedmovie=movie)
         ratemovie.delete()
         return Response({'like delete'})
     else:
@@ -96,7 +97,7 @@ def dislike_movie(request, movie_pk):
     me = User.objects.get(pk=1)
     movie = Movie.objects.get(pk=movie_pk)
     if RateMovie.objects.filter(rateuser=me, ratedmovie=movie).exists():
-        ratemovie = RateMovie.objects.get(rateuser=me, ratedmovie=movie)
+        ratemovie = RateMovie.objects.filter(rateuser=me, ratedmovie=movie)
         ratemovie.delete()
         return Response({'dislike delete'})
     else:
