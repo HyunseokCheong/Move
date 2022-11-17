@@ -29,7 +29,7 @@ class DirectorSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ReviewSerializer(serializers.ModelSerializer):
-    reviewer = UserSerializer(read_only=True, many=True)
+    reviewer = UserSerializer(read_only=True)
 
     class Meta:
         model = Review

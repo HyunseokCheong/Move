@@ -11,7 +11,7 @@ urlpatterns = [
     path('actor/<int:actor_pk>/', views.actorport, name="actorport"),
     path('director/<int:director_pk>/', views.directorport, name="directorport"),
     path('genre/<int:genre_pk>/', views.genreport, name="genreport"),
-    # path('recommend/', views.recommend, name="recommend"),
+    path('recommend/', views.recommend, name="recommend"),
     path('test/', views.test),
 ]
 

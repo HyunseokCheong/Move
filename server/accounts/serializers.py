@@ -12,14 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username', 'date_of_birth', 'followings', 'favorite_genres', 'favorite_actors', 'favorite_directors', 'reviews_count')
 
 class RateMovieSerializer(serializers.ModelSerializer):
-    rateuser = UserSerializer(read_only=True)
-    ratedmovie = MovieSerializer(many=True)
 
     class Meta:
         model = RateMovie
-        fields = 'ratedmovie'
-
-
-
-
-
+        fields = '__all__'

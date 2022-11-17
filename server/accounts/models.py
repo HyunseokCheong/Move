@@ -12,7 +12,8 @@ class User(AbstractUser):
     reviews_count = models.IntegerField(default=0)
  
 class RateMovie(models.Model):
-    rateuser = models.ManyToManyField(User, symmetrical=False)
-    ratedmovie = models.ManyToManyField(Movie, symmetrical=False)
-    title = models.CharField(max_length=100)
-    state = models.IntegerField()
+    rateuser = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    ratedmovie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True)
+    title = models.CharField(max_length=100, null=True)
+    state = models.IntegerField(default=0)
+

@@ -8,10 +8,6 @@ from movies.serializers import ReviewSerializer
 from movies.models import Review, Actor, Director, Genre, Movie
 from rest_framework import status
 
-
-
-
-
 @api_view(['GET'])
 def profile(request, username):
     User = get_user_model()
@@ -21,7 +17,7 @@ def profile(request, username):
     person.reviews_count = review.count()
     review_serializer = ReviewSerializer(review, many=True)
     likemovie = RateMovie.objects.filter(rateuser=person, state=1)
-    lm_serializer = RateMovieSerializer(likemovie, many=True)
+    lm_serializer = RateMovieSerializer(likemovie)
     context = {
         'profile': serializer.data,
         'reviews': review_serializer.data,

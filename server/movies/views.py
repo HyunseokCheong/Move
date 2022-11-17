@@ -1,9 +1,8 @@
-from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
-from .models import Movie, Genre, Actor, Director, Review
-
-from .serializers import MovieSerializer, ReviewSerializer, ActorSerializer
+from .models import Movie, Review
+from accounts.models import RateMovie, User
+from .serializers import MovieSerializer, ReviewSerializer
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -59,11 +58,23 @@ def genreport(request, genre_pk):
     serializer = MovieSerializer(directed_movie, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-
-
-
 @api_view(['GET'])
 def test(request):
     review = Review.objects.all()
     serializer_reviews = ReviewSerializer(review, many=True)
     return Response(serializer_reviews.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def recommend(request):
+    user = User.objects.get(pk=1)
+    # user = request.user
+    recommendmovies = []
+    cnt = 0
+    exceptmovies = RateMovie.objects.filter(rateuser=user)
+    for movie in Movie.objects.order_by('-popularity'):
+        if movie not in exceptmovies:
+            recommendmovies.append(movie)
+            cnt + 1
+        if cnt > 10:
+            break
+    print(recommendmovies)
