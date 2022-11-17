@@ -15,7 +15,30 @@
                 {{ actor.name }}
             </div>
             <hr />
+            <div>
+                <h1>리뷰 작성</h1>
+                <form @submit.prevent="createReview">
+                    <label for="content">내용: </label>
+                    <textarea
+                        id="content"
+                        cols="30"
+                        rows="10"
+                        v-model="content"
+                    ></textarea>
+                    <label for="rate">평점 : 0 ~ 5</label>
+                    <input
+                        type="number"
+                        min="0"
+                        max="5"
+                        id="rate"
+                        v-model="rate"
+                    />
+                    <input type="submit" value="제출" />
+                </form>
+            </div>
             <div v-for="review in reviews" :key="review.id" class="col-sector">
+                {{ review }}
+                <br />
                 {{ review.reviewer[0].username }}
                 {{ review.content }}
                 {{ review.rate }}
@@ -39,6 +62,8 @@ export default {
             genres: [],
             actors: [],
             reviews: [],
+            content: null,
+            rate: null,
         };
     },
     created() {
@@ -60,6 +85,32 @@ export default {
                 .catch((err) => {
                     console.log(err);
                 });
+        },
+        createReview() {
+            const content = this.content;
+            const rate = this.rate;
+            if (!content) {
+                alert("내용을 입력해주세요");
+                return;
+            } else if (!rate) {
+                alert("평점을 입력해주세요");
+                return;
+            }
+            axios({
+                method: "post",
+                url: `${API_URL}/movies/${this.movie.id}/create/`,
+                data: {
+                    content: content,
+                    rate: rate,
+                },
+                headers: {
+                    Authorization: `Token ${this.$store.state.token}`,
+                },
+            })
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => console.log(err));
         },
     },
     computed: {
