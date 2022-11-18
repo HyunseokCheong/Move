@@ -85,7 +85,8 @@ def get_cast(movie):
             if not Actor.objects.filter(pk=actor_id).exists():
                 actor = Actor.objects.create(
                     id=person.get('id'),
-                    name=translation(person.get('name')),
+                    name=person.get('name'),
+                    # name=translation(person.get('name')),
                 )
             movie.actors.add(actor_id)
             if movie.actors.count() == 5:       # 5명의 배우 정보만 저장
@@ -96,7 +97,8 @@ def get_cast(movie):
             if not Director.objects.filter(pk=director_id).exists():
                 director = Director.objects.create(
                     id=person.get('id'),
-                    name=translation(person.get('name')),
+                    name=person.get('name'),
+                    # name=translation(person.get('name')),
                 )
             movie.directors.add(director_id)
 

@@ -15,6 +15,10 @@ export default new Vuex.Store({
         loggedInUser: null,
         users: [],
         recommends: [],
+        genreports: [],
+        directorports: [],
+        actorports: [],
+
     },
     getters: {
         isLogin(state) {
@@ -35,6 +39,16 @@ export default new Vuex.Store({
         SET_RECOMMENDS(state, movies) {
             state.recommends = movies;
         },
+        SET_GENREPORT(state, movies) {
+            state.genreports = movies;
+        },
+        SET_DIRECTORPORT(state, movies) {
+            state.directorports = movies;
+        },
+        SET_ACTORPORT(state, movies) {
+            state.actorports = movies;
+        },
+
     },
     actions: {
         getMovie(context) {
@@ -91,6 +105,39 @@ export default new Vuex.Store({
             })
                 .then((res) => {
                     context.commit("SET_RECOMMENDS", res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        getGenrePort(context, id) {
+            axios({
+                url: `${API_URL}/movies/genre/${id}`,
+            })
+                .then((res) => {
+                    context.commit("SET_GENREPORT", res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        getDirectorPort(context, id) {
+            axios({
+                url: `${API_URL}/movies/director/${id}`,
+            })
+                .then((res) => {
+                    context.commit("SET_DIRECTORPORT", res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        getActorPort(context, id) {
+            axios({
+                url: `${API_URL}/movies/actor/${id}`,
+            })
+                .then((res) => {
+                    context.commit("SET_ACTORPORT", res.data);
                 })
                 .catch((err) => {
                     console.log(err);

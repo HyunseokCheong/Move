@@ -32,12 +32,12 @@ def follow(request, user_pk):
         if me != you:
             # 내가(request.user) 그 사람의 팔로워 목록에 있다면
             # if me in you.followers.all():
-            if you.followers.filter(pk=me.pk).exists():
+            if you.followings.filter(pk=me.pk).exists():
                 # 언팔로우
-                you.followers.remove(me)
+                you.followings.remove(me)
             else:
                 # 팔로우
-                you.followers.add(me)
+                you.followings.add(me)
         return redirect('accounts:profile', you.username)
     return Response({'follow'})
 
@@ -152,3 +152,9 @@ def wishlist(request):
     wishlist = RateMovie.objects.filter(rateuser=me, state=3)
     wishlist_serializer = RateMovieSerializer(wishlist, many=True)
     return Response(wishlist_serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def userlist(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

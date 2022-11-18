@@ -13,7 +13,7 @@
 
 <script>
 export default {
-    name: "RankBase",
+    name: "ActorPort",
     props: {
         movie: Object,
     },

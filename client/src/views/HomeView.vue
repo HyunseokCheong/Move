@@ -13,7 +13,7 @@
                 </div>
                 <HeadBar msg="영화 추천" />
                 <div class="cards-box">
-                    <Recommend
+                    <RecommendMovie
                         v-for="(movie, index) in recommends"
                         :key="index"
                         :movie="movie"
@@ -27,7 +27,7 @@
 
 <script>
 import RecommendRankBase from "@/components/RecommendRankBase.vue";
-import Recommend from "@/components/Recommend.vue";
+import RecommendMovie from "@/components/RecommendMovie.vue";
 import SideBar from "@/components/SideBar";
 import HeadBar from "@/components/HeadBar";
 
@@ -35,7 +35,7 @@ export default {
     name: "HomeView",
     components: {
         RecommendRankBase,
-        Recommend,
+        RecommendMovie,
         SideBar,
         HeadBar,
     },

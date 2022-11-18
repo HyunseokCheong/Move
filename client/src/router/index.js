@@ -1,11 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import DetailView from "../views/DetailView.vue";
-import SignupView from "../views/SignupView.vue";
-import LoginView from "../views/LoginView.vue";
-import DetailUserView from "../views/DetailUserView.vue";
-import RankingView from "../views/RankingView.vue";
+import HomeView from "@/views/HomeView";
+import DetailView from "@/views/DetailView";
+import SignupView from "@/views/SignupView";
+import LoginView from "@/views/LoginView";
+import DetailUserView from "@/views/DetailUserView";
+import RankingView from "@/views/RankingView";
+import GenrePortView from '@/views/Port/GenrePortView'
+import DirectorPortView from '@/views/Port/DirectorPortView';
+import ActorPortView from '@/views/Port/ActorPortView';
 
 Vue.use(VueRouter);
 
@@ -39,6 +42,21 @@ const routes = [
         path: "/ranking",
         name: "ranking",
         component: RankingView,
+    },
+    {
+        path: "/genre/:id",
+        name: "genre",
+        component: GenrePortView,
+    },
+    {
+        path: "/director/:id",
+        name: "director",
+        component: DirectorPortView,
+    },
+    {
+        path: "/actor/:id",
+        name: "actor",
+        component: ActorPortView,
     },
 ];
 

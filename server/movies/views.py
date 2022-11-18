@@ -52,22 +52,22 @@ def review_delete(request, movie_pk, review_pk):
 @api_view(['GET'])
 def actorport(request, actor_pk):
     # 배우의 출연영화
-    casted_movie = Movie.objects.filter(actors=actor_pk).order_by('-popularity')
+    casted_movie = Movie.objects.filter(actors=actor_pk).order_by('?')
     serializer = MovieSerializer(casted_movie, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def directorport(request, director_pk):
     # 감독의 연출영화
-    directed_movie = Movie.objects.filter(directors=director_pk).order_by('-popularity')
+    directed_movie = Movie.objects.filter(directors=director_pk).order_by('?')
     serializer = MovieSerializer(directed_movie, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def genreport(request, genre_pk):
     # 해당장르의 인기영화
-    directed_movie = Movie.objects.filter(genrers=genre_pk).order_by('-popularity')
-    serializer = MovieSerializer(directed_movie, many=True)
+    genre_movie = Movie.objects.filter(genres=genre_pk, vote_count__gte=1000, vote_average__gte=7).order_by('?')
+    serializer = MovieSerializer(genre_movie, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])

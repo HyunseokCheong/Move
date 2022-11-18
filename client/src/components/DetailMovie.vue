@@ -28,14 +28,38 @@
             <p>개봉일 : {{ movie.release_date }}</p>
             <img :src="poster_path" alt="..." />
             <p>내용 : {{ movie.overview }}</p>
-            <div v-for="director in directors" :key="director.id">
-                {{ director.name }}
+            <div>
+                <span>감독</span>
+                <div v-for="director in directors" :key="director.id">
+                    <router-link
+                        :to="{ name: 'director', params: { id: director.id } }"
+                        tag="span"
+                    >
+                        {{ director.name }}
+                    </router-link>
+                </div>
             </div>
-            <div v-for="genre in genres" :key="genre.id">
-                {{ genre.name }}
+            <div>
+                <span>장르</span>
+                <div v-for="genre in genres" :key="genre.id">
+                    <router-link
+                        :to="{ name: 'genre', params: { id: genre.id } }"
+                        tag="span"
+                    >
+                        {{ genre.name }}
+                    </router-link>
+                </div>
             </div>
-            <div v-for="actor in actors" :key="actor.id">
-                {{ actor.name }}
+            <div>
+                <span>배우</span>
+                <div v-for="actor in actors" :key="actor.id">
+                    <router-link
+                        :to="{ name: 'actor', params: { id: actor.id } }"
+                        tag="span"
+                    >
+                        {{ actor.name }}
+                    </router-link>
+                </div>
             </div>
         </div>
     </div>
@@ -43,7 +67,6 @@
 
 <script>
 import axios from "axios";
-
 const API_URL = "http://127.0.0.1:8000";
 
 export default {
