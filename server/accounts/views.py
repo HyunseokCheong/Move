@@ -147,8 +147,8 @@ def ranking(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-def wishlist(request, username):
-    me = User.objects.get(username=username)
+def wishlist(request):
+    me = request.user
     wishlist = RateMovie.objects.filter(rateuser=me, state=3)
     wishlist_serializer = RateMovieSerializer(wishlist, many=True)
     return Response(wishlist_serializer.data, status=status.HTTP_200_OK)

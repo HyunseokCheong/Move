@@ -31,6 +31,3 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     rate = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
-    
-    
-    

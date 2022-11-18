@@ -16,4 +16,3 @@ class RateMovie(models.Model):
     ratedmovie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     state = models.IntegerField()
-
