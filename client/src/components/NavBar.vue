@@ -32,7 +32,7 @@ export default {
             this.$store.state.token = null;
             this.$store.state.userName = null;
             localStorage.removeItem("vuex");
-            console.log("logout");
+            this.$router.go();
         },
     },
 };

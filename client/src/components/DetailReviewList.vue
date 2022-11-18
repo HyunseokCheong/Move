@@ -44,7 +44,7 @@ export default {
                 url: `${API_URL}/movies/${this.$route.params.id}`,
             })
                 .then((res) => {
-                    this.reviews = res.data.reviews;
+                    this.reviews = res.data.movie.reviews;
                 })
                 .catch((err) => {
                     console.log(err);

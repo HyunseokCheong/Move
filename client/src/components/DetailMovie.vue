@@ -1,9 +1,29 @@
 <template>
     <div>
+        <div v-if="isLogin">
+            <div v-if="state == 0">
+                <button @click="like()">좋아요</button>
+                <button @click="dislike()">싫어요</button>
+                <button @click="addWishList()">찜하기</button>
+            </div>
+            <div v-if="state == 1">
+                <button @click="like()">좋아요 취소</button>
+                <button @click="dislike()">싫어요</button>
+                <button @click="addWishList()">찜하기</button>
+            </div>
+            <div v-if="state == 2">
+                <button @click="like()">좋아요</button>
+                <button @click="dislike()">싫어요 취소</button>
+                <button @click="addWishList()">찜하기</button>
+            </div>
+            <div v-if="state == 3">
+                <button @click="like()">좋아요</button>
+                <button @click="dislike()">싫어요</button>
+                <button @click="addWishList()">찜하기 취소</button>
+            </div>
+        </div>
+        <div v-else>로그인해서 영화 평가하기</div>
         <div v-if="movie">
-            <button @click="like">좋아요</button>
-            <button @click="dislike">싫어요</button>
-            <button @click="addWishList">찜하기</button>
             <p>제목 : {{ movie.title }}</p>
             <p>개봉일 : {{ movie.release_date }}</p>
             <img :src="poster_path" alt="..." />
@@ -30,11 +50,23 @@ export default {
     name: "DetailMovie",
     data() {
         return {
+            state: null,
             movie: null,
             directors: [],
             genres: [],
             actors: [],
         };
+    },
+    computed: {
+        poster_path() {
+            return `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${this.movie.poster_path}`;
+        },
+        isLogin() {
+            return this.$store.getters.isLogin;
+        },
+        userName() {
+            return this.$store.state.loggedInUser;
+        },
     },
     created() {
         this.getMovieDetail(this.$route.params.id);
@@ -45,15 +77,20 @@ export default {
                 url: `${API_URL}/movies/${this.$route.params.id}`,
             })
                 .then((res) => {
-                    this.movie = res.data;
-                    this.reviews = res.data.reviews;
-                    this.directors = res.data.directors;
-                    this.genres = res.data.genres;
-                    this.actors = res.data.actors;
+                    console.log(res.data);
+                    this.movie = res.data.movie;
+                    this.reviews = res.data.movie.reviews;
+                    this.directors = res.data.movie.directors;
+                    this.genres = res.data.movie.genres;
+                    this.actors = res.data.movie.actors;
+                    this.state = res.data.state;
                 })
                 .catch((err) => {
                     console.log(err);
                 });
+        },
+        stateChange(event) {
+            console.log(event);
         },
         like() {
             axios({
@@ -62,7 +99,9 @@ export default {
                     Authorization: `Token ${this.$store.state.token}`,
                 },
             })
-                .then((res) => console.log(res))
+                .then(() => {
+                    this.$router.go();
+                })
                 .catch((err) => console.log(err));
         },
         dislike() {
@@ -72,7 +111,9 @@ export default {
                     Authorization: `Token ${this.$store.state.token}`,
                 },
             })
-                .then((res) => console.log(res))
+                .then(() => {
+                    this.$router.go();
+                })
                 .catch((err) => console.log(err));
         },
         addWishList() {
@@ -82,13 +123,10 @@ export default {
                     Authorization: `Token ${this.$store.state.token}`,
                 },
             })
-                .then((res) => console.log(res))
+                .then(() => {
+                    this.$router.go();
+                })
                 .catch((err) => console.log(err));
-        },
-    },
-    computed: {
-        poster_path() {
-            return `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${this.movie.poster_path}`;
         },
     },
 };
