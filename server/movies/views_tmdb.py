@@ -1,10 +1,15 @@
 from django.http import JsonResponse, HttpResponse
-import requests
+import requests, os, sys, urllib.request
 from .models import Genre, Movie, Actor, Director
+from pprint import pprint
 
 API_KEY = '2f838d7eacf38adb7504971b083228bf'
 GENRE_URL = 'https://api.themoviedb.org/3/genre/movie/list'
 POPULAR_MOVIE_URL = 'https://api.themoviedb.org/3/movie/popular'
+CLIENT_ID = 'Lx1trkp9HH9SazNbG55l'
+CLIENT_SECRET = 'eKScj3bUTK'
+
+
 
 def tmdb_genres():
     response = requests.get(
@@ -18,7 +23,7 @@ def tmdb_genres():
         if Genre.objects.filter(pk=genre['id']).exists(): continue        
         Genre.objects.create(
             id=genre['id'],
-            name=genre['name']
+            name=genre['name'],
         )
     return JsonResponse(response)
 
@@ -49,6 +54,7 @@ def movie_data(page=1):
 
         # 제작진 저장
         get_cast(movie)
+        print('>>>', movie.title)
 
 def get_cast(movie):
     movie_id = movie.id
@@ -68,6 +74,8 @@ def get_cast(movie):
                     id=person.get('id'),
                     name=person.get('name'),
                 )
+                print(person.get('name'))
+                print(translation('Ben Foster'))
             movie.actors.add(actor_id)
             # actor.movie.set(movie_id)
             if movie.actors.count() == 5:       # 5명의 배우 정보만 저장
@@ -80,6 +88,7 @@ def get_cast(movie):
                     id=person.get('id'),
                     name=person.get('name'),
                 )
+                print(person.get('name'))
             movie.directors.add(director_id)
 
        
@@ -90,6 +99,6 @@ def tmdb_data(request):
     Movie.objects.all().delete()
 
     tmdb_genres()
-    for i in range(1, 3):
+    for i in range(1, 1):
         movie_data(i)
     return HttpResponse('OK >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
