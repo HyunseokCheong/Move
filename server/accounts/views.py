@@ -78,9 +78,14 @@ def like_movie(request, movie_pk):
     me = User.objects.get(pk=1)
     movie = Movie.objects.get(pk=movie_pk)
     if RateMovie.objects.filter(rateuser=me, ratedmovie=movie).exists():
-        ratemovie = RateMovie.objects.filter(rateuser=me, ratedmovie=movie)
-        ratemovie.delete()
-        return Response({'like delete'})
+        ratemovie = RateMovie.objects.get(rateuser=me, ratedmovie=movie)
+        if ratemovie.state == 1:
+            ratemovie.delete()
+            return Response({'like delete'})
+        else:
+            ratemovie.state = 1
+            ratemovie.save()
+            return Response({'like add'})
     else:
         rate_movie = RateMovie.objects.create(
             rateuser = me,
@@ -96,9 +101,14 @@ def dislike_movie(request, movie_pk):
     me = User.objects.get(pk=1)
     movie = Movie.objects.get(pk=movie_pk)
     if RateMovie.objects.filter(rateuser=me, ratedmovie=movie).exists():
-        ratemovie = RateMovie.objects.filter(rateuser=me, ratedmovie=movie)
-        ratemovie.delete()
-        return Response({'dislike delete'})
+        ratemovie = RateMovie.objects.get(rateuser=me, ratedmovie=movie)
+        if ratemovie.state == 2:
+            ratemovie.delete()
+            return Response({'dislike delete'})
+        else:
+            ratemovie.state = 2
+            ratemovie.save()
+            return Response({'dislike add'})
     else:
         rate_movie = RateMovie.objects.create(
             rateuser = me,
@@ -108,6 +118,29 @@ def dislike_movie(request, movie_pk):
         )
         print(rate_movie)
         return Response({'dislike add'})
+
+@api_view(['GET'])
+def wish_movie(request, movie_pk):
+    me = User.objects.get(pk=1)
+    movie = Movie.objects.get(pk=movie_pk)
+    if RateMovie.objects.filter(rateuser=me, ratedmovie=movie).exists():
+        ratemovie = RateMovie.objects.get(rateuser=me, ratedmovie=movie)
+        if ratemovie.state == 3:
+            ratemovie.delete()
+            return Response({'wish delete'})
+        else:
+            ratemovie.state = 3
+            ratemovie.save()
+            return Response({'wish add'})
+    else:
+        rate_movie = RateMovie.objects.create(
+            rateuser = me,
+            ratedmovie = movie,
+            title = movie.title,
+            state = 3
+        )
+        print(rate_movie)
+        return Response({'wish add'})
 
 @api_view(['GET'])
 def ranking(request):
