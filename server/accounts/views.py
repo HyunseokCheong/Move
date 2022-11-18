@@ -10,7 +10,6 @@ from rest_framework import status
 
 @api_view(['GET'])
 def profile(request, username):
-    User = get_user_model()
     person = User.objects.get(username=username)
     serializer = UserSerializer(person)
     review = Review.objects.filter(reviewer=person.pk)
@@ -28,7 +27,6 @@ def profile(request, username):
 @api_view(['GET'])
 def follow(request, user_pk):
     if request.user.is_authenticated:
-        User = get_user_model()
         me = request.user
         you = User.objects.get(pk=user_pk)
         if me != you:
@@ -147,3 +145,10 @@ def ranking(request):
     users = User.objects.order_by('-reviews_count')
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def wishlist(request, username):
+    me = User.objects.get(username=username)
+    wishlist = RateMovie.objects.filter(rateuser=me, state=3)
+    wishlist_serializer = RateMovieSerializer(wishlist, many=True)
+    return Response(wishlist_serializer.data, status=status.HTTP_200_OK)
