@@ -10,9 +10,8 @@ from rest_framework import status
 
 @api_view(['GET'])
 def profile(request, username):
-    # User = get_user_model()
-    # person = User.objects.get(username=username)
-    person = User.objects.get(pk=1)
+    User = get_user_model()
+    person = User.objects.get(username=username)
     serializer = UserSerializer(person)
     review = Review.objects.filter(reviewer=person.pk)
     person.reviews_count = review.count()

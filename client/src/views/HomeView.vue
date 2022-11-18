@@ -3,10 +3,18 @@
         <div class="col-sector">
             <SideBar />
             <div class="row-sector">
-                <HeadBar msg="순위 기반 영화 추천" />
+                <HeadBar msg="인기 영화" />
                 <div class="cards-box">
                     <RecommendRankBase
                         v-for="(movie, index) in movies"
+                        :key="index"
+                        :movie="movie"
+                    />
+                </div>
+                <HeadBar msg="영화 추천" />
+                <div class="cards-box">
+                    <Recommend
+                        v-for="(movie, index) in recommends"
                         :key="index"
                         :movie="movie"
                     />
@@ -19,6 +27,7 @@
 
 <script>
 import RecommendRankBase from "@/components/RecommendRankBase.vue";
+import Recommend from "@/components/Recommend.vue";
 import SideBar from "@/components/SideBar";
 import HeadBar from "@/components/HeadBar";
 
@@ -26,22 +35,30 @@ export default {
     name: "HomeView",
     components: {
         RecommendRankBase,
+        Recommend,
         SideBar,
         HeadBar,
     },
     created() {
         this.getMovie();
+        this.getRecommend();
     },
     computed: {
         movies() {
             return this.$store.state.movies;
         },
+        recommends() {
+            return this.$store.state.recommends;
+        }
     },
 
     methods: {
         getMovie() {
             this.$store.dispatch("getMovie");
         },
+        getRecommend() {
+            this.$store.dispatch("getRecommend");
+        }
     },
 };
 </script>

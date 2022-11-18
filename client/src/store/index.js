@@ -14,6 +14,7 @@ export default new Vuex.Store({
         token: null,
         loggedInUser: null,
         users: [],
+        recommends: [],
     },
     getters: {
         isLogin(state) {
@@ -30,6 +31,9 @@ export default new Vuex.Store({
         },
         SET_USERS(state, users) {
             state.users = users;
+        },
+        SET_RECOMMENDS(state, movies) {
+            state.recommends = movies;
         },
     },
     actions: {
@@ -80,6 +84,17 @@ export default new Vuex.Store({
             }).then((res) => {
                 context.commit("SET_USERS", res.data);
             });
+        },
+        getRecommend(context) {
+            axios({
+                url: `${API_URL}/movies/recommend/`,
+            })
+                .then((res) => {
+                    context.commit("SET_RECOMMENDS", res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         },
     },
     modules: {},
