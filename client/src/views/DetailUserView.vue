@@ -1,9 +1,9 @@
 <template>
     <div>
         <div v-if="user">
-            <!-- <p>
+            <p>
                 {{ user.profile.username }}
-            </p> -->
+            </p>
             {{ user }}
         </div>
     </div>
@@ -19,7 +19,7 @@ export default {
         return { user: null };
     },
     created() {
-        this.getUserDetail(this.$route.params.name);
+        this.getUserDetail();
     },
     methods: {
         getUserDetail() {

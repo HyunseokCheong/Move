@@ -10,6 +10,9 @@
                 {{ review.reviewer.username }}</router-link
             >
             <p>{{ review }}</p>
+            <div v-if="review.reviewer.username == loggedInUser">
+                <button v-on:click="DeleteReview(review.id)">X</button>
+            </div>
             <br />
         </div>
     </div>
@@ -30,6 +33,11 @@ export default {
     created() {
         this.getMovieDetail(this.$route.params.id);
     },
+    computed: {
+        loggedInUser() {
+            return this.$store.state.loggedInUser;
+        },
+    },
     methods: {
         getMovieDetail() {
             axios({
@@ -41,6 +49,19 @@ export default {
                 .catch((err) => {
                     console.log(err);
                 });
+        },
+        DeleteReview(id) {
+            axios({
+                method: "post",
+                url: `${API_URL}/movies/${this.$route.params.id}/delete/${id}/`,
+                headers: {
+                    Authorization: `Token ${this.$store.state.token}`,
+                },
+            })
+                .then(() => {
+                    this.$router.go();
+                })
+                .catch((err) => console.log(err));
         },
     },
 };
