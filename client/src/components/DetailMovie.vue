@@ -32,7 +32,7 @@
                 <span>감독</span>
                 <div v-for="director in directors" :key="director.id">
                     <router-link
-                        :to="{ name: 'director', params: { id: director.id } }"
+                        :to="{ name: 'director', params: { id: director.id, name: director.name } }"
                         tag="span"
                     >
                         {{ director.name }}
