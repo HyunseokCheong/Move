@@ -4,7 +4,21 @@
             <p>
                 {{ user.profile.username }}
             </p>
-            {{ user }}
+            <p>{{ user }}</p>
+            <div v-for="review in user.reviews" :key="review.id">
+                <div v-for="movie in movies" :key="movie.id">
+                    <div v-if="movie.id == review.movies">
+                        <router-link
+                            :to="{
+                                name: 'detail',
+                                params: { id: review.movies },
+                            }"
+                            >{{ movie.title }}</router-link
+                        >
+                        {{ review }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -17,6 +31,11 @@ export default {
     name: "DetailUserView",
     data() {
         return { user: null };
+    },
+    computed: {
+        movies() {
+            return this.$store.state.movies;
+        },
     },
     created() {
         this.getUserDetail();
