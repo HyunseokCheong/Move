@@ -1,6 +1,9 @@
 <template>
     <div>
         <div v-if="movie">
+            <button @click="like">좋아요</button>
+            <button @click="dislike">싫어요</button>
+            <button @click="addWishList">찜하기</button>
             <p>제목 : {{ movie.title }}</p>
             <p>개봉일 : {{ movie.release_date }}</p>
             <img :src="poster_path" alt="..." />
@@ -51,6 +54,36 @@ export default {
                 .catch((err) => {
                     console.log(err);
                 });
+        },
+        like() {
+            axios({
+                url: `${API_URL}/accounts/likemovie/${this.movie.id}`,
+                headers: {
+                    Authorization: `Token ${this.$store.state.token}`,
+                },
+            })
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err));
+        },
+        dislike() {
+            axios({
+                url: `${API_URL}/accounts/dislikemovie/${this.movie.id}`,
+                headers: {
+                    Authorization: `Token ${this.$store.state.token}`,
+                },
+            })
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err));
+        },
+        addWishList() {
+            axios({
+                url: `${API_URL}/accounts/wishmovie/${this.movie.id}`,
+                headers: {
+                    Authorization: `Token ${this.$store.state.token}`,
+                },
+            })
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err));
         },
     },
     computed: {
