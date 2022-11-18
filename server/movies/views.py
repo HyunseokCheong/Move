@@ -17,16 +17,10 @@ def index(request):
 def detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = MovieSerializer(movie)
-    context = {
-            'movie': serializer.data,
-        }
-    # if request.user.is_authenticated:
     me = User.objects.get(pk=1)
     state = 0
     if RateMovie.objects.filter(rateuser=me.id, ratedmovie=movie).exists():
-        print(state)
         state = RateMovie.objects.get(rateuser=me, ratedmovie=movie).state
-        print(state)
     context = {
         'movie': serializer.data,
         'state': state

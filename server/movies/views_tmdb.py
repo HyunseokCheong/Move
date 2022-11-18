@@ -1,7 +1,6 @@
 from django.http import JsonResponse, HttpResponse
-import requests, os, sys, urllib.request
+import requests, urllib.request, json
 from .models import Genre, Movie, Actor, Director
-from pprint import pprint
 
 API_KEY = '2f838d7eacf38adb7504971b083228bf'
 GENRE_URL = 'https://api.themoviedb.org/3/genre/movie/list'
@@ -9,7 +8,21 @@ POPULAR_MOVIE_URL = 'https://api.themoviedb.org/3/movie/popular'
 CLIENT_ID = 'Lx1trkp9HH9SazNbG55l'
 CLIENT_SECRET = 'eKScj3bUTK'
 
-
+def translation(word):
+    encText = urllib.parse.quote(word)
+    data = "source=en&target=ko&text=" + encText
+    url = "https://openapi.naver.com/v1/papago/n2mt"
+    request = urllib.request.Request(url)
+    request.add_header("X-Naver-Client-Id",CLIENT_ID)
+    request.add_header("X-Naver-Client-Secret",CLIENT_SECRET)
+    response = urllib.request.urlopen(request, data=data.encode("utf-8"))
+    rescode = response.getcode()
+    if(rescode==200):
+        response_body = response.read()
+        res = json.loads(response_body.decode('utf-8'))['message']['result']['translatedText']
+        return res
+    else:
+        return ("Error Code:" + rescode)
 
 def tmdb_genres():
     response = requests.get(
@@ -72,12 +85,9 @@ def get_cast(movie):
             if not Actor.objects.filter(pk=actor_id).exists():
                 actor = Actor.objects.create(
                     id=person.get('id'),
-                    name=person.get('name'),
+                    name=translation(person.get('name')),
                 )
-                print(person.get('name'))
-                print(translation('Ben Foster'))
             movie.actors.add(actor_id)
-            # actor.movie.set(movie_id)
             if movie.actors.count() == 5:       # 5명의 배우 정보만 저장
                 break
     for person in response.get('crew'):
@@ -86,9 +96,8 @@ def get_cast(movie):
             if not Director.objects.filter(pk=director_id).exists():
                 director = Director.objects.create(
                     id=person.get('id'),
-                    name=person.get('name'),
+                    name=translation(person.get('name')),
                 )
-                print(person.get('name'))
             movie.directors.add(director_id)
 
        
@@ -99,6 +108,6 @@ def tmdb_data(request):
     Movie.objects.all().delete()
 
     tmdb_genres()
-    for i in range(1, 1):
+    for i in range(1, 50):
         movie_data(i)
     return HttpResponse('OK >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
