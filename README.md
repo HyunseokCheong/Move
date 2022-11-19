@@ -103,3 +103,16 @@
 > 2. 인기영화, 추천영화 노출방식 수정
 > 3. 영화 좋아요, 싫어요 수정 및 찜하기 추가
 > 4. db의 감독 및 배우 데이터 한글로 번역
+
+## 221119
+
+### Client
+
+> 1. carousel
+> 2. nav
+> 3. tinder
+
+src/assets/styles/\*\*.css
+App.vue : @import './assets/styles/navbar.css';
+
+### Server
