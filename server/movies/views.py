@@ -103,6 +103,8 @@ def recommend(request):
         rec_movies = Movie.objects.filter(Q(id__in=recommends)).order_by('?')
     serializer_recommend = MovieSerializer(rec_movies, many=True)
     return Response(serializer_recommend.data, status=status.HTTP_200_OK)
-    
 
+@api_view(['GET'])
+def search(request):
+    pass
     
