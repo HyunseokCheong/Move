@@ -112,7 +112,4 @@
 > 2. nav
 > 3. tinder
 
-src/assets/styles/\*\*.css
-App.vue : @import './assets/styles/navbar.css';
-
 ### Server

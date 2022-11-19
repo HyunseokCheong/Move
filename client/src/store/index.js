@@ -18,7 +18,6 @@ export default new Vuex.Store({
         genreports: [],
         directorports: [],
         actorports: [],
-
     },
     getters: {
         isLogin(state) {
@@ -48,7 +47,6 @@ export default new Vuex.Store({
         SET_ACTORPORT(state, movies) {
             state.actorports = movies;
         },
-
     },
     actions: {
         getMovie(context) {

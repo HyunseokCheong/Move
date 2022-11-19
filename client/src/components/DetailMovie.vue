@@ -26,13 +26,17 @@
         <div v-if="movie">
             <p>제목 : {{ movie.title }}</p>
             <p>개봉일 : {{ movie.release_date }}</p>
-            <img :src="poster_path" alt="..." />
+            <img :src="poster_path" alt="poster" />
+            <img :src="backdrop_path" alt="backdrop" />
             <p>내용 : {{ movie.overview }}</p>
             <div>
                 <span>감독</span>
                 <div v-for="director in directors" :key="director.id">
                     <router-link
-                        :to="{ name: 'director', params: { id: director.id, name: director.name } }"
+                        :to="{
+                            name: 'director',
+                            params: { id: director.id, name: director.name },
+                        }"
                         tag="span"
                     >
                         {{ director.name }}
@@ -100,7 +104,6 @@ export default {
                 url: `${API_URL}/movies/${this.$route.params.id}`,
             })
                 .then((res) => {
-                    console.log(res.data);
                     this.movie = res.data.movie;
                     this.reviews = res.data.movie.reviews;
                     this.directors = res.data.movie.directors;

@@ -6,9 +6,9 @@ import SignupView from "@/views/SignupView";
 import LoginView from "@/views/LoginView";
 import DetailUserView from "@/views/DetailUserView";
 import RankingView from "@/views/RankingView";
-import GenrePortView from '@/views/Port/GenrePortView'
-import DirectorPortView from '@/views/Port/DirectorPortView';
-import ActorPortView from '@/views/Port/ActorPortView';
+import GenrePortView from "@/views/Port/GenrePortView";
+import DirectorPortView from "@/views/Port/DirectorPortView";
+import ActorPortView from "@/views/Port/ActorPortView";
 
 Vue.use(VueRouter);
 
@@ -49,7 +49,7 @@ const routes = [
         component: GenrePortView,
     },
     {
-        path: "/director/:id",
+        path: "/director/:id/:name",
         name: "director",
         component: DirectorPortView,
     },
