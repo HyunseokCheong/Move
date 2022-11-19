@@ -17,6 +17,10 @@
                     <router-link to="/login">LOGIN</router-link> |
                     <router-link to="/signup">SIGNUP</router-link> |
                 </div>
+                <div class="form-inline my-2 my-lg-0">
+                    <input v-model="keyword" id="keyword" @keypress.enter="search(keyword)" class="form-control mr-sm-2" type="search" placeholder="Search">
+                    <button @click="search(keyword)" class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+                </div>
             </div>
         </div>
     </div>
@@ -28,6 +32,7 @@ export default {
     data() {
         return {
             windowTop: 0,
+            keyword: null,
         };
     },
     mounted() {
@@ -51,6 +56,10 @@ export default {
             localStorage.removeItem("vuex");
             this.$router.go();
         },
+        search(keyword) {
+            this.$router.push(`/search/${keyword}`)
+        },
+        
     },
 };
 </script>

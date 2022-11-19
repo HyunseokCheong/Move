@@ -3,7 +3,7 @@
         <HeadBar msg="배우" />
         <div class="cards-box">
             <ActorPort
-                v-for="(movie, index) in actorports"
+                v-for="(movie, index) in actorPorts"
                 :key="index"
                 :movie="movie"
             />
@@ -26,8 +26,8 @@ export default {
         this.getActorPort();
     },
     computed: {
-        actorports() {
-            return this.$store.state.actorports;
+        actorPorts() {
+            return this.$store.state.actorPorts;
         },
     },
 

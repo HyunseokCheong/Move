@@ -3,7 +3,7 @@
         <HeadBar msg="영화 추천" />
         <div class="cards-box">
             <DirectorPort
-                v-for="(movie, index) in directorports"
+                v-for="(movie, index) in directorPorts"
                 :key="index"
                 :movie="movie"
             />
@@ -26,8 +26,8 @@ export default {
         this.getDirectorPort();
     },
     computed: {
-        directorports() {
-            return this.$store.state.directorports;
+        directorPorts() {
+            return this.$store.state.directorPorts;
         },
     },
 

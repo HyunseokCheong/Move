@@ -3,7 +3,7 @@
     <HeadBar msg="장르" />
     <div class="cards-box">
         <GenrePort
-             v-for="(movie, index) in genreports"
+             v-for="(movie, index) in genrePorts"
             :key="index"
             :movie="movie"
         />
@@ -26,8 +26,8 @@ export default {
         this.getGenrePort();
     },
     computed: {
-        genreports() {
-            return this.$store.state.genreports;
+        genrePorts() {
+            return this.$store.state.genrePorts;
         },
     },
 

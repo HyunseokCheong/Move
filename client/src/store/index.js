@@ -15,9 +15,10 @@ export default new Vuex.Store({
         loggedInUser: null,
         users: [],
         recommends: [],
-        genreports: [],
-        directorports: [],
-        actorports: [],
+        genrePorts: [],
+        directorPorts: [],
+        actorPorts: [],
+        searchData: [],
     },
     getters: {
         isLogin(state) {
@@ -39,13 +40,16 @@ export default new Vuex.Store({
             state.recommends = movies;
         },
         SET_GENREPORT(state, movies) {
-            state.genreports = movies;
+            state.genrePorts = movies;
         },
         SET_DIRECTORPORT(state, movies) {
-            state.directorports = movies;
+            state.directorPorts = movies;
         },
         SET_ACTORPORT(state, movies) {
-            state.actorports = movies;
+            state.actorPorts = movies;
+        },
+        SET_SEARCH(state, searchData) {
+            state.searchData = searchData;
         },
     },
     actions: {
@@ -136,6 +140,22 @@ export default new Vuex.Store({
             })
                 .then((res) => {
                     context.commit("SET_ACTORPORT", res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        getSearchData(context, keyword) {
+            axios({
+                method: "post",
+                url: `${API_URL}/movies/search/`,
+                data: {
+                    keyword: keyword,
+                },
+            })
+                .then((res) => {
+                    console.log()
+                    context.commit("SET_SEARCH", res.data);
                 })
                 .catch((err) => {
                     console.log(err);

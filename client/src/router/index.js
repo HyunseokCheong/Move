@@ -9,6 +9,7 @@ import RankingView from "@/views/RankingView";
 import GenrePortView from "@/views/Port/GenrePortView";
 import DirectorPortView from "@/views/Port/DirectorPortView";
 import ActorPortView from "@/views/Port/ActorPortView";
+import SearchView from "@/views/SearchView";
 
 Vue.use(VueRouter);
 
@@ -58,6 +59,11 @@ const routes = [
         name: "actor",
         component: ActorPortView,
     },
+    {
+        path: '/search/:keyword',
+        name: 'Search',
+        component: SearchView,
+      },
 ];
 
 const router = new VueRouter({

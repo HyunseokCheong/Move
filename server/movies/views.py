@@ -104,7 +104,14 @@ def recommend(request):
     serializer_recommend = MovieSerializer(rec_movies, many=True)
     return Response(serializer_recommend.data, status=status.HTTP_200_OK)
 
-@api_view(['GET'])
+@api_view(['POST'])
 def search(request):
-    pass
+    keyword = request.data.get('keyword')
+    movies = Movie.objects.filter(
+        Q(title__contains=keyword) |
+        Q(actors__name__contains=keyword) |
+        Q(directors__name__contains=keyword)
+    ).distinct().order_by('-popularity')
+    serializer = MovieSerializer(movies, many=True)
+    return Response(serializer.data)
     
