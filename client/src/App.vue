@@ -1,8 +1,8 @@
 <template>
     <div id="app">
-        <header>
-            <NavBar />
-        </header>
+        <NavBar />
+        <div class="tmp"></div>
+        <hr />
         <router-view />
     </div>
 </template>
@@ -31,14 +31,6 @@ export default {
 nav a.router-link-exact-active {
     color: #42b983;
 }
-/* nav 정렬 */
-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    border: solid 1px black;
-}
 .col-sector {
     width: 100%;
 
@@ -56,5 +48,8 @@ header {
     justify-content: center;
 
     border: solid 1px black;
+}
+.tmp {
+    height: 68px;
 }
 </style>
