@@ -16,6 +16,7 @@ export default {
 };
 </script>
 <style>
+@import "./assets/styles/navbar.css";
 /* 전체 */
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -23,6 +24,8 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    /*  */
+    z-index: 2;
 }
 /* 현재 페이지 강조 */
 nav a.router-link-exact-active {

@@ -1,22 +1,22 @@
 <template>
-  <div>
-    <HeadBar msg="배우" />
-    <div class="cards-box">
-        <ActorPort
-             v-for="(movie, index) in actorports"
-            :key="index"
-            :movie="movie"
-        />
+    <div>
+        <HeadBar msg="배우" />
+        <div class="cards-box">
+            <ActorPort
+                v-for="(movie, index) in actorports"
+                :key="index"
+                :movie="movie"
+            />
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-import HeadBar from '@/components/HeadBar';
+import HeadBar from "@/components/HeadBar";
 import ActorPort from "@/components/Port/ActorPort";
 
 export default {
-    name: 'ActorPortView',
+    name: "ActorPortView",
 
     components: {
         HeadBar,
@@ -39,6 +39,4 @@ export default {
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

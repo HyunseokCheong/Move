@@ -49,7 +49,7 @@ export default {
         },
         recommends() {
             return this.$store.state.recommends;
-        }
+        },
     },
 
     methods: {
@@ -58,7 +58,7 @@ export default {
         },
         getRecommend() {
             this.$store.dispatch("getRecommend");
-        }
+        },
     },
 };
 </script>
