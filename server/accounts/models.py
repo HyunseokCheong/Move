@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from movies.models import Genre, Actor, Director, Movie
 # Create your models here.
 class User(AbstractUser):
+    profile_image = models.ImageField(default='default.png', upload_to='profile_pics')
     date_of_birth = models.DateField(blank=True, null=True)
     rank = models.IntegerField(default=1)
     followings = models.ManyToManyField('self', blank=True, symmetrical=False, related_name='followers')

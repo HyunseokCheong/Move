@@ -20,6 +20,8 @@ class Movie(models.Model):
     vote_average = models.FloatField()
     overview = models.TextField(blank=True)
     poster_path = models.CharField(max_length=200)
+    backdrop_path = models.CharField(max_length=200)
+    youtube_key = models.CharField(max_length=100)
     genres = models.ManyToManyField(Genre, blank=True, related_name='movies')
     actors = models.ManyToManyField(Actor, blank=True, related_name='movies')
     directors = models.ManyToManyField(Director, blank=True, related_name='movies')
