@@ -3,7 +3,15 @@
         <div class="col-sector">
             <SideBar />
             <div class="row-sector">
-                <HeadBar msg="인기 영화" />
+                <HeadBar msg="인기 영화1" />
+                <div class="cards-box">
+                    <RecommendRankBase
+                        v-for="(movie, index) in movies"
+                        :key="index"
+                        :movie="movie"
+                    />
+                </div>
+                <HeadBar msg="인기 영화2" />
                 <div class="cards-box">
                     <RecommendRankBase
                         v-for="(movie, index) in movies"
