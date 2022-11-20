@@ -66,7 +66,7 @@ import { Carousel3d, Slide } from 'vue-carousel-3d';
 import PopularMovie from '@/components/PopularMovie';
 
 export default {
-    name: "HomeView",
+    name: "IndexView",
     components: {
         RecommendMovie,
         Random,
