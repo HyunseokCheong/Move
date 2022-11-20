@@ -1,134 +1,79 @@
 <template>
-    <div class="home">
-        <div class="col-sector">
-            <SideBar />
-            <div class="row-sector">
-                <HeadBar msg="인기 영화1" />
-                <div id="popular">
-                    <carousel-3d 
-                    :height="510"
-                    :autoplay="true" :autoplay-timeout="3000" 
-                    :controls-visible="true" 
-                    :controls-prev-html="'&#x2039; '" :controls-next-html="'&#x203A;'"  :controls-width="10" :controls-height="30" 
-                    >
-                        <slide v-for="(popularmovie, i) in movies" :index="i" :key="i">
-                            <PopularMovie 
-                                :popularmovie="popularmovie"
-                                :index="i"
-                            />
-                        </slide>
-                    </carousel-3d>
-                </div>
-                <HeadBar msg="영화 추천" />
-                <div class="cards-box">
-                    <RecommendMovie
-                        v-for="(movie, index) in recommends"
-                        :key="index"
-                        :movie="movie"
-                    />
-                </div>
-                <HeadBar :msg="randomGenreName" />
-                <div class="cards-box">
-                    <Random
-                        v-for="(movie, index) in randoms.genre"
-                        :key="index"
-                        :movie="movie"
-                    />
-                </div>
-                <HeadBar :msg="randomDirectorName" />
-                <div class="cards-box">
-                    <Random
-                        v-for="(movie, index) in randoms.director"
-                        :key="index"
-                        :movie="movie"
-                    />
-                </div>
-                <HeadBar :msg="randomActorName" />
-                <div class="cards-box">
-                    <Random
-                        v-for="(movie, index) in randoms.actor"
-                        :key="index"
-                        :movie="movie"
-                    />
-                </div>
-            </div>
-            <SideBar />
+  <div class="overlay">
+    <div class="frame">
+        <div class="content">
+            <h1>Move</h1>
+            <p>원하는 곳 어디에서나 시청하십시오</p>
+            <p id="p2">시청할 준비가 되셨나요? 구독을 생성하거나 액세스하려면 이메일 주소를 입력하세요.</p>
         </div>
+        <LogIn/>
     </div>
+  </div>
 </template>
 
 <script>
-import RecommendMovie from "@/components/RecommendMovie";
-import Random from "@/components/Random"
-import SideBar from "@/components/SideBar";
-import HeadBar from "@/components/HeadBar";
-import { Carousel3d, Slide } from 'vue-carousel-3d';
-import PopularMovie from '@/components/PopularMovie';
+import LogIn from "@/components/LogIn";
 
 export default {
-    name: "IndexView",
+    name: 'IndexView',
+    data() {
+        return {
+            loginform: false,
+        };
+    },
     components: {
-        RecommendMovie,
-        Random,
-        SideBar,
-        HeadBar,
-        Carousel3d,
-        Slide,
-        PopularMovie
-    },
-    created() {
-        this.getMovie();
-        this.getRecommend();
-        this.getRandom();
-    },
-    computed: {
-        movies() {
-            return this.$store.state.movies;
-        },
-        recommends() {
-            return this.$store.state.recommends;
-        },
-        randoms() {
-            return this.$store.state.randoms;
-        },
-        randomGenreName() {
-            return `${this.$store.state.randoms.genre_name} 장르의 영화`;
-        },
-        randomDirectorName() {
-            return `${this.$store.state.randoms.director_name} 감독의 연출 영화`;
-        },
-        randomActorName() {
-            return `${this.$store.state.randoms.actor_name} 배우의 출연 영화`;
-        },
-    },
-
-    methods: {
-        getMovie() {
-            this.$store.dispatch("getMovie");
-        },
-        getRecommend() {
-            this.$store.dispatch("getRecommend");
-        },
-        getRandom() {
-            this.$store.dispatch("getRandom");
-        },
-    },
+        LogIn,
+    }
 };
 </script>
-<style>
-.cards-box {
-    width: 100%;
-    /* 가로스크롤 */
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
+
+<style scoped>
+#p2 {
+  margin-top: -18px;
+  font-size: 17px;
 }
-.card {
-    flex: 0 0 auto;
-    width: 270px;
-    height: 460px;
-    border: solid 1px black;
-    margin: 5px;
+
+.content p {
+  margin-top: -18px;
+  font-size: 24px;
+}
+
+.content {
+  font-family: sans-serif;
+  text-align: center;
+  width: 750px;
+  height: 500px;
+  color: white;
+  font-size: 28px;
+}
+
+.overlay {
+  background: url("https://i.ibb.co/ynf52h8/zgeTuV.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.frame {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+@media (max-width: 748px) {
+  .content {
+    width: 90%;
+  }
+  .errorBox {
+    width: 100%;
+    margin-left: 0px;
+  }
 }
 </style>

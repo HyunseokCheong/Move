@@ -3,8 +3,6 @@ import VueRouter from "vue-router";
 import IndexView from "@/views/IndexView";
 import HomeView from "@/views/HomeView";
 import DetailView from "@/views/DetailView";
-import SignupView from "@/views/SignupView";
-import LoginView from "@/views/LoginView";
 import DetailUserView from "@/views/DetailUserView";
 import RankingView from "@/views/RankingView";
 import GenrePortView from "@/views/Port/GenrePortView";
@@ -20,16 +18,6 @@ const routes = [
         path: "/",
         name: "index",
         component: IndexView,
-    },
-    {
-        path: "/login",
-        name: "login",
-        component: LoginView,
-    },
-    {
-        path: "/signup",
-        name: "signup",
-        component: SignupView,
     },
     {
         path: "/home",

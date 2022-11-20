@@ -40,11 +40,8 @@
                         >{{ userName }}</router-link
                     >
                     <p v-if="isLogin" @click="logOut" class="router">LOGOUT</p>
-                    <router-link v-if="!isLogin" to="/login" class="router"
+                    <router-link v-if="!isLogin" to="/" class="router"
                         >LOGIN</router-link
-                    >
-                    <router-link v-if="!isLogin" to="/signup" class="router"
-                        >SIGNUP</router-link
                     >
                 </div>
             </div>
@@ -80,7 +77,7 @@ export default {
             this.$store.state.token = null;
             this.$store.state.userName = null;
             localStorage.removeItem("vuex");
-            this.$router.go();
+            this.$router.push('/');
         },
         search(keyword) {
             this.$router.push(`/search/${keyword}`);
