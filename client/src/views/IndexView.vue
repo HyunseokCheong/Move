@@ -11,21 +11,14 @@
                     :controls-visible="true" 
                     :controls-prev-html="'&#x2039; '" :controls-next-html="'&#x203A;'"  :controls-width="10" :controls-height="30" 
                     >
-                        <slide
-                            v-for="(popularmovie, i) in movies"
-                            :index="i"
-                            :key="i"
-                        >
-                            <PopularMovie
+                        <slide v-for="(popularmovie, i) in movies" :index="i" :key="i">
+                            <PopularMovie 
                                 :popularmovie="popularmovie"
                                 :index="i"
                             />
                         </slide>
                     </carousel-3d>
                 </div>
-                <!--  -->
-                <TestMovie />
-                <!--  -->
                 <HeadBar msg="영화 추천" />
                 <div class="cards-box">
                     <RecommendMovie
@@ -66,15 +59,14 @@
 
 <script>
 import RecommendMovie from "@/components/RecommendMovie";
-import Random from "@/components/Random";
+import Random from "@/components/Random"
 import SideBar from "@/components/SideBar";
 import HeadBar from "@/components/HeadBar";
-import { Carousel3d, Slide } from "vue-carousel-3d";
-import PopularMovie from "@/components/PopularMovie";
-import TestMovie from "@/components/TestMovie";
+import { Carousel3d, Slide } from 'vue-carousel-3d';
+import PopularMovie from '@/components/PopularMovie';
 
 export default {
-    name: "HomeView",
+    name: "IndexView",
     components: {
         RecommendMovie,
         Random,
@@ -82,8 +74,7 @@ export default {
         HeadBar,
         Carousel3d,
         Slide,
-        PopularMovie,
-        TestMovie,
+        PopularMovie
     },
     created() {
         this.getMovie();

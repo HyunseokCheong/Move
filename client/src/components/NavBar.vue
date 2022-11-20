@@ -3,7 +3,7 @@
         <div class="items">
             <div class="left">
                 <div :class="windowTop > 0 ? 'routersActive' : 'routers'">
-                    <router-link to="/" class="router">MAIN</router-link>
+                    <router-link to="/home" class="router">MAIN</router-link>
                     <router-link to="/ranking" class="router"
                         >RANKING</router-link
                     >
