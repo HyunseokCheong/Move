@@ -88,10 +88,12 @@ export default new Vuex.Store({
                     username: payload.username,
                     password: payload.password,
                 },
-            }).then((res) => {
-                this.state.loggedInUser = payload.username;
-                context.commit("SAVE_TOKEN", res.data.key);
-            });
+            })
+                .then((res) => {
+                    this.state.loggedInUser = payload.username;
+                    context.commit("SAVE_TOKEN", res.data.key);
+                })
+                .catch(() => alert("회원가입 정보가 일치하지 않습니다."));
         },
         getUser(context) {
             axios({
