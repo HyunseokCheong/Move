@@ -134,15 +134,25 @@ def search(request):
 @api_view(['GET'])
 def random(request):
     random_genre = Genre.objects.order_by('?')[0]
-    random_director = Director.objects.order_by('?')[0]
-    random_actor = Actor.objects.order_by('?')[0]
+    # 연출한 영화가 5개 이상인 감독중 무작위
+    random_directors = []
+    for director in Director.objects.all():
+        if len(director.movies.all()) >= 5:
+            random_directors.append(director.id)
+    random_director = Director.objects.filter(id__in=random_directors).order_by('?')[0]
+    # 출연한 영화가 5개 이상인 배우중 무작위
+    random_actors = []
+    for actor in Actor.objects.all():
+        if len(actor.movies.all()) >= 5:
+            random_actors.append(actor.id)
+    random_actor = Actor.objects.filter(id__in=random_actors).order_by('?')[0]
+
     genre_random = Movie.objects.filter(genres=random_genre).order_by('?')[:10]
     director_random = Movie.objects.filter(directors=random_director).order_by('?')
     actor_random = Movie.objects.filter(actors=random_actor).order_by('?')
     genre_serializer = MovieSerializer(genre_random, many=True)
     director_serializer = MovieSerializer(director_random, many=True)
     actor_serializer = MovieSerializer(actor_random, many=True)
-    print(random_genre.id)
     context = {
         'genre': genre_serializer.data,
         'genre_name': random_genre.name,
