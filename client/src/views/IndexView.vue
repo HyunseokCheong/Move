@@ -16,11 +16,6 @@ import LogIn from "@/components/LogIn";
 
 export default {
     name: 'IndexView',
-    data() {
-        return {
-            loginform: false,
-        };
-    },
     components: {
         LogIn,
     }
