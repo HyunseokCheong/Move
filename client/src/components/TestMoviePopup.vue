@@ -29,7 +29,7 @@
 import { Carousel, Slide } from "vue-carousel";
 
 export default {
-    name: "TestMovie",
+    name: "TestMoviePopup",
     components: {
         Carousel,
         Slide,

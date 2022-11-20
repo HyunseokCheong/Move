@@ -28,6 +28,8 @@
                     </carousel-3d>
                 </div>
                 <!--  -->
+                <HeadBar msg="팝업 테스트" />
+                <TestMoviePopup />
                 <HeadBar msg="추천 알고리즘" />
                 <TestMovie />
                 <HeadBar :msg="randomGenreName" />
@@ -82,6 +84,7 @@ import SideBar from "@/components/SideBar";
 import HeadBar from "@/components/HeadBar";
 import { Carousel3d, Slide } from "vue-carousel-3d";
 import PopularMovie from "@/components/PopularMovie";
+import TestMoviePopup from "@/components/TestMoviePopup";
 import TestMovie from "@/components/TestMovie";
 import TestMovie2 from "@/components/TestMovie2";
 import TestMovie3 from "@/components/TestMovie3";
@@ -97,6 +100,7 @@ export default {
         Carousel3d,
         Slide,
         PopularMovie,
+        TestMoviePopup,
         TestMovie,
         TestMovie2,
         TestMovie3,

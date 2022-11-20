@@ -96,7 +96,6 @@ export default new Vuex.Store({
                     "https://www.themoviedb.org/t/p/original" +
                     temp_poster_path;
             }
-            console.log(randoms.genre);
             state.randoms = randoms;
         },
     },
@@ -204,7 +203,6 @@ export default new Vuex.Store({
                 },
             })
                 .then((res) => {
-                    console.log();
                     context.commit("SET_SEARCH", res.data);
                 })
                 .catch((err) => {
