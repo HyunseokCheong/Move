@@ -1,8 +1,9 @@
 <template>
     <div id="app">
-        <NavBar />
-        <div class="tmp"></div>
-        <hr />
+        <div v-if="$store.state.token !== null">
+            <NavBar />
+            <div class="tmp"></div>
+        </div>
         <router-view />
     </div>
 </template>
@@ -17,7 +18,8 @@ export default {
 </script>
 <style>
 @import "./assets/styles/navbar.css";
-@import "./assets/styles/testmovie.css";
+@import "./assets/styles/movieslider.css";
+
 /* 전체 */
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;

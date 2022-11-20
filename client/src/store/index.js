@@ -63,6 +63,40 @@ export default new Vuex.Store({
             state.searchData = searchData;
         },
         SET_RANDOMS(state, randoms) {
+            // actor
+            for (let i = 0; i < randoms.actor.length; i++) {
+                let temp_backdrop_path = randoms.actor[i].backdrop_path;
+                randoms.actor[i].backdrop_path =
+                    "https://www.themoviedb.org/t/p/original" +
+                    temp_backdrop_path;
+                let temp_poster_path = randoms.actor[i].poster_path;
+                randoms.actor[i].poster_path =
+                    "https://www.themoviedb.org/t/p/original" +
+                    temp_poster_path;
+            }
+            // director
+            for (let i = 0; i < randoms.director.length; i++) {
+                let temp_backdrop_path = randoms.director[i].backdrop_path;
+                randoms.director[i].backdrop_path =
+                    "https://www.themoviedb.org/t/p/original" +
+                    temp_backdrop_path;
+                let temp_poster_path = randoms.director[i].poster_path;
+                randoms.director[i].poster_path =
+                    "https://www.themoviedb.org/t/p/original" +
+                    temp_poster_path;
+            }
+            // genre
+            for (let i = 0; i < randoms.genre.length; i++) {
+                let temp_backdrop_path = randoms.genre[i].backdrop_path;
+                randoms.genre[i].backdrop_path =
+                    "https://www.themoviedb.org/t/p/original" +
+                    temp_backdrop_path;
+                let temp_poster_path = randoms.genre[i].poster_path;
+                randoms.genre[i].poster_path =
+                    "https://www.themoviedb.org/t/p/original" +
+                    temp_poster_path;
+            }
+            console.log(randoms.genre);
             state.randoms = randoms;
         },
     },

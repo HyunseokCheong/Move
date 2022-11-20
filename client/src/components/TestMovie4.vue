@@ -39,7 +39,7 @@ export default {
     },
     computed: {
         randoms() {
-            return this.$store.state.randoms.genre;
+            return this.$store.state.randoms.actor;
         },
     },
     methods: {

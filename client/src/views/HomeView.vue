@@ -28,8 +28,14 @@
                     </carousel-3d>
                 </div>
                 <!--  -->
+                <HeadBar msg="추천 알고리즘" />
                 <TestMovie />
+                <HeadBar :msg="randomGenreName" />
                 <TestMovie2 />
+                <HeadBar :msg="randomDirectorName" />
+                <TestMovie3 />
+                <HeadBar :msg="randomActorName" />
+                <TestMovie4 />
                 <!--  -->
                 <HeadBar msg="영화 추천" />
                 <div class="cards-box">
@@ -78,6 +84,8 @@ import { Carousel3d, Slide } from "vue-carousel-3d";
 import PopularMovie from "@/components/PopularMovie";
 import TestMovie from "@/components/TestMovie";
 import TestMovie2 from "@/components/TestMovie2";
+import TestMovie3 from "@/components/TestMovie3";
+import TestMovie4 from "@/components/TestMovie4";
 
 export default {
     name: "HomeView",
@@ -91,6 +99,8 @@ export default {
         PopularMovie,
         TestMovie,
         TestMovie2,
+        TestMovie3,
+        TestMovie4,
     },
     created() {
         this.getMovie();
