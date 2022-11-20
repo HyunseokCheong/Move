@@ -17,6 +17,7 @@ export default {
 </script>
 <style>
 @import "./assets/styles/navbar.css";
+@import "./assets/styles/testmovie.css";
 /* 전체 */
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
