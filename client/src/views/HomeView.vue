@@ -5,11 +5,15 @@
             <div class="row-sector">
                 <HeadBar msg="인기 영화1" />
                 <div id="popular">
-                    <carousel-3d 
-                    :height="510"
-                    :autoplay="true" :autoplay-timeout="3000" 
-                    :controls-visible="true" 
-                    :controls-prev-html="'&#x2039; '" :controls-next-html="'&#x203A;'"  :controls-width="10" :controls-height="30" 
+                    <carousel-3d
+                        :height="510"
+                        :autoplay="true"
+                        :autoplay-timeout="3000"
+                        :controls-visible="true"
+                        :controls-prev-html="'&#x2039; '"
+                        :controls-next-html="'&#x203A;'"
+                        :controls-width="10"
+                        :controls-height="30"
                     >
                         <slide
                             v-for="(popularmovie, i) in movies"
@@ -25,6 +29,7 @@
                 </div>
                 <!--  -->
                 <TestMovie />
+                <TestMovie2 />
                 <!--  -->
                 <HeadBar msg="영화 추천" />
                 <div class="cards-box">
@@ -72,6 +77,7 @@ import HeadBar from "@/components/HeadBar";
 import { Carousel3d, Slide } from "vue-carousel-3d";
 import PopularMovie from "@/components/PopularMovie";
 import TestMovie from "@/components/TestMovie";
+import TestMovie2 from "@/components/TestMovie2";
 
 export default {
     name: "HomeView",
@@ -84,6 +90,7 @@ export default {
         Slide,
         PopularMovie,
         TestMovie,
+        TestMovie2,
     },
     created() {
         this.getMovie();
