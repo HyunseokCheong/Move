@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
-from .models import Movie, Review
+from .models import Movie, Review, Genre, Director, Actor
 from accounts.models import RateMovie, User
 from .serializers import MovieSerializer, ReviewSerializer
 from rest_framework.response import Response
@@ -115,3 +115,21 @@ def search(request):
     serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data)
     
+@api_view(['GET'])
+def random(request):
+    random_genre = Genre.objects.order_by('?')[0]
+    random_director = Director.objects.order_by('?')[0]
+    random_actor = Actor.objects.order_by('?')[0]
+    genre_random = Movie.objects.filter(genres=random_genre).order_by('?')[:10]
+    director_random = Movie.objects.filter(directors=random_director).order_by('?')
+    actor_random = Movie.objects.filter(actors=random_actor).order_by('?')
+    genre_serializer = MovieSerializer(genre_random, many=True)
+    director_serializer = MovieSerializer(director_random, many=True)
+    actor_serializer = MovieSerializer(actor_random, many=True)
+    context = {
+        'genre': genre_serializer.data,
+        'director': director_serializer.data,   
+        'actor': actor_serializer.data,   
+    }
+    return Response(context, status=status.HTTP_200_OK)
+
