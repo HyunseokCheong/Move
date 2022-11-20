@@ -3,7 +3,7 @@
         <HeadBar :msg="genreName" />
         <div class="cards-box">
             <GenrePort
-                v-for="(movie, index) in genrePorts"
+                v-for="(movie, index) in genrePorts.movie"
                 :key="index"
                 :movie="movie"
             />
@@ -17,35 +17,26 @@ import GenrePort from "@/components/Port/GenrePort";
 
 export default {
     name: "GenrePortView",
-    data() {
-        return { genreName: null };
-    },
     components: {
         HeadBar,
         GenrePort,
     },
     created() {
         this.getGenrePort();
-        this.getGenreName();
     },
     computed: {
         genrePorts() {
+            console.log(this.$store.state.genrePorts.name)
             return this.$store.state.genrePorts;
+        },
+        genreName() {
+            return `${this.$store.state.genrePorts.name} 장르의 영화`;
         },
     },
 
     methods: {
         getGenrePort() {
             this.$store.dispatch("getGenrePort", this.$route.params.id);
-        },
-        getGenreName() {
-            let genrePorts = this.$store.state.genrePorts;
-            for (let i = 0; i < genrePorts[0].genres.length; i++) {
-                if (genrePorts[0].genres[i].id == this.$route.params.id) {
-                    this.genreName = genrePorts[0].genres[i].name;
-                    break;
-                }
-            }
         },
     },
 };

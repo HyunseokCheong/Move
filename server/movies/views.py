@@ -50,25 +50,41 @@ def review_delete(request, movie_pk, review_pk):
     return Response({'delete'})
 
 @api_view(['GET'])
-def actorport(request, actor_pk):
-    # 배우의 출연영화
-    casted_movie = Movie.objects.filter(actors=actor_pk).order_by('?')
-    serializer = MovieSerializer(casted_movie, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+def genreport(request, genre_pk):
+    # 해당장르의 인기영화
+    genre_movie = Movie.objects.filter(genres=genre_pk, vote_count__gte=1000, vote_average__gte=7).order_by('?')
+    genre_name = Genre.objects.get(pk=genre_pk).name
+    serializer = MovieSerializer(genre_movie, many=True)
+    context = {
+        'movie': serializer.data,
+        'name': genre_name,
+    }
+    print(genre_name)
+    return Response(context, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def directorport(request, director_pk):
     # 감독의 연출영화
     directed_movie = Movie.objects.filter(directors=director_pk).order_by('?')
+    director_name = Director.objects.get(pk=director_pk).name
     serializer = MovieSerializer(directed_movie, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    context = {
+        'movie': serializer.data,
+        'name': director_name,
+    }
+    return Response(context, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-def genreport(request, genre_pk):
-    # 해당장르의 인기영화
-    genre_movie = Movie.objects.filter(genres=genre_pk, vote_count__gte=1000, vote_average__gte=7).order_by('?')
-    serializer = MovieSerializer(genre_movie, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+def actorport(request, actor_pk):
+    # 배우의 출연영화
+    casted_movie = Movie.objects.filter(actors=actor_pk).order_by('?')
+    actor_name = Actor.objects.get(pk=actor_pk).name
+    serializer = MovieSerializer(casted_movie, many=True)
+    context = {
+        'movie': serializer.data,
+        'name': actor_name,
+    }
+    return Response(context, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def recommend(request):
@@ -126,10 +142,14 @@ def random(request):
     genre_serializer = MovieSerializer(genre_random, many=True)
     director_serializer = MovieSerializer(director_random, many=True)
     actor_serializer = MovieSerializer(actor_random, many=True)
+    print(random_genre.id)
     context = {
         'genre': genre_serializer.data,
-        'director': director_serializer.data,   
-        'actor': actor_serializer.data,   
+        'genre_name': random_genre.name,
+        'director': director_serializer.data,
+        'director_name': random_director.name,   
+        'actor': actor_serializer.data,
+        'actor_name': random_actor.name,  
     }
     return Response(context, status=status.HTTP_200_OK)
 

@@ -1,12 +1,17 @@
-<template>
-  <img :data-index="index" :class="{ current: isCurrent, onLeft: (leftIndex >= 0), onRight: (rightIndex >= 0) }" :src="posterpath">
+<template >
+    <router-link
+        :to="{ name: 'detail', params: { id: popularmovie.id } }"
+    >
+        <img :data-index="index" :src="posterpath">
+    </router-link>
 </template>
 
 <script>
 export default {
     name: "PopularMovie",
     props: {
-        popularmovie: Object
+        popularmovie: Object,
+        index: Number,
     },
     computed: {
         posterpath() {

@@ -19,6 +19,7 @@ export default new Vuex.Store({
         directorPorts: [],
         actorPorts: [],
         searchData: [],
+        randoms: [],
     },
     getters: {
         isLogin(state) {
@@ -50,6 +51,9 @@ export default new Vuex.Store({
         },
         SET_SEARCH(state, searchData) {
             state.searchData = searchData;
+        },
+        SET_RANDOMS(state, randoms) {
+            state.randoms = randoms;
         },
     },
     actions: {
@@ -163,6 +167,17 @@ export default new Vuex.Store({
                     console.log(err);
                 });
         },
+        getRandom(context) {
+            axios({
+                url: `${API_URL}/movies/random/`,
+            })
+                .then((res) => {
+                    context.commit("SET_RANDOMS", res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }, 
     },
     modules: {},
 });
