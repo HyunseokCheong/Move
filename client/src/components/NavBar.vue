@@ -21,19 +21,12 @@
                             placeholder="Search"
                         />
                         <img
-                            v-if="windowTop == 0"
-                            src="../assets/images/search_black.png"
-                            alt="..."
+                            :class="
+                                windowTop > 0
+                                    ? 'searchButtonActive'
+                                    : 'searchButton'
+                            "
                             @click="search(keyword)"
-                            class="searchButton"
-                            type="submit"
-                        />
-                        <img
-                            v-if="windowTop != 0"
-                            src="../assets/images/search_white.png"
-                            alt="..."
-                            @click="search(keyword)"
-                            class="searchButton"
                             type="submit"
                         />
                     </div>
