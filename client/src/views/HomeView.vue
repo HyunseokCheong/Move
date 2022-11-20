@@ -4,20 +4,19 @@
             <SideBar />
             <div class="row-sector">
                 <HeadBar msg="인기 영화1" />
-                <div class="cards-box">
-                    <RecommendRankBase
-                        v-for="(movie, index) in movies"
-                        :key="index"
-                        :movie="movie"
-                    />
-                </div>
-                <HeadBar msg="인기 영화2" />
-                <div class="cards-box">
-                    <RecommendRankBase
-                        v-for="(movie, index) in movies"
-                        :key="index"
-                        :movie="movie"
-                    />
+                <div id="popular">
+                    <carousel-3d 
+                    :height="400"
+                    :autoplay="true" :autoplay-timeout="3000" 
+                    :controls-visible="true" 
+                    :controls-prev-html="'&#x2039; '" :controls-next-html="'&#x203A;'"  :controls-width="10" :controls-height="30" 
+                    :clickable="false">
+                        <slide v-for="(popularmovie, i) in movies" :index="i" :key="i">
+                            <PopularMovie 
+                                :popularmovie="popularmovie"
+                            />
+                        </slide>
+                    </carousel-3d>
                 </div>
                 <HeadBar msg="영화 추천" />
                 <div class="cards-box">
@@ -34,18 +33,21 @@
 </template>
 
 <script>
-import RecommendRankBase from "@/components/RecommendRankBase.vue";
 import RecommendMovie from "@/components/RecommendMovie.vue";
 import SideBar from "@/components/SideBar";
 import HeadBar from "@/components/HeadBar";
+import { Carousel3d, Slide } from 'vue-carousel-3d';
+import PopularMovie from '@/components/PopularMovie';
 
 export default {
     name: "HomeView",
     components: {
-        RecommendRankBase,
         RecommendMovie,
         SideBar,
         HeadBar,
+        Carousel3d,
+        Slide,
+        PopularMovie
     },
     created() {
         this.getMovie();
@@ -57,6 +59,9 @@ export default {
         },
         recommends() {
             return this.$store.state.recommends;
+        },
+        posterpath() {
+            return `https://www.themoviedb.org/t/p/original${this.slidemovie.poster_path}`;
         },
     },
 
