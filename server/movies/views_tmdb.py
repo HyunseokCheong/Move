@@ -5,10 +5,14 @@ from .models import Genre, Movie, Actor, Director
 API_KEY = '2f838d7eacf38adb7504971b083228bf'
 GENRE_URL = 'https://api.themoviedb.org/3/genre/movie/list'
 POPULAR_MOVIE_URL = 'https://api.themoviedb.org/3/movie/popular'
-# CLIENT_ID = 'Lx1trkp9HH9SazNbG55l'
-# CLIENT_SECRET = 'eKScj3bUTK'
-CLIENT_ID = 'xmDJGcXpIFNrLeWkL49T'
-CLIENT_SECRET = 'ztZxi3PlsI'
+CLIENT_ID = 'Lx1trkp9HH9SazNbG55l'
+CLIENT_SECRET = 'eKScj3bUTK'
+# CLIENT_ID = 'xmDJGcXpIFNrLeWkL49T'
+# CLIENT_SECRET = 'ztZxi3PlsI'
+# CLIENT_ID = 'UWJrnTy2ZdYkLQh6zYwh'
+# CLIENT_SECRET = 'UKjrxp00_e'
+# CLIENT_ID = 'gNmOLzQIq3HuBt4kZVO1'
+# CLIENT_SECRET = 'ZyrHNYH9HU'
 
 
 def translation(word):      # 네이버 파파고 api를 이용한 영어 -> 한글 번역
@@ -106,8 +110,8 @@ def get_cast(movie):
             if not Actor.objects.filter(pk=actor_id).exists():
                 actor = Actor.objects.create(
                     id=person.get('id'),
-                    name=person.get('name'),
-                    # name=translation(person.get('name')),   # 배우 이름 번역
+                    # name=person.get('name'),
+                    name=translation(person.get('name')),   # 배우 이름 번역
                 )
             movie.actors.add(actor_id)
             if movie.actors.count() == 5:       # 5명의 배우 정보만 저장
@@ -118,8 +122,8 @@ def get_cast(movie):
             if not Director.objects.filter(pk=director_id).exists():
                 director = Director.objects.create(
                     id=person.get('id'),
-                    name=person.get('name'),
-                    # name=translation(person.get('name')),   # 감독 이름 번역
+                    # name=person.get('name'),
+                    name=translation(person.get('name')),   # 감독 이름 번역
                 )
             movie.directors.add(director_id)
 
@@ -131,6 +135,6 @@ def tmdb_data(request):
     # Movie.objects.all().delete()
     # 1~7하기
     tmdb_genres()
-    for i in range(1, 50):
+    for i in range(29, 36):
         movie_data(i)
     return HttpResponse('OK >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')

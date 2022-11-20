@@ -24,6 +24,7 @@ export default {
             username: null,
             password1: null,
             password2: null,
+            errorMessage: null,
         };
     },
     methods: {
@@ -31,14 +32,25 @@ export default {
             const username = this.username;
             const password1 = this.password1;
             const password2 = this.password2;
+            if (this.password1.length < 8){
+                this.errorMessage = "비밀번호가 너무 짧습니다."
+                alert(this.errorMessage)
+            }
+            else if (this.password1 !== this.password2){
+                this.errorMessage = "비밀번호가 일치하지 않습니다."
+                alert(this.errorMessage)
+            }
+            else {
+                const payload = {
+                    username: username,
+                    password1: password1,
+                    password2: password2,
+                };
+                this.$store.dispatch("signUp", payload);
+            }
+            
 
-            const payload = {
-                username: username,
-                password1: password1,
-                password2: password2,
-            };
 
-            this.$store.dispatch("signUp", payload);
         },
     },
 };

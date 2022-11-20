@@ -78,7 +78,7 @@ export default new Vuex.Store({
                     this.state.loggedInUser = payload.username;
                     context.commit("SAVE_TOKEN", res.data.key);
                 })
-                .catch((err) => console.log(err));
+                .catch(() => alert("이미 있는 아이디입니다."));
         },
         logIn(context, payload) {
             axios({
