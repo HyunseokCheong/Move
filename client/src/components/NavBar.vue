@@ -2,24 +2,50 @@
     <div :class="windowTop > 0 ? 'navActive' : 'nav'">
         <div class="items">
             <div class="left">
-                <router-link to="/">MAIN</router-link> |
-                <router-link to="/ranking">RANKING</router-link> |
+                <div :class="windowTop > 0 ? 'routersActive' : 'routers'">
+                    <router-link to="/" class="router">MAIN</router-link>
+                    <router-link to="/ranking" class="router"
+                        >RANKING</router-link
+                    >
+                </div>
             </div>
             <div class="right">
-                <div v-if="isLogin">
+                <div :class="windowTop > 0 ? 'routersActive' : 'routers'">
+                    <div class="router">
+                        <input
+                            v-model="keyword"
+                            id="keyword"
+                            @keypress.enter="search(keyword)"
+                            class="searchInput"
+                            type="search"
+                            placeholder="Search"
+                        />
+                        <img
+                            :class="
+                                windowTop > 0
+                                    ? 'searchButtonActive'
+                                    : 'searchButton'
+                            "
+                            @click="search(keyword)"
+                            type="submit"
+                        />
+                    </div>
                     <router-link
-                        :to="{ name: 'detailuser', params: { name: userName } }"
+                        v-if="isLogin"
+                        :to="{
+                            name: 'detailuser',
+                            params: { name: userName },
+                        }"
+                        class="router"
                         >{{ userName }}</router-link
                     >
-                    <button @click="logOut">로그아웃버튼</button>
-                </div>
-                <div v-if="!isLogin">
-                    <router-link to="/login">LOGIN</router-link> |
-                    <router-link to="/signup">SIGNUP</router-link> |
-                </div>
-                <div class="form-inline my-2 my-lg-0">
-                    <input v-model="keyword" id="keyword" @keypress.enter="search(keyword)" class="form-control mr-sm-2" type="search" placeholder="Search">
-                    <button @click="search(keyword)" class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+                    <p v-if="isLogin" @click="logOut" class="router">LOGOUT</p>
+                    <router-link v-if="!isLogin" to="/login" class="router"
+                        >LOGIN</router-link
+                    >
+                    <router-link v-if="!isLogin" to="/signup" class="router"
+                        >SIGNUP</router-link
+                    >
                 </div>
             </div>
         </div>
@@ -57,9 +83,8 @@ export default {
             this.$router.go();
         },
         search(keyword) {
-            this.$router.push(`/search/${keyword}`)
+            this.$router.push(`/search/${keyword}`);
         },
-        
     },
 };
 </script>

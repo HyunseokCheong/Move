@@ -8,8 +8,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /*  */
     z-index: 1;
+    background-color: lightgrey;
 }
 .navActive {
     transition: 0.5s;
@@ -21,8 +21,86 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /*  */
     z-index: 1;
-    /*  */
     background-color: rgb(55, 29, 72);
+}
+.items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 94%;
+    height: 100%;
+}
+.left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 70%;
+    height: 100%;
+}
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 30%;
+    height: 100%;
+}
+.routersActive,
+.routers {
+    margin-left: 30px;
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.routersActive > .router {
+    margin-bottom: 4px;
+    color: white;
+    font-size: 16px;
+    margin-right: 18px;
+    font-weight: 900;
+    text-decoration: none;
+}
+.routersActive > .router:hover {
+    margin-bottom: 4px;
+    color: grey;
+    font-size: 16px;
+    margin-right: 18px;
+    font-weight: 900;
+    text-decoration: none;
+}
+.routers > .router {
+    margin-bottom: 4px;
+    color: black;
+    font-size: 16px;
+    margin-right: 18px;
+    font-weight: 900;
+    text-decoration: none;
+}
+.routers > .router:hover {
+    margin-bottom: 4px;
+    color: rgb(55, 29, 72);
+    font-size: 16px;
+    margin-right: 18px;
+    font-weight: 900;
+    text-decoration: none;
+}
+.searchInput {
+    width: 200px;
+    margin-right: 5px;
+}
+.searchButtonActive {
+    content: url("../images/search_white.png");
+    height: 25px;
+}
+.searchButton {
+    content: url("../images/search_black.png");
+    height: 25px;
+}
+.searchButtonActive:hover {
+    content: url("../images/search_grey.png");
+    height: 25px;
+}
+.searchButton:hover {
+    content: url("../images/search_puple.png");
+    height: 25px;
 }
