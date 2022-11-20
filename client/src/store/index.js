@@ -38,6 +38,16 @@ export default new Vuex.Store({
             state.users = users;
         },
         SET_RECOMMENDS(state, movies) {
+            for (let i = 0; i < movies.length; i++) {
+                let temp_poster_path = movies[i].backdrop_path;
+                movies[i].temp_poster_path =
+                    "https://www.themoviedb.org/t/p/original" +
+                    temp_poster_path;
+                let temp_backdrop_path = movies[i].backdrop_path;
+                movies[i].backdrop_path =
+                    "https://www.themoviedb.org/t/p/original" +
+                    temp_backdrop_path;
+            }
             state.recommends = movies;
         },
         SET_GENREPORT(state, movies) {
@@ -160,7 +170,7 @@ export default new Vuex.Store({
                 },
             })
                 .then((res) => {
-                    console.log()
+                    console.log();
                     context.commit("SET_SEARCH", res.data);
                 })
                 .catch((err) => {
@@ -177,7 +187,7 @@ export default new Vuex.Store({
                 .catch((err) => {
                     console.log(err);
                 });
-        }, 
+        },
     },
     modules: {},
 });

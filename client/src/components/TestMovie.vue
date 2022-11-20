@@ -2,7 +2,7 @@
     <div>
         <div id="slide">
             <carousel
-                :per-page="8"
+                :per-page="5"
                 :navigate-to="0"
                 :mouse-drag="true"
                 :paginationEnabled="false"
@@ -11,18 +11,21 @@
             >
                 <slide
                     id=""
-                    v-for="(movie, index) in movies"
+                    v-for="(movie, index) in this.recommends"
                     :key="index"
                     :movie="movie"
                 >
-                    {{ movie }}
+                    <router-link
+                        :to="{ name: 'detail', params: { id: movie.id } }"
+                        tag="div"
+                        ><img :src="movie.backdrop_path" id="imagemPosterSlide"
+                    /></router-link>
                 </slide>
             </carousel>
         </div>
     </div>
 </template>
 <script>
-// https://www.themoviedb.org/t/p/original${movie.backdrop_path}
 import { Carousel, Slide } from "vue-carousel";
 
 export default {
@@ -35,8 +38,8 @@ export default {
         this.getRecommend();
     },
     computed: {
-        movies() {
-            return this.$store.state.movies;
+        recommends() {
+            return this.$store.state.recommends;
         },
     },
     methods: {
