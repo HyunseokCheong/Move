@@ -54,7 +54,7 @@
                     <HeadBar :msg="randomDirectorName" />
                     <div id="slide">
                         <ccarousel
-                            :per-page="5"
+                            :per-page="6"
                             :navigate-to="0"
                             :mouse-drag="false"
                             :paginationEnabled="false"
@@ -66,14 +66,18 @@
                                 :key="index"
                                 :randommovie="randommovie"
                             >
-                                <Random :randommovie="randommovie" />
+                                <Random
+                                    :randommovie="randommovie"
+                                    :popupView="popupView"
+                                    @booleanFromChild="booleanChange"
+                                />
                             </slide2>
                         </ccarousel>
                     </div>
                     <HeadBar :msg="randomActorName" />
                     <div id="slide">
                         <ccarousel
-                            :per-page="5"
+                            :per-page="6"
                             :navigate-to="0"
                             :mouse-drag="false"
                             :paginationEnabled="false"
@@ -85,7 +89,11 @@
                                 :key="index"
                                 :randommovie="randommovie"
                             >
-                                <Random :randommovie="randommovie" />
+                                <Random
+                                    :randommovie="randommovie"
+                                    :popupView="popupView"
+                                    @booleanFromChild="booleanChange"
+                                />
                             </slide2>
                         </ccarousel>
                     </div>
@@ -94,9 +102,10 @@
                     class="popup-view"
                     :class="{ popupActive: popupView }"
                     :style="{ left: xPosition, top: yPosition }"
-                    @mouseout="closePopup()"
                 >
-                    <PopUp :movieObj="movieObj" />
+                    <div @mouseleave="closePopup()">
+                        <PopUp :movieObj="movieObj" :state="state" />
+                    </div>
                 </div>
                 <SideBar />
             </div>
@@ -133,6 +142,7 @@ export default {
             popupView: false,
             xPosition: null,
             yPosition: null,
+            state: null,
             movieObj: {},
         };
     },
@@ -182,6 +192,7 @@ export default {
             this.xPosition = popupView[1];
             this.yPosition = popupView[2];
             this.movieObj = popupView[3];
+            this.state = popupView[4];
         },
         closePopup: function () {
             this.popupView = false;

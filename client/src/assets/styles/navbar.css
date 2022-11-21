@@ -57,7 +57,7 @@
     color: white;
     font-size: 16px;
     margin-right: 18px;
-    font-weight: 900;
+    /* font-weight: 900; */
     text-decoration: none;
 }
 .routersActive > .router:hover {
@@ -65,7 +65,7 @@
     color: grey;
     font-size: 16px;
     margin-right: 18px;
-    font-weight: 900;
+    /* font-weight: 900; */
     text-decoration: none;
 }
 .routers > .router {
@@ -73,7 +73,7 @@
     color: black;
     font-size: 16px;
     margin-right: 18px;
-    font-weight: 900;
+    /* font-weight: 900; */
     text-decoration: none;
 }
 .routers > .router:hover {
@@ -81,7 +81,7 @@
     color: rgb(55, 29, 72);
     font-size: 16px;
     margin-right: 18px;
-    font-weight: 900;
+    /* font-weight: 900; */
     text-decoration: none;
 }
 .searchInput {

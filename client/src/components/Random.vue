@@ -28,11 +28,13 @@ export default {
                 this.propPopupView = true;
                 this.xPosition =
                     window.pageXOffset +
-                    event.currentTarget.getBoundingClientRect().left +
+                    event.currentTarget.getBoundingClientRect().left -
+                    62.5 +
                     "px";
                 this.yPosition =
                     window.pageYOffset +
-                    event.currentTarget.getBoundingClientRect().top +
+                    event.currentTarget.getBoundingClientRect().top -
+                    86.75 +
                     "px";
                 let bag = [
                     this.propPopupView,

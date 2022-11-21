@@ -9,18 +9,11 @@
     outline: none !important;
 }
 #imagemPosterSlide {
-    border-radius: 15px;
     transition: 0.5s;
-
     margin-top: 20px;
     margin-bottom: 20px;
-    /* 1043 * 587 */
-    /* width: 17.73vw; */
-    /* height: 9.98vw; */
-    /* width: 330px; */
-    /* height: 190px; */
-    width: 238px;
-    height: 140px;
+    width: 250px;
+    height: 147px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
