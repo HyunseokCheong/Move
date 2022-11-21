@@ -1,0 +1,22 @@
+.popupBox {
+    width: 280px;
+    height: 164px;
+    /* width: 330px; */
+    /* height: 190px; */
+    border: solid 1px black;
+    background-color: lightblue;
+    z-index: -1;
+}
+.popup-view {
+    opacity: 0;
+    display: none;
+    visibility: hidden;
+    position: absolute;
+}
+
+.popupActive {
+    opacity: 1;
+    display: block;
+    visibility: visible;
+    position: absolute;
+}

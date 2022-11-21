@@ -10,7 +10,7 @@ export default {
 
 <style>
 .sidebar {
-    width: 5%;
+    width: 10%;
     height: 100%;
     border: solid 1px black;
 }

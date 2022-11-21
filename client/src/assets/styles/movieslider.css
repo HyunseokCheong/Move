@@ -15,13 +15,13 @@
     margin-top: 20px;
     margin-bottom: 20px;
     /* 1043 * 587 */
-    width: 17.73vw;
-    height: 9.98vw;
+    /* width: 17.73vw; */
+    /* height: 9.98vw; */
+    /* width: 330px; */
+    /* height: 190px; */
+    width: 238px;
+    height: 140px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-}
-#imagemPosterSlide:hover {
-    transform: scale(1.1);
-    cursor: pointer;
 }
