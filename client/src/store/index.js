@@ -181,9 +181,12 @@ export default new Vuex.Store({
             axios({
                 method: "post",
                 url: `${API_URL}/accounts/likemovie/${id}/`,
+                // headers: {
+                //     Authorization: `Token ${this.$store.state.token}`,
+                // },
             })
                 .then(() => {
-                    console.log('like')
+                    console.log("like");
                 })
                 .catch((err) => {
                     console.log(err);
@@ -193,9 +196,12 @@ export default new Vuex.Store({
             axios({
                 method: "post",
                 url: `${API_URL}/accounts/dislikemovie/${id}/`,
+                // headers: {
+                //     Authorization: `Token ${this.$store.state.token}`,
+                // },
             })
                 .then(() => {
-                    console.log('dislike')
+                    console.log("dislike");
                 })
                 .catch((err) => {
                     console.log(err);
@@ -205,9 +211,12 @@ export default new Vuex.Store({
             axios({
                 method: "post",
                 url: `${API_URL}/accounts/wishmovie/${id}/`,
+                // headers: {
+                //     Authorization: `Token ${this.$store.state.token}`,
+                // },
             })
                 .then(() => {
-                    console.log('wish')
+                    console.log("wish");
                 })
                 .catch((err) => {
                     console.log(err);

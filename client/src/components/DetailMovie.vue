@@ -118,44 +118,17 @@ export default {
                     console.log(err);
                 });
         },
-        stateChange(event) {
-            console.log(event);
-        },
         like() {
-            axios({
-                url: `${API_URL}/accounts/likemovie/${this.movie.id}`,
-                headers: {
-                    Authorization: `Token ${this.$store.state.token}`,
-                },
-            })
-                .then(() => {
-                    this.$router.go();
-                })
-                .catch((err) => console.log(err));
+            this.$store.dispatch("movieLike", this.movie.id);
+            this.$router.go();
         },
         dislike() {
-            axios({
-                url: `${API_URL}/accounts/dislikemovie/${this.movie.id}`,
-                headers: {
-                    Authorization: `Token ${this.$store.state.token}`,
-                },
-            })
-                .then(() => {
-                    this.$router.go();
-                })
-                .catch((err) => console.log(err));
+            this.$store.dispatch("movieDislike", this.movie.id);
+            this.$router.go();
         },
         addWishList() {
-            axios({
-                url: `${API_URL}/accounts/wishmovie/${this.movie.id}`,
-                headers: {
-                    Authorization: `Token ${this.$store.state.token}`,
-                },
-            })
-                .then(() => {
-                    this.$router.go();
-                })
-                .catch((err) => console.log(err));
+            this.$store.dispatch("movieWish", this.movie.id);
+            this.$router.go();
         },
     },
 };
