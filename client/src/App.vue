@@ -23,4 +23,8 @@ export default {
 @import "./assets/styles/tinder.css";
 @import "./assets/styles/navbar.css";
 @import "./assets/styles/popup.css";
+@import "./assets/styles/app.css";
+@import "./assets/styles/navbar.css";
+@import "./assets/styles/popup.css";
+@import "./assets/styles/movieslider.css";
 </style>
