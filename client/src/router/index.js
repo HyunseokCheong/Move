@@ -10,6 +10,7 @@ import DirectorPortView from "@/views/Port/DirectorPortView";
 import ActorPortView from "@/views/Port/ActorPortView";
 import SearchView from "@/views/SearchView";
 import store from "@/store";
+import TinderView from '@/views/Tinder/TinderView';
 
 Vue.use(VueRouter);
 
@@ -114,7 +115,12 @@ const routes = [
                 next('/login')
             }
         },
-      },
+    },
+    {
+        path: '/test',
+        name: 'test',
+        component: TinderView,
+    },
 ];
 
 const router = new VueRouter({

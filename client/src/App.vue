@@ -19,6 +19,7 @@ export default {
 <style>
 @import "./assets/styles/navbar.css";
 @import "./assets/styles/movieslider.css";
+@import "./assets/styles/tinder.css";
 
 /* 전체 */
 #app {

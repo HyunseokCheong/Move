@@ -42,7 +42,6 @@
                                 v-for="(randommovie, index) in randoms.genre"
                                 :key="index"
                                 :randommovie="randommovie"
-<<<<<<< HEAD
                             >
                                 <Random
                                     :randommovie="randommovie"
@@ -61,30 +60,6 @@
                             :paginationEnabled="false"
                             :navigationEnabled="true"
                             :navigationClickTargetSize="9"
-=======
-                            />
-                        </slide2>
-                    </ccarousel>
-                </div>
-                <HeadBar msg="test" />
-                <div>
-                    <HeadBar :msg="randomDirectorName" />
-                    <TinderView/>
-                </div>
-                <div id="slide">
-                    <ccarousel
-                        :per-page="5"
-                        :navigate-to="0"
-                        :mouse-drag="false"
-                        :paginationEnabled="false"
-                        :navigationEnabled="true"
-                        :navigationClickTargetSize="9"
-                    >
-                        <slide2
-                            v-for="(randommovie, index) in randoms.director"
-                            :key="index"
-                            :randommovie="randommovie"
->>>>>>> 7438bf45b5867d1ddb0bf1efa314cb7fd99f8b98
                         >
                             <slide2
                                 v-for="(randommovie, index) in randoms.director"
@@ -137,11 +112,7 @@ import { Carousel as Ccarousel } from "vue-carousel";
 import { Slide as Slide2 } from "vue-carousel";
 import PopularMovie from "@/components/PopularMovie";
 import Random from "@/components/Random";
-<<<<<<< HEAD
 import PopUp from "@/components/PopUp";
-=======
-import TinderView from '@/views/TinderView';
->>>>>>> 7438bf45b5867d1ddb0bf1efa314cb7fd99f8b98
 
 export default {
     name: "HomeView",
@@ -154,7 +125,6 @@ export default {
         Slide2,
         PopularMovie,
         Random,
-<<<<<<< HEAD
         PopUp,
     },
     data() {
@@ -165,9 +135,6 @@ export default {
             yPosition: null,
             movieObj: {},
         };
-=======
-        TinderView
->>>>>>> 7438bf45b5867d1ddb0bf1efa314cb7fd99f8b98
     },
     created() {
         this.getMovie();

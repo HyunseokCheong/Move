@@ -177,6 +177,42 @@ export default new Vuex.Store({
                     console.log(err);
                 });
         },
+        movieLike(context, id) {
+            axios({
+                method: "post",
+                url: `${API_URL}/accounts/likemovie/${id}/`,
+            })
+                .then(() => {
+                    console.log('like')
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        movieDislike(context, id) {
+            axios({
+                method: "post",
+                url: `${API_URL}/accounts/dislikemovie/${id}/`,
+            })
+                .then(() => {
+                    console.log('dislike')
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        movieWish(context, id) {
+            axios({
+                method: "post",
+                url: `${API_URL}/accounts/wishmovie/${id}/`,
+            })
+                .then(() => {
+                    console.log('wish')
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
     },
     modules: {},
 });
