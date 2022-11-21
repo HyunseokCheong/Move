@@ -48,7 +48,11 @@
                         </slide2>
                     </ccarousel>
                 </div>
-                <HeadBar :msg="randomDirectorName" />
+                <HeadBar msg="test" />
+                <div>
+                    <HeadBar :msg="randomDirectorName" />
+                    <TinderView/>
+                </div>
                 <div id="slide">
                     <ccarousel
                         :per-page="5"
@@ -104,6 +108,7 @@ import {Carousel as Ccarousel} from "vue-carousel";
 import {Slide as Slide2}  from "vue-carousel";
 import PopularMovie from "@/components/PopularMovie";
 import Random from "@/components/Random";
+import TinderView from '@/views/TinderView';
 
 export default {
     name: "HomeView",
@@ -116,6 +121,7 @@ export default {
         Slide2,
         PopularMovie,
         Random,
+        TinderView
     },
     created() {
         this.getMovie();
