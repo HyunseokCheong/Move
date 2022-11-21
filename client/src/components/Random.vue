@@ -1,27 +1,24 @@
 <template>
     <router-link
-        :to="{ name: 'detail', params: { id: movie.id } }"
-        tag="div"
-        class="card"
+        :to="{ name: 'detail', params: { id: randommovie.id } }"
     >
-        <img :src="poster_path" class="card-img-top" alt="..." />
-        <div class="card-body">
-            <p class="card-text">{{ movie.title }}/{{ movie.id }}</p>
-        </div>
+        <img :src="backdrop_path" id="imagemPosterSlide"/>
     </router-link>
-</template>
 
+</template>
 <script>
+
 export default {
-    name: "RandomGenre",
+    name: "TestMovie2",
     props: {
-        movie: Object,
+        randommovie: Object,
     },
     computed: {
-        poster_path() {
-            return `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${this.movie.poster_path}`;
+        backdrop_path() {
+            return `https://www.themoviedb.org/t/p/original${this.randommovie.backdrop_path}`;
         },
     },
 };
 </script>
-<style scoped></style>
+
+<style></style>

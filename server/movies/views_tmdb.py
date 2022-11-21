@@ -5,10 +5,10 @@ from .models import Genre, Movie, Actor, Director
 API_KEY = '2f838d7eacf38adb7504971b083228bf'
 GENRE_URL = 'https://api.themoviedb.org/3/genre/movie/list'
 POPULAR_MOVIE_URL = 'https://api.themoviedb.org/3/movie/popular'
-CLIENT_ID = 'Lx1trkp9HH9SazNbG55l'
-CLIENT_SECRET = 'eKScj3bUTK'
-# CLIENT_ID = 'xmDJGcXpIFNrLeWkL49T'
-# CLIENT_SECRET = 'ztZxi3PlsI'
+# CLIENT_ID = 'Lx1trkp9HH9SazNbG55l'
+# CLIENT_SECRET = 'eKScj3bUTK'
+CLIENT_ID = 'xmDJGcXpIFNrLeWkL49T'
+CLIENT_SECRET = 'ztZxi3PlsI'
 # CLIENT_ID = 'UWJrnTy2ZdYkLQh6zYwh'
 # CLIENT_SECRET = 'UKjrxp00_e'
 # CLIENT_ID = 'gNmOLzQIq3HuBt4kZVO1'
@@ -74,25 +74,26 @@ def movie_data(page=1):
         if not movie_dict.get('backdrop_path'): continue
         # 유투브 key 조회
         youtube_key = get_youtube_key(movie_dict)
-        if youtube_key == 'nothing': continue   
-        movie = Movie.objects.create(
-            id=movie_dict.get('id'),
-            title=movie_dict.get('title'),
-            release_date=movie_dict.get('release_date'),
-            popularity=movie_dict.get('popularity'),
-            vote_count=movie_dict.get('vote_count'),
-            vote_average=movie_dict.get('vote_average'),
-            overview=movie_dict.get('overview'),
-            poster_path=movie_dict.get('poster_path'),
-            backdrop_path=movie_dict.get('backdrop_path'),
-            youtube_key=youtube_key, 
-        )
-        for genre_id in movie_dict.get('genre_ids', []):
-            movie.genres.add(genre_id)
+        if youtube_key == 'nothing': continue
+        if not Movie.objects.filter(id=movie_dict.get('id')).exists():
+            movie = Movie.objects.create(
+                id=movie_dict.get('id'),
+                title=movie_dict.get('title'),
+                release_date=movie_dict.get('release_date'),
+                popularity=movie_dict.get('popularity'),
+                vote_count=movie_dict.get('vote_count'),
+                vote_average=movie_dict.get('vote_average'),
+                overview=movie_dict.get('overview'),
+                poster_path=movie_dict.get('poster_path'),
+                backdrop_path=movie_dict.get('backdrop_path'),
+                youtube_key=youtube_key, 
+            )
+            for genre_id in movie_dict.get('genre_ids', []):
+                movie.genres.add(genre_id)
 
-        # 제작진 저장
-        get_cast(movie)
-        print('>>>', movie.title, '==>', movie.youtube_key) 
+            # 제작진 저장
+            get_cast(movie)
+            print('>>>', movie.title, '==>', movie.youtube_key) 
 
 def get_cast(movie):
     movie_id = movie.id
@@ -133,8 +134,7 @@ def tmdb_data(request):
     # Actor.objects.all().delete()
     # Director.objects.all().delete()
     # Movie.objects.all().delete()
-    # 1~7하기
     tmdb_genres()
-    for i in range(29, 36):
+    for i in range(1, 60):
         movie_data(i)
     return HttpResponse('OK >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')

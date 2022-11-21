@@ -27,49 +27,68 @@
                         </slide>
                     </carousel-3d>
                 </div>
-                <!--  -->
-                <HeadBar msg="팝업 테스트" />
-                <TestMoviePopup />
-                <HeadBar msg="추천 알고리즘" />
-                <TestMovie />
                 <HeadBar :msg="randomGenreName" />
-                <TestMovie2 />
-                <HeadBar :msg="randomDirectorName" />
-                <TestMovie3 />
-                <HeadBar :msg="randomActorName" />
-                <TestMovie4 />
-                <!--  -->
-                <HeadBar msg="영화 추천" />
-                <div class="cards-box">
-                    <RecommendMovie
-                        v-for="(movie, index) in recommends"
-                        :key="index"
-                        :movie="movie"
-                    />
-                </div>
-                <HeadBar :msg="randomGenreName" />
-                <div class="cards-box">
-                    <Random
-                        v-for="(movie, index) in randoms.genre"
-                        :key="index"
-                        :movie="movie"
-                    />
+                <div id="slide">
+                    <ccarousel
+                        :per-page="5"
+                        :navigate-to="0"
+                        :mouse-drag="false"
+                        :paginationEnabled="false"
+                        :navigationEnabled="true"
+                        :navigationClickTargetSize="9"
+                    >
+                        <slide2
+                            v-for="(randommovie, index) in randoms.genre"
+                            :key="index"
+                            :randommovie="randommovie"
+                        >
+                            <Random
+                                :randommovie="randommovie"
+                            />
+                        </slide2>
+                    </ccarousel>
                 </div>
                 <HeadBar :msg="randomDirectorName" />
-                <div class="cards-box">
-                    <Random
-                        v-for="(movie, index) in randoms.director"
-                        :key="index"
-                        :movie="movie"
-                    />
+                <div id="slide">
+                    <ccarousel
+                        :per-page="5"
+                        :navigate-to="0"
+                        :mouse-drag="false"
+                        :paginationEnabled="false"
+                        :navigationEnabled="true"
+                        :navigationClickTargetSize="9"
+                    >
+                        <slide2
+                            v-for="(randommovie, index) in randoms.director"
+                            :key="index"
+                            :randommovie="randommovie"
+                        >
+                            <Random
+                                :randommovie="randommovie"
+                            />
+                        </slide2>
+                    </ccarousel>
                 </div>
                 <HeadBar :msg="randomActorName" />
-                <div class="cards-box">
-                    <Random
-                        v-for="(movie, index) in randoms.actor"
-                        :key="index"
-                        :movie="movie"
-                    />
+                <div id="slide">
+                    <ccarousel
+                        :per-page="5"
+                        :navigate-to="0"
+                        :mouse-drag="false"
+                        :paginationEnabled="false"
+                        :navigationEnabled="true"
+                        :navigationClickTargetSize="9"
+                    >
+                        <slide2
+                            v-for="(randommovie, index) in randoms.actor"
+                            :key="index"
+                            :randommovie="randommovie"
+                        >
+                            <Random
+                                :randommovie="randommovie"
+                            />
+                        </slide2>
+                    </ccarousel>
                 </div>
             </div>
             <SideBar />
@@ -78,33 +97,25 @@
 </template>
 
 <script>
-import RecommendMovie from "@/components/RecommendMovie";
-import Random from "@/components/Random";
 import SideBar from "@/components/SideBar";
 import HeadBar from "@/components/HeadBar";
 import { Carousel3d, Slide } from "vue-carousel-3d";
+import {Carousel as Ccarousel} from "vue-carousel";
+import {Slide as Slide2}  from "vue-carousel";
 import PopularMovie from "@/components/PopularMovie";
-import TestMoviePopup from "@/components/TestMoviePopup";
-import TestMovie from "@/components/TestMovie";
-import TestMovie2 from "@/components/TestMovie2";
-import TestMovie3 from "@/components/TestMovie3";
-import TestMovie4 from "@/components/TestMovie4";
+import Random from "@/components/Random";
 
 export default {
     name: "HomeView",
     components: {
-        RecommendMovie,
-        Random,
         SideBar,
         HeadBar,
         Carousel3d,
+        Ccarousel,
         Slide,
+        Slide2,
         PopularMovie,
-        TestMoviePopup,
-        TestMovie,
-        TestMovie2,
-        TestMovie3,
-        TestMovie4,
+        Random,
     },
     created() {
         this.getMovie();

@@ -109,7 +109,7 @@ def recommend(request):
     for director in user.favorite_directors.all():
        directors.append(director.id)
     rec_movies = Movie.objects.filter(~Q(id__in=excepts) & (Q(id__in=follows) | Q(actors__in=actors) | Q(directors__in=directors))).distinct()
-    rec = len(rec_movies)
+    rec = rec_movies.count()
     if rec < 30:
         num = 30 - rec
         for rec_movie in rec_movies:
@@ -137,13 +137,13 @@ def random(request):
     # 연출한 영화가 5개 이상인 감독중 무작위
     random_directors = []
     for director in Director.objects.all():
-        if len(director.movies.all()) >= 5:
+        if director.movies.count() >= 5:
             random_directors.append(director.id)
     random_director = Director.objects.filter(id__in=random_directors).order_by('?')[0]
     # 출연한 영화가 5개 이상인 배우중 무작위
     random_actors = []
     for actor in Actor.objects.all():
-        if len(actor.movies.all()) >= 5:
+        if actor.movies.count() >= 5:
             random_actors.append(actor.id)
     random_actor = Actor.objects.filter(id__in=random_actors).order_by('?')[0]
 

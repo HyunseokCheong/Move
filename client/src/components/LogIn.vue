@@ -7,8 +7,8 @@
                 등록성공, 로그인
             </div>
             </transition>
-            <input type="text" v-model="login.username" placeholder="아이디">
-            <input type="password" v-model="login.password" placeholder="비밀번호">
+            <input type="text" @keyup.enter.prevent="logIn" v-model="login.username" placeholder="아이디">
+            <input type="password" @keyup.enter.prevent="logIn" v-model="login.password" placeholder="비밀번호">
             <button @click.prevent="logIn">로그인</button>
             <div class="kayit-ol"><p>넷플릭스에 가입하고싶으세요? <a @click="loginForm = true">지금 가입하세요</a></p></div>
             <div class="kayit-ol-m"><p>기존회원? <br> <a @click="loginForm = false">로그인.</a></p></div>
