@@ -73,7 +73,9 @@ def like_genre(request, genre_pk):
 
 @api_view(['POST'])
 def like_movie(request, movie_pk):
-    me = User.objects.get(pk=1)
+    me = request.user
+    print(me)
+    print(movie_pk)
     movie = Movie.objects.get(pk=movie_pk)
     if RateMovie.objects.filter(rateuser=me, ratedmovie=movie).exists():
         ratemovie = RateMovie.objects.get(rateuser=me, ratedmovie=movie)
@@ -95,7 +97,7 @@ def like_movie(request, movie_pk):
 
 @api_view(['POST'])
 def dislike_movie(request, movie_pk):
-    me = User.objects.get(pk=1)
+    me = request.user
     movie = Movie.objects.get(pk=movie_pk)
     if RateMovie.objects.filter(rateuser=me, ratedmovie=movie).exists():
         ratemovie = RateMovie.objects.get(rateuser=me, ratedmovie=movie)
@@ -117,7 +119,7 @@ def dislike_movie(request, movie_pk):
 
 @api_view(['POST'])
 def wish_movie(request, movie_pk):
-    me = User.objects.get(pk=1)
+    me = request.user
     movie = Movie.objects.get(pk=movie_pk)
     if RateMovie.objects.filter(rateuser=me, ratedmovie=movie).exists():
         ratemovie = RateMovie.objects.get(rateuser=me, ratedmovie=movie)

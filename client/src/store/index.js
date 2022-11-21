@@ -10,10 +10,11 @@ const API_URL = "http://127.0.0.1:8000";
 export default new Vuex.Store({
     plugins: [createPersistedState()],
     state: {
-        movies: [],
         token: null,
         loggedInUser: null,
         users: [],
+        movies: [],
+        movie: null,
         recommends: [],
         genrePorts: [],
         directorPorts: [],
@@ -27,15 +28,18 @@ export default new Vuex.Store({
         },
     },
     mutations: {
-        SET_MOVIES(state, movies) {
-            state.movies = movies.slice(0, 30);
-        },
         SAVE_TOKEN(state, token) {
             state.token = token;
             router.push({ name: "home" });
         },
         SET_USERS(state, users) {
             state.users = users;
+        },
+        SET_MOVIES(state, movies) {
+            state.movies = movies.slice(0, 30);
+        },
+        SET_MOVIE_DETAIL(state, movie) {
+            state.movie = movie
         },
         SET_RECOMMENDS(state, movies) {
             state.recommends = movies;
@@ -57,17 +61,6 @@ export default new Vuex.Store({
         },
     },
     actions: {
-        getMovie(context) {
-            axios({
-                url: `${API_URL}/movies/`,
-            })
-                .then((res) => {
-                    context.commit("SET_MOVIES", res.data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        },
         signUp(context, payload) {
             axios({
                 method: "post",
@@ -106,6 +99,31 @@ export default new Vuex.Store({
             }).then((res) => {
                 context.commit("SET_USERS", res.data);
             });
+        },
+        getMovie(context) {
+            axios({
+                url: `${API_URL}/movies/`,
+            })
+                .then((res) => {
+                    context.commit("SET_MOVIES", res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        getMovieDetail(context, id) {
+            axios({
+                url: `${API_URL}/movies/${id}`,
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
+            })
+                .then((res) => {
+                    context.commit("SET_MOVIE_DETAIL", res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         },
         getRecommend(context) {
             axios({
@@ -180,10 +198,10 @@ export default new Vuex.Store({
         movieLike(context, id) {
             axios({
                 method: "post",
-                url: `${API_URL}/accounts/likemovie/${id}/`,
-                // headers: {
-                //     Authorization: `Token ${this.$store.state.token}`,
-                // },
+                url: `${API_URL}/accounts/likemovie/${id}/`,                
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
             })
                 .then(() => {
                     console.log("like");
@@ -196,9 +214,9 @@ export default new Vuex.Store({
             axios({
                 method: "post",
                 url: `${API_URL}/accounts/dislikemovie/${id}/`,
-                // headers: {
-                //     Authorization: `Token ${this.$store.state.token}`,
-                // },
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
             })
                 .then(() => {
                     console.log("dislike");
@@ -211,9 +229,9 @@ export default new Vuex.Store({
             axios({
                 method: "post",
                 url: `${API_URL}/accounts/wishmovie/${id}/`,
-                // headers: {
-                //     Authorization: `Token ${this.$store.state.token}`,
-                // },
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
             })
                 .then(() => {
                     console.log("wish");

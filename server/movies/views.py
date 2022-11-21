@@ -17,7 +17,7 @@ def index(request):
 def detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = MovieSerializer(movie)
-    me = User.objects.get(pk=1)
+    me = request.user
     state = 0
     if RateMovie.objects.filter(rateuser=me.id, ratedmovie=movie).exists():
         state = RateMovie.objects.get(rateuser=me, ratedmovie=movie).state
@@ -59,7 +59,6 @@ def genreport(request, genre_pk):
         'movie': serializer.data,
         'name': genre_name,
     }
-    print(genre_name)
     return Response(context, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
