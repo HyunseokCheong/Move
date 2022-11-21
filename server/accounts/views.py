@@ -71,7 +71,7 @@ def like_genre(request, genre_pk):
         me.favorite_genres.add(genre)
     return Response({'like genre'})
 
-@api_view(['GET'])
+@api_view(['POST'])
 def like_movie(request, movie_pk):
     me = User.objects.get(pk=1)
     movie = Movie.objects.get(pk=movie_pk)
@@ -91,10 +91,9 @@ def like_movie(request, movie_pk):
             title = movie.title,
             state = 1
         )
-        print(rate_movie)
         return Response({'like add'})
 
-@api_view(['GET'])
+@api_view(['POST'])
 def dislike_movie(request, movie_pk):
     me = User.objects.get(pk=1)
     movie = Movie.objects.get(pk=movie_pk)
@@ -114,10 +113,9 @@ def dislike_movie(request, movie_pk):
             title = movie.title,
             state = 2
         )
-        print(rate_movie)
         return Response({'dislike add'})
 
-@api_view(['GET'])
+@api_view(['POST'])
 def wish_movie(request, movie_pk):
     me = User.objects.get(pk=1)
     movie = Movie.objects.get(pk=movie_pk)
@@ -137,7 +135,6 @@ def wish_movie(request, movie_pk):
             title = movie.title,
             state = 3
         )
-        print(rate_movie)
         return Response({'wish add'})
 
 @api_view(['GET'])

@@ -134,16 +134,16 @@ def search(request):
 @api_view(['GET'])
 def random(request):
     random_genre = Genre.objects.order_by('?')[0]
-    # 연출한 영화가 5개 이상인 감독중 무작위
+    # 연출한 영화가 6개 이상인 감독중 무작위
     random_directors = []
     for director in Director.objects.all():
-        if director.movies.count() >= 5:
+        if director.movies.count() >= 6:
             random_directors.append(director.id)
     random_director = Director.objects.filter(id__in=random_directors).order_by('?')[0]
-    # 출연한 영화가 5개 이상인 배우중 무작위
+    # 출연한 영화가 6개 이상인 배우중 무작위
     random_actors = []
     for actor in Actor.objects.all():
-        if actor.movies.count() >= 5:
+        if actor.movies.count() >= 6:
             random_actors.append(actor.id)
     random_actor = Actor.objects.filter(id__in=random_actors).order_by('?')[0]
 
