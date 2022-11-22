@@ -1,10 +1,15 @@
 <template>
     <div class="popupBox" @mouseenter="getMovieDetail" @mouseleave="closePopup">
         <router-link :to="{ name: 'detail', params: { id: movieObj.id } }">
-            <img class="popupImage" :src="backdrop_path" alt="" />
+            <div class="video-frame">
+                <div class="video">
+                    <iframe width="50%" :src="youtube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                </div>
+            </div>
         </router-link>
         <div class="popupContent">
             <small>{{ state }}</small>
+
             <div v-if="state == 0">
                 <button @click="like()">좋아요</button>
                 <button @click="dislike()">싫어요</button>
@@ -47,14 +52,17 @@ export default {
         movieObj: Object,
     },
     computed: {
-        backdrop_path() {
-            return `https://www.themoviedb.org/t/p/original${this.movieObj.backdrop_path}`;
+        youtube() {
+            return `https://www.youtube.com/embed/${this.movieObj.youtube_key}?autoplay=1&mute=1`;
         },
     },
     methods: {
         getMovieDetail() {
             axios({
                 url: `${API_URL}/movies/${this.movieObj.id}`,
+                headers: {
+                    Authorization: `Token ${this.$store.state.token}`,
+                },
             })
                 .then((res) => {
                     this.state = res.data.state;
@@ -68,15 +76,53 @@ export default {
         },
         like() {
             this.$store.dispatch("movieLike", this.movieObj.id);
+            if (this.state==1) {
+                this.state = 0
+            }
+            else {
+                this.state = 1
+            }
         },
         dislike() {
             this.$store.dispatch("movieDislike", this.movieObj.id);
+            if (this.state==2) {
+                this.state = 0
+            }
+            else {
+                this.state = 2
+            }
         },
         addWishList() {
             this.$store.dispatch("movieWish", this.movieObj.id);
+            if (this.state==3) {
+                this.state = 0
+            }
+            else {
+                this.state = 3
+            }
         },
     },
 };
 </script>
 
-<style></style>
+<style>
+.video-frame{
+  max-width: 650px;
+  border: 4px solid red;
+}
+.video{
+  height: 0;
+/*  padding top은 부모 요소의 가로 요소에 영향을 받는다  */
+/*  height는 반응형이 안되고 크기를 픽스해버리는 것임  */
+  padding-top: 56.25%;
+  position: relative;
+}
+iframe{
+  background: black;
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>

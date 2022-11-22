@@ -1,6 +1,5 @@
 <template>
     <div>
-        <div v-if="isLogin">
             <div v-if="state == 0">
                 <button @click="like()">좋아요</button>
                 <button @click="dislike()">싫어요</button>
@@ -21,8 +20,6 @@
                 <button @click="dislike()">싫어요</button>
                 <button @click="addWishList()">찜하기 취소</button>
             </div>
-        </div>
-        <div v-else>로그인해서 영화 평가하기</div>
         <div v-if="movie">
             <p>제목 : {{ movie.movie.title }}</p>
             <p>개봉일 : {{ movie.movie.release_date }}</p>
@@ -66,7 +63,6 @@
                 </div>
             </div>
         </div>
-        {{state}}
     </div>
 </template>
 
