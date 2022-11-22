@@ -3,7 +3,12 @@
         <router-link :to="{ name: 'detail', params: { id: movieObj.id } }">
             <div class="video-frame">
                 <div class="video">
-                    <iframe width="50%" :src="youtube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                    <iframe
+                        width="50%"
+                        :src="youtube"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    ></iframe>
                 </div>
             </div>
         </router-link>
@@ -76,53 +81,28 @@ export default {
         },
         like() {
             this.$store.dispatch("movieLike", this.movieObj.id);
-            if (this.state==1) {
-                this.state = 0
-            }
-            else {
-                this.state = 1
+            if (this.state == 1) {
+                this.state = 0;
+            } else {
+                this.state = 1;
             }
         },
         dislike() {
             this.$store.dispatch("movieDislike", this.movieObj.id);
-            if (this.state==2) {
-                this.state = 0
-            }
-            else {
-                this.state = 2
+            if (this.state == 2) {
+                this.state = 0;
+            } else {
+                this.state = 2;
             }
         },
         addWishList() {
             this.$store.dispatch("movieWish", this.movieObj.id);
-            if (this.state==3) {
-                this.state = 0
-            }
-            else {
-                this.state = 3
+            if (this.state == 3) {
+                this.state = 0;
+            } else {
+                this.state = 3;
             }
         },
     },
 };
 </script>
-
-<style>
-.video-frame{
-  max-width: 650px;
-  border: 4px solid red;
-}
-.video{
-  height: 0;
-/*  padding top은 부모 요소의 가로 요소에 영향을 받는다  */
-/*  height는 반응형이 안되고 크기를 픽스해버리는 것임  */
-  padding-top: 56.25%;
-  position: relative;
-}
-iframe{
-  background: black;
-  position: absolute;
-  top:0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-</style>

@@ -1,8 +1,8 @@
 <template>
-    <div :class="windowTop > 0 ? 'navActive' : 'nav'">
+    <div class="nav">
         <div class="items">
             <div class="left">
-                <div :class="windowTop > 0 ? 'routersActive' : 'routers'">
+                <div class="routers">
                     <router-link to="/home" class="router">MAIN</router-link>
                     <router-link to="/ranking" class="router"
                         >RANKING</router-link
@@ -10,26 +10,20 @@
                 </div>
             </div>
             <div class="right">
-                <div :class="windowTop > 0 ? 'routersActive' : 'routers'">
-                    <div class="router">
-                        <input
-                            v-model="keyword"
-                            id="keyword"
-                            @keypress.enter="search(keyword)"
-                            class="searchInput"
-                            type="search"
-                            placeholder="Search"
-                        />
-                        <img
-                            :class="
-                                windowTop > 0
-                                    ? 'searchButtonActive'
-                                    : 'searchButton'
-                            "
-                            @click="search(keyword)"
-                            type="submit"
-                        />
-                    </div>
+                <div class="routers">
+                    <input
+                        v-model="keyword"
+                        id="keyword"
+                        @keypress.enter="search(keyword)"
+                        class="searchInput"
+                        type="search"
+                        placeholder="Search"
+                    />
+                    <img
+                        class="searchButton"
+                        @click="search(keyword)"
+                        type="submit"
+                    />
                     <router-link
                         v-if="isLogin"
                         :to="{
@@ -77,7 +71,7 @@ export default {
             this.$store.state.token = null;
             this.$store.state.userName = null;
             localStorage.removeItem("vuex");
-            this.$router.push('/');
+            this.$router.push("/");
         },
         search(keyword) {
             this.$router.push(`/search/${keyword}`);

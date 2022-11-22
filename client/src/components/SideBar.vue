@@ -12,6 +12,5 @@ export default {
 .sidebar {
     width: 10%;
     height: 100%;
-    border: solid 1px black;
 }
 </style>

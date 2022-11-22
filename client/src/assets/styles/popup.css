@@ -10,8 +10,6 @@
     display: block;
     visibility: visible;
     position: absolute;
-
-    border: solid black 1px;
 }
 .popupBox {
     width: 375px;
@@ -26,4 +24,23 @@
     height: 100px;
 
     background-color: lightgrey;
+}
+.video-frame {
+    max-width: 650px;
+    border: 4px solid red;
+}
+.video {
+    height: 0;
+    /*  padding top은 부모 요소의 가로 요소에 영향을 받는다  */
+    /*  height는 반응형이 안되고 크기를 픽스해버리는 것임  */
+    padding-top: 56.25%;
+    position: relative;
+}
+iframe {
+    background: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }

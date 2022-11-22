@@ -1,6 +1,11 @@
 <template>
     <div class="col-sector d-flex justify-content-between">
         <p>{{ index + 1 }}</p>
+        <router-link
+            :to="{ name: 'detailuser', params: { name: user.username } }"
+        >
+            {{ user.username }}</router-link
+        >
         <p>{{ user }}</p>
     </div>
 </template>

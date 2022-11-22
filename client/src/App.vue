@@ -21,7 +21,7 @@ export default {
 };
 </script>
 <style>
-@import "./assets/styles/app.css";
+@import "./assets/styles/root.css";
 @import "./assets/styles/navbar.css";
 @import "./assets/styles/footer.css";
 @import "./assets/styles/movieslider.css";

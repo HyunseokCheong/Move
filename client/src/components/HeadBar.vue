@@ -23,8 +23,6 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-
-    border: solid 1px black;
 }
 .headbar-title {
     margin-left: 10px;

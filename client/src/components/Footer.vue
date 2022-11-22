@@ -1,5 +1,5 @@
 <template>
-    <div class="footer">footer</div>
+    <div class="footer"></div>
 </template>
 
 <script>
@@ -7,5 +7,3 @@ export default {
     name: "FooterFooter",
 };
 </script>
-
-<style></style>

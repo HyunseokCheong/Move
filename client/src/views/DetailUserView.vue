@@ -1,25 +1,34 @@
 <template>
     <div>
         <div v-if="user">
-            <p>{{ user }}</p>
+            {{ user }}
+            <hr />
+            <p>리뷰 작성한 영화</p>
             <div v-for="review in user.reviews" :key="review.id">
-                <div v-for="movie in movies" :key="movie.id">
-                    <div v-if="movie.id == review.movies">
-                        <router-link
-                            :to="{
-                                name: 'detail',
-                                params: { id: review.movies },
-                            }"
-                            >{{ movie.title }}</router-link
-                        >
-                        {{ review }}
-                    </div>
-                </div>
+                <router-link
+                    :to="{ name: 'detail', params: { id: review.movies } }"
+                >
+                    {{ review.movies }}
+                </router-link>
             </div>
             <hr />
             <p>위시리스트 / 팔로우</p>
             <p>현재 팔로워 수 : {{ user.profile.followings.length }}</p>
-            <p>현재 팔로워 : {{ user.profile.followings }}</p>
+            <p>현재 팔로워 :</p>
+            <div v-for="follower in user.profile.followings" :key="follower.id">
+                <router-link
+                    @click.native="getUserDetail()"
+                    :to="{
+                        name: 'detailuser',
+                        params: { name: users[follower - 1].username },
+                    }"
+                >
+                    <div @click="getUserDetail()">
+                        {{ users[follower - 1].username }}
+                    </div>
+                </router-link>
+            </div>
+
             <div v-if="userName == this.$route.params.name">
                 <p>위시리스트</p>
                 <div v-if="wishlist">
@@ -27,7 +36,6 @@
                 </div>
             </div>
             <div v-else>
-                <p>팔로우</p>
                 <button @click="follow">팔로우</button>
             </div>
         </div>
@@ -44,6 +52,9 @@ export default {
         return { user: null, userId: null, wishlist: null };
     },
     computed: {
+        users() {
+            return this.$store.state.users;
+        },
         movies() {
             return this.$store.state.movies;
         },

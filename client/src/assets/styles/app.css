@@ -3,7 +3,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    background-color: var(--bg-color);
+    color: var(--paragraph-text-color);
     z-index: 2;
 }
 .col-sector {
@@ -11,14 +12,12 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    border: solid 1px black;
 }
 .row-sector {
     width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: solid 1px black;
 }
 .tmp {
     height: 68px;
