@@ -1,0 +1,49 @@
+.movie-detail {
+    display: flex;
+    flex-direction: column;
+    background-color: #000000;
+    margin-left: 12em;
+    margin-right: 12rem;
+}
+
+.movie-detail-card {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
+.movie-detail-upbody {
+    background-color:blue;
+}
+
+.movie-detail-downbody{
+    display: flex;
+    background-color:green;
+}
+
+.movie-detail-poster{
+    background-color:gray;
+}
+
+.movie-detail-descriptions{
+    display: flex;
+    flex-direction: column;
+    background-color:pink;
+}
+
+.movie-detail-descriptions-top{
+    display: flex;
+    background-color:purple;
+}
+
+.movie-detail-descriptions-top-highlight{
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-detail-descriptions-top-vote{
+    display: flex;
+    flex-direction: column;
+}

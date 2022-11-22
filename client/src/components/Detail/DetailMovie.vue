@@ -1,5 +1,31 @@
 <template>
     <div class="movie-detail-card">
+        <div class="movie-detail-upbody">
+            a
+        </div>
+        <div class="movie-detail-downbody">
+            <div class="movie-detail-poster">
+                a
+            </div>
+            <div class="movie-detail-descriptions">
+                <div class="movie-detail-descriptions-top">
+                    <div class="movie-detail-descriptions-top-highlight">
+                        a
+                    </div>
+                    <div class="movie-detial-decriptions-top-vote">
+
+                    </div>
+
+                </div>
+                <div class="movie-detail-descriptions-casts">
+                    a
+                </div>
+                <div class="movie-detail-descriptions-overviews">
+                    a
+                </div>
+            </div>
+        </div>
+
         <!-- <div class="movie-detail-body" v-if="movie">
             <div class="movie-detail-poster" >
                 <img width="70%" :src="poster_path" alt="poster"/>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="movie-detail">
         <DetailMovie/>
         <DetailReviewList/>
         <DetailReviewForm/>
@@ -24,9 +24,5 @@ export default {
 }
 </script>
 
-<style-scope>
-.container {
-    display: flex;
-    flex-direction: column;
-}
-</style-scope>
+<style>
+</style>
