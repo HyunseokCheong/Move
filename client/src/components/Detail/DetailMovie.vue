@@ -143,8 +143,5 @@ export default {
 </script>
 
 <style>
-.movie-detail-card{
-    background-color: black;
-}
 
 </style>
