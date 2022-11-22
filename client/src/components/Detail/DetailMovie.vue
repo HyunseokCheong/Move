@@ -1,44 +1,48 @@
 <template>
     <div class="movie-detail-card">
         <div class="movie-detail-upbody">
-            a
+            <h1>logo</h1>
         </div>
         <div class="movie-detail-downbody">
             <div class="movie-detail-poster">
-                a
+                <img width="100%" :src="poster_path" alt="poster"/>
             </div>
             <div class="movie-detail-descriptions">
                 <div class="movie-detail-descriptions-top">
-                    <div class="movie-detail-descriptions-top-highlight">
-                        a
+                    <div class="movie-detail-descriptions-top-left">
+                        <div class="movie-detail-title">
+                        {{ movie.movie.title }}
+                        </div>
+                        <div class="movie-release-date">
+                            개봉 : {{ movie.movie.release_date }}
+                        </div>
                     </div>
-                    <div class="movie-detial-decriptions-top-vote">
+                    <div class="movie-detial-decriptions-top-right">
+                        <img id="movie-star" src="@/assets/images/star.png">
+                        {{ movie.movie.vote_average }}
 
                     </div>
-
                 </div>
                 <div class="movie-detail-descriptions-casts">
-                    a
+                    <h1>a</h1>
                 </div>
                 <div class="movie-detail-descriptions-overviews">
-                    a
+                    <h1>a</h1>
                 </div>
             </div>
         </div>
 
         <!-- <div class="movie-detail-body" v-if="movie">
             <div class="movie-detail-poster" >
-                <img width="70%" :src="poster_path" alt="poster"/>
+                
             </div>
             <div class="movie-detail-info">
                 <div class="movie-detail-info-header">
                     <div class="movie-detail-info-header-left">
-                        <div class="movie-detail-title">
-                            {{ movie.movie.title }}
+                        
+                            
                         </div>
-                        <div class="movie-release-date">
-                            개봉 : {{ movie.movie.release_date }}
-                        </div>
+                        
                         <span v-for="director in directors" :key="director.id">
                             <router-link
                                 :to="{
@@ -72,10 +76,7 @@
                             </router-link>
                         </span>
                         <div class="movie-score">
-                            <div class="movie-vote">
-                                {{ movie.movie.vote_average }}
-                            </div>
-                            <img id="movie-star" src="@/assets/images/star.png">
+                            
                         </div>
                         <div v-if="state == 0">
                             <button @click="like()">좋아요</button>

@@ -163,6 +163,7 @@ def random(request):
     genre_serializer = MovieSerializer(genre_random, many=True)
     director_serializer = MovieSerializer(director_random, many=True)
     actor_serializer = MovieSerializer(actor_random, many=True)
+    print(actor_random)
     context = {
         'genre': genre_serializer.data,
         'genre_name': random_genre.name,
@@ -173,3 +174,13 @@ def random(request):
     }
     return Response(context, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def test(request, user_pk):
+    user = User.objects.get(pk=user_pk)
+    like_movies = RateMovie.objects.filter(rateuser=user, state=1)
+    likelist = []
+    for like_movie in like_movies.all():
+        likelist.append(like_movie.ratedmovie.id)
+    userlikemovies = Movie.objects.filter(id__in=likelist)
+    serializer = MovieSerializer(userlikemovies, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
