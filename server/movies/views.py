@@ -50,6 +50,17 @@ def review_delete(request, movie_pk, review_pk):
     return Response({'delete'})
 
 @api_view(['GET'])
+def reviewed_list(request):
+    user = request.user
+    reviews = Review.objects.filter(reviewer=user)
+    movies = []
+    for review in reviews:
+        movies.append(review.movies.id)
+    reviewd_movies = Movie.objects.filter(pk__in=movies)
+    reviewd_movies_serializer = MovieSerializer(reviewd_movies, many=True)
+    return Response(reviewd_movies_serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
 def genreport(request, genre_pk):
     # 해당장르의 인기영화
     genre_movie = Movie.objects.filter(genres=genre_pk, vote_count__gte=1000, vote_average__gte=7).order_by('?')

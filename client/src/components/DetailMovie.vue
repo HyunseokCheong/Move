@@ -1,74 +1,116 @@
 <template>
-    <div>
-            <div v-if="state == 0">
-                <button @click="like()">좋아요</button>
-                <button @click="dislike()">싫어요</button>
-                <button @click="addWishList()">찜하기</button>
-            </div>
-            <div v-if="state == 1">
-                <button @click="like()">좋아요 취소</button>
-                <button @click="dislike()">싫어요</button>
-                <button @click="addWishList()">찜하기</button>
-            </div>
-            <div v-if="state == 2">
-                <button @click="like()">좋아요</button>
-                <button @click="dislike()">싫어요 취소</button>
-                <button @click="addWishList()">찜하기</button>
-            </div>
-            <div v-if="state == 3">
-                <button @click="like()">좋아요</button>
-                <button @click="dislike()">싫어요</button>
-                <button @click="addWishList()">찜하기 취소</button>
-            </div>
-        <div v-if="movie">
-            <p>제목 : {{ movie.movie.title }}</p>
-            <p>개봉일 : {{ movie.movie.release_date }}</p>
-            <img :src="poster_path" alt="poster" />
-            <img :src="backdrop_path" alt="backdrop" />
-            <p>내용 : {{ movie.movie.overview }}</p>
-            <div>
-                <span>감독</span>
-                <div v-for="director in directors" :key="director.id">
-                    <router-link
-                        :to="{
-                            name: 'director',
-                            params: { id: director.id, name: director.name },
-                        }"
-                        tag="span"
-                    >
-                        {{ director.name }}
-                    </router-link>
+    <div class="col-sector">
+        <SideBar/>
+        <div class="movie-detail-body" v-if="movie">
+                <div class="movie-detail-poster" >
+                    <img width="70%" :src="poster_path" alt="poster"/>
+                </div>
+                <div class="movie-detail-info">
+                    <div class="movie-detail-info-header">
+                        <div class="movie-detail-info-header-left">
+                            <div class="movie-detail-title">
+                                {{ movie.movie.title }}
+                            </div>
+                            <div class="movie-release-date">
+                                개봉 : {{ movie.movie.release_date }}
+                            </div>
+                            <div v-for="director in directors" :key="director.id">
+                                <router-link
+                                    :to="{
+                                        name: 'director',
+                                        params: { id: director.id, name: director.name },
+                                    }"
+                                    tag="span"
+                                >
+                                    {{ director.name }}
+                                </router-link>
+                            </div>
+                            <div class="movie-detail-info-header-right">
+                                <div class="movie-vote">
+                                    {{ movie.movie.vote_average }}
+                                </div>
+                                <img id="movie-star" src="@/assets/images/star.png">
+                            </div>
+                            <div class="movie-detail-overview-header">
+                                줄거리
+                            </div>
+                            <hr>
+                            <div class="movie-detail-overview-body">
+                                {{ movie.movie.overview }}
+                            </div>
+                            <div class="movie-detail-lower">
+                                <DetailReviewList/>
+                                <div class="movie-youtube-area">
+                                    리뷰목록
+                                    <hr>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div>
-                <span>장르</span>
-                <div v-for="genre in genres" :key="genre.id">
-                    <router-link
-                        :to="{ name: 'genre', params: { id: genre.id } }"
-                        tag="span"
-                    >
-                        {{ genre.name }}
-                    </router-link>
-                </div>
-            </div>
-            <div>
-                <span>배우</span>
-                <div v-for="actor in actors" :key="actor.id">
-                    <router-link
-                        :to="{ name: 'actor', params: { id: actor.id } }"
-                        tag="span"
-                    >
-                        {{ actor.name }}
-                    </router-link>
-                </div>
-            </div>
-        </div>
+        <SideBar/>
     </div>
+    
+
+                <!-- <div v-if="state == 0">
+                    <button @click="like()">좋아요</button>
+                    <button @click="dislike()">싫어요</button>
+                    <button @click="addWishList()">찜하기</button>
+                </div>
+                <div v-if="state == 1">
+                    <button @click="like()">좋아요 취소</button>
+                    <button @click="dislike()">싫어요</button>
+                    <button @click="addWishList()">찜하기</button>
+                </div>
+                <div v-if="state == 2">
+                    <button @click="like()">좋아요</button>
+                    <button @click="dislike()">싫어요 취소</button>
+                    <button @click="addWishList()">찜하기</button>
+                </div>
+                <div v-if="state == 3">
+                    <button @click="like()">좋아요</button>
+                    <button @click="dislike()">싫어요</button>
+                    <button @click="addWishList()">찜하기 취소</button>
+                </div> -->
+
+                <!-- <div>
+                    <span>장르</span>
+                    <br>
+                    <span v-for="genre in genres" :key="genre.id">
+                        <router-link
+                            :to="{ name: 'genre', params: { id: genre.id } }"
+                            tag="span"
+                        >
+                            {{ genre.name }}
+                        </router-link>
+                    </span>
+                </div>
+                <div>
+                    <span>배우</span>
+                    <br>
+                    <span v-for="actor in actors" :key="actor.id">
+                        <router-link
+                            :to="{ name: 'actor', params: { id: actor.id } }"
+                            tag="span"
+                        >
+                            {{ actor.name }}
+                        </router-link> -->
 </template>
 
 <script>
+import SideBar from '@/components/SideBar'
+import DetailReviewForm from "@/components/DetailReviewForm";
+import DetailReviewList from "@/components/DetailReviewList";
+
 export default {
     name: "DetailMovie",
+    components: {
+        SideBar,
+        DetailReviewForm,
+        DetailReviewList
+    },
     computed: {
         movie() {
             return this.$store.state.movie;

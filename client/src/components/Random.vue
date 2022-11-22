@@ -1,11 +1,9 @@
 <template>
-    <router-link :to="{ name: 'detail', params: { id: randommovie.id } }">
-        <img
-            :src="backdrop_path"
-            id="imagemPosterSlide"
-            @mouseover="openPopup($event)"
-        />
-    </router-link>
+    <img
+        :src="backdrop_path"
+        id="imagemPosterSlide"
+        @mouseover="openPopup($event)"
+    />
 </template>
 <script>
 export default {

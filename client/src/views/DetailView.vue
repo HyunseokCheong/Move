@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <DetailMovie />
-        <DetailReviewForm movie="" />
-        <DetailReviewList />
-        <router-link :to="{ name: 'home' }">뒤로가기</router-link>
+    <div class="movie-detail-card">
+            <DetailMovie />
+            <DetailReviewForm movie="" />
+            <DetailReviewList />
+            <router-link :to="{ name: 'home' }">뒤로가기</router-link>
     </div>
 </template>
 
@@ -16,8 +16,8 @@ export default {
     name: "DetailView",
     components: {
         DetailMovie,
-        DetailReviewForm,
-        DetailReviewList,
+        // DetailReviewForm,
+        // DetailReviewList,
     },
 };
 </script>

@@ -157,3 +157,10 @@ def userlist(request):
     users = User.objects.all()
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def likemovie_list(request):
+    me = request.user
+    likes = RateMovie.objects.filter(rateuser=me, state=1)
+    likemovie_list_serializer = RateMovieSerializer(likes, many=True)
+    return Response(likemovie_list_serializer.data, status=status.HTTP_200_OK)
