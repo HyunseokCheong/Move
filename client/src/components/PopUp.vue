@@ -1,21 +1,21 @@
 <template>
     <div class="popupBox" @mouseenter="getMovieDetail" @mouseleave="closePopup">
-
-            <div class="video-frame">
-                <div class="video">
-                    <iframe width="50%" :src="youtube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-                </div>
+        <div class="video-frame">
+            <div class="video">
+                <iframe
+                    width="50%"
+                    :src="youtube"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                ></iframe>
             </div>
-
+        </div>
         <div class="popupContent">
             <router-link :to="{ name: 'detail', params: { id: movieObj.id } }">
                 <h2>{{ movieObj.title }}</h2>
             </router-link>
-            <span
-                v-for="(genre, i) in movieObj.genres"
-                :key="i"  
-            >
-                {{genre.name}}
+            <span v-for="(genre, i) in movieObj.genres" :key="i">
+                {{ genre.name }}
             </span>
             <div v-if="state == 0">
                 <button @click="like()">좋아요</button>
@@ -37,7 +37,6 @@
                 <button @click="dislike()">싫어요</button>
                 <button @click="addWishList()">찜하기 취소</button>
             </div>
-
             <br />
         </div>
     </div>
@@ -82,34 +81,30 @@ export default {
         },
         like() {
             this.$store.dispatch("movieLike", this.movieObj.id);
-            if (this.state==1) {
-                this.state = 0
-            }
-            else {
-                this.state = 1
+            if (this.state == 1) {
+                this.state = 0;
+            } else {
+                this.state = 1;
             }
         },
         dislike() {
             this.$store.dispatch("movieDislike", this.movieObj.id);
-            if (this.state==2) {
-                this.state = 0
-            }
-            else {
-                this.state = 2
+            if (this.state == 2) {
+                this.state = 0;
+            } else {
+                this.state = 2;
             }
         },
         addWishList() {
             this.$store.dispatch("movieWish", this.movieObj.id);
-            if (this.state==3) {
-                this.state = 0
-            }
-            else {
-                this.state = 3
+            if (this.state == 3) {
+                this.state = 0;
+            } else {
+                this.state = 3;
             }
         },
     },
 };
 </script>
 
-<style>
-</style>
+<style></style>

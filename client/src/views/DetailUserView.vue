@@ -3,18 +3,34 @@
         <SideBar />
         <div class="row-sector">
             <div v-if="user">
-                <p>movie recommed random</p>
                 <p>이름 : {{ user.profile.username }}</p>
+                <!-- 팔로우 관련 -->
                 <div v-if="userName != this.$route.params.name">
                     <button @click="follow">팔로우</button>
+                </div>
+                <p>현재 팔로워 수 : {{ user.profile.followings.length }}</p>
+                <p>현재 팔로워 :</p>
+                <div
+                    v-for="follower in user.profile.followings"
+                    :key="follower.id"
+                >
+                    <router-link
+                        :to="{
+                            name: 'detailuser',
+                            params: { name: users[follower - 1].username },
+                        }"
+                    >
+                        <div>
+                            {{ users[follower - 1].username }}
+                        </div>
+                    </router-link>
                 </div>
                 <!-- 틴더에서 구현 후 v-for로 구현 -->
                 <!-- <p>선호 장르 : {{ user.profile.favorite_genres }}</p> -->
                 <!-- <p>선호 감독 : {{ user.profile.favorite_genres }}</p> -->
                 <!-- <p>선호 배우 : {{ user.profile.favorite_genres }}</p> -->
                 <hr />
-                <!--  -->
-                <!-- {{ userLikedMovies }} -->
+                <h3>좋아요 누른 영화들</h3>
                 <ccarousel
                     :per-page="6"
                     :navigate-to="0"
@@ -25,49 +41,55 @@
                 >
                     <slide2
                         v-for="userLikedMovie in userLikedMovies"
-                        :key="`00-${userLikedMovie.title}`"
+                        :key="`00-${userLikedMovie.id}`"
                         :userLikedMovie="userLikedMovie"
                     >
-                        <UserLikedMovie
-                            :userLikedMovie="userLikedMovie"
-                            :movies="movies"
-                            :recommend="recommend"
+                        <UserLikedMovie :userLikedMovie="userLikedMovie" />
+                    </slide2>
+                </ccarousel>
+                <hr />
+                <h3>리뷰 남긴 영화들</h3>
+                <ccarousel
+                    :per-page="6"
+                    :navigate-to="0"
+                    :mouse-drag="false"
+                    :paginationEnabled="false"
+                    :navigationEnabled="true"
+                    :navigationClickTargetSize="9"
+                >
+                    <slide2
+                        v-for="userReviewedMovie in userReviewedMovies"
+                        :key="`00-${userReviewedMovie.id}`"
+                        :userReviewedMovie="userReviewedMovie"
+                    >
+                        <UserReviewedMovie
+                            :userReviewedMovie="userReviewedMovie"
                         />
                     </slide2>
                 </ccarousel>
-                <!--  -->
-                <!-- <div v-for="movie in userLikedMovie" :key="`1-${movie.id}`">
-                {{ movie.title }}
-            </div> -->
-                <hr />
-                <h3>좋아요 누른 영화들</h3>
-                <h3>리뷰 남긴 영화들</h3>
-                <div v-for="movie in userReviewMovie" :key="`2-${movie.id}`">
-                    {{ movie.title }}
-                </div>
                 <hr />
                 <div v-if="userName == this.$route.params.name">
                     <h3>위시리스트</h3>
-                    <div v-for="movie in userWishMovie" :key="`3-${movie.id}`">
-                        {{ movie.title }}
-                    </div>
+                    <ccarousel
+                        :per-page="6"
+                        :navigate-to="0"
+                        :mouse-drag="false"
+                        :paginationEnabled="false"
+                        :navigationEnabled="true"
+                        :navigationClickTargetSize="9"
+                    >
+                        <slide2
+                            v-for="userWishedMovie in userWishedMovies"
+                            :key="`02-${userWishedMovie.id}`"
+                            :userWishedMovie="userWishedMovie"
+                        >
+                            <UserWishedMovie
+                                :userWishedMovie="userWishedMovie"
+                            />
+                        </slide2>
+                    </ccarousel>
                 </div>
                 <div v-else>본인이면 위시리스트 보임</div>
-                <!-- 팔로우 관련 -->
-                <!-- <p>현재 팔로워 수 : {{ user.profile.followings.length }}</p>
-            <p>현재 팔로워 :</p>
-            <div v-for="follower in user.profile.followings" :key="follower.id">
-                <router-link
-                    :to="{
-                        name: 'detailuser',
-                        params: { name: users[follower - 1].username },
-                    }"
-                >
-                    <div>
-                        {{ users[follower - 1].username }}
-                    </div>
-                </router-link>
-            </div> -->
             </div>
         </div>
 
@@ -81,6 +103,8 @@ import SideBar from "@/components/SideBar";
 import { Carousel as Ccarousel } from "vue-carousel";
 import { Slide as Slide2 } from "vue-carousel";
 import UserLikedMovie from "@/components/UserLikedMovie";
+import UserReviewedMovie from "@/components/UserReviewedMovie";
+import UserWishedMovie from "@/components/UserWishedMovie";
 
 const API_URL = "http://127.0.0.1:8000";
 
@@ -91,19 +115,13 @@ export default {
         Ccarousel,
         Slide2,
         UserLikedMovie,
+        UserReviewedMovie,
+        UserWishedMovie,
     },
     data() {
         return { user: null, userId: null, wishlist: null };
     },
     computed: {
-        // 전체 영화 조회 어케함 ㅜㅜ
-        movies() {
-            return this.$store.state.movies;
-        },
-        recommend() {
-            return this.$store.state.recommend;
-        },
-        //
         users() {
             return this.$store.state.users;
         },
@@ -113,41 +131,32 @@ export default {
         userName() {
             return this.$store.state.loggedInUser;
         },
-        userReviewMovie() {
+        userReviewedMovies() {
             return this.$store.state.reviewed_list;
         },
         userLikedMovies() {
             return this.$store.state.liked_list;
         },
-        userWishMovie() {
-            return this.$store.state.wish_list;
+        userWishedMovies() {
+            return this.$store.state.wished_list;
         },
     },
     created() {
         this.getUserDetail();
         this.getUser();
-        this.getReviewedList();
         this.getLikedList();
-        this.getWishlist();
-        // 전체 영화 조회 어케함 ㅜㅜ
-        this.getMovie();
-        this.getRecommend();
+        this.getReviewedList();
+        this.getWishedlist();
     },
     methods: {
-        getMovie() {
-            this.$store.dispatch("getMovie");
-        },
-        getRecommend() {
-            this.$store.dispatch("getRecommend");
+        getLikedList() {
+            this.$store.dispatch("getLikedList", this.$route.params.name);
         },
         getReviewedList() {
             this.$store.dispatch("getReviewedList", this.$route.params.name);
         },
-        getLikedList() {
-            this.$store.dispatch("getLikedList", this.$route.params.name);
-        },
-        getWishlist() {
-            this.$store.dispatch("getWishList");
+        getWishedlist() {
+            this.$store.dispatch("getWishedlist", this.$route.params.name);
         },
         getUserDetail() {
             axios({

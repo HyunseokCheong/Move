@@ -23,7 +23,7 @@ export default new Vuex.Store({
         randoms: [],
         reviewed_list: [],
         liked_list: [],
-        wish_list: [],
+        wished_list: [],
         detail_page_user: null,
     },
     getters: {
@@ -69,20 +69,34 @@ export default new Vuex.Store({
         GET_LIKEDLIST(state, liked_list) {
             state.liked_list = liked_list;
         },
-        GET_WISHLIST(state, wish_list) {
-            state.wish_list = wish_list;
+        GET_WISHEDLIST(state, wished_list) {
+            state.wished_list = wished_list;
         },
     },
     actions: {
-        getWishList(context) {
+        getWishedlist(context, payload) {
             axios({
-                url: `${API_URL}/accounts/wishlist/`,
-                headers: {
-                    Authorization: `Token ${this.state.token}`,
-                },
+                url: `${API_URL}/accounts/userlist/`,
             })
-                .then((res) => {
-                    context.commit("GET_WISHLIST", res.data);
+                .then((res1) => {
+                    for (let i = 0; i < res1.data.length; i++) {
+                        if (res1.data[i].username == payload) {
+                            let temp_userId = i + 1;
+                            axios({
+                                url: `${API_URL}/movies/wished_list/${temp_userId}/`,
+                                headers: {
+                                    Authorization: `Token ${this.state.token}`,
+                                },
+                            })
+                                .then((res) => {
+                                    context.commit("GET_WISHEDLIST", res.data);
+                                })
+                                .catch((err) => {
+                                    console.log(err);
+                                });
+                            break;
+                        }
+                    }
                 })
                 .catch((err) => console.log(err));
         },
@@ -95,7 +109,7 @@ export default new Vuex.Store({
                         if (res1.data[i].username == payload) {
                             let temp_userId = i + 1;
                             axios({
-                                url: `${API_URL}/accounts/likemovie_list/${temp_userId}/`,
+                                url: `${API_URL}/movies/liked_list/${temp_userId}/`,
                                 headers: {
                                     Authorization: `Token ${this.state.token}`,
                                 },
