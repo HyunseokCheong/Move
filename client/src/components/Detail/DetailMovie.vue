@@ -11,16 +11,55 @@
                 <div class="movie-detail-descriptions-top">
                     <div class="movie-detail-descriptions-top-left">
                         <div class="movie-detail-title">
-                        {{ movie.movie.title }}
+                            {{ movie.movie.title }}
+                        </div>
+                        <div class="movie-genres">
+                            <span v-for="genre in genres" :key="genre.id">
+                                <router-link
+                                    :to="{
+                                        name: 'genre',
+                                        params: { id: genre.id, name: genre.name },
+                                    }"
+                                >
+                                    {{ genre.name }}·
+                                </router-link>
+                            </span>
                         </div>
                         <div class="movie-release-date">
                             개봉 : {{ movie.movie.release_date }}
                         </div>
+                        <div class="movie-directors">
+                            <span v-for="director in directors" :key="director.id">
+                                <router-link
+                                    :to="{
+                                        name: 'director',
+                                        params: { id: director.id, name: director.name },
+                                    }"
+                                >
+                                    {{ director.name }}·
+                                </router-link>
+                            </span>
+                        </div>
+                        <div class="movie-actors">
+                            <span v-for="actor in actors" :key="actor.id">
+                                <router-link
+                                    :to="{
+                                        name: 'actor',
+                                        params: { id: actor.id, name: actor.name },
+                                    }"
+                                >
+                                    {{ actor.name }}·
+                                </router-link>
+                            </span>
+                        </div>
                     </div>
                     <div class="movie-detial-decriptions-top-right">
-                        <img id="movie-star" src="@/assets/images/star.png">
-                        {{ movie.movie.vote_average }}
-
+                        <div>
+                            <img id="movie-star" src="@/assets/images/star.png">
+                            <div id="movie-score">
+                                {{ movie.movie.vote_average }}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="movie-detail-descriptions-casts">

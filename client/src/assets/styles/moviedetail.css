@@ -29,7 +29,7 @@
 
 .movie-detail-poster{
     background-color:gray;
-    width: 35%;
+    width: 70%;
 }
 
 .movie-detail-descriptions{
@@ -42,24 +42,50 @@
 .movie-detail-descriptions-top{
     display: flex;
     justify-content: space-between;
+    height: 18%;
+    margin-bottom: 6rem;
 }
 .movie-detail-title {
+    margin-top: 1rem;
     font-size: 40px;
 }
-.movie-detail-descriptions-top-left{
-    display: flex;
-    flex-direction: column;
-    background-color:rgb(41, 22, 213);
 
+.movie-detail-descriptions-top-left{
+    background-color:rgb(41, 22, 213);
+    width: 420%;
+    height: 200%
+
+}
+
+.movie-genres {
+    font-size: 15px
+}
+
+.movie-release-date {
+    margin-bottom:1rem;
+}
+
+.movie-directors {
+    font-size: 22px
+}
+
+.movie-actors {
+    font-size: 15px
 }
 
 .movie-detail-descriptions-top-right{
     display: flex;
-    flex-direction: column;
+    flex-flow: row nowrap;
+    align-items: center;
 }
 
 #movie-star {
-    width: 5%
+    margin-top: 1rem;
+    width: 10%;
+}
+
+#movie-score {
+    font-size: 25px;
 }
 
 .movie-detail-descriptions-casts{
