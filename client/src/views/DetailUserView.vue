@@ -1,43 +1,46 @@
 <template>
     <div>
         <div v-if="user">
-            {{ user }}
+            <p>이름 : {{ user.profile.username }}</p>
+            <div v-if="userName != this.$route.params.name">
+                <button @click="follow">팔로우</button>
+            </div>
+            <!-- 틴더에서 구현 후 v-for로 구현 -->
+            <!-- <p>선호 장르 : {{ user.profile.favorite_genres }}</p> -->
+            <!-- <p>선호 감독 : {{ user.profile.favorite_genres }}</p> -->
+            <!-- <p>선호 배우 : {{ user.profile.favorite_genres }}</p> -->
             <hr />
-            <p>리뷰 작성한 영화</p>
-            <div v-for="review in user.reviews" :key="review.id">
-                <router-link
-                    :to="{ name: 'detail', params: { id: review.movies } }"
-                >
-                    {{ review.movies }}
-                </router-link>
+            <h3>좋아요 누른 영화들</h3>
+            <div v-for="movie in userLikedMovie" :key="`1-${movie.id}`">
+                {{ movie.title }}
+            </div>
+            <h3>리뷰 남긴 영화들</h3>
+            <div v-for="movie in userReviewMovie" :key="`2-${movie.id}`">
+                {{ movie.title }}
             </div>
             <hr />
-            <p>위시리스트 / 팔로우</p>
-            <p>현재 팔로워 수 : {{ user.profile.followings.length }}</p>
+            <div v-if="userName == this.$route.params.name">
+                <h3>위시리스트</h3>
+                <div v-for="movie in userWishMovie" :key="`3-${movie.id}`">
+                    {{ movie.title }}
+                </div>
+            </div>
+            <div v-else>본인이면 위시리스트 보임</div>
+            <!-- 팔로우 관련 -->
+            <!-- <p>현재 팔로워 수 : {{ user.profile.followings.length }}</p>
             <p>현재 팔로워 :</p>
             <div v-for="follower in user.profile.followings" :key="follower.id">
                 <router-link
-                    @click.native="getUserDetail()"
                     :to="{
                         name: 'detailuser',
                         params: { name: users[follower - 1].username },
                     }"
                 >
-                    <div @click="getUserDetail()">
+                    <div>
                         {{ users[follower - 1].username }}
                     </div>
                 </router-link>
-            </div>
-
-            <div v-if="userName == this.$route.params.name">
-                <p>위시리스트</p>
-                <div v-if="wishlist">
-                    <p>{{ wishlist }}</p>
-                </div>
-            </div>
-            <div v-else>
-                <button @click="follow">팔로우</button>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -64,13 +67,36 @@ export default {
         userName() {
             return this.$store.state.loggedInUser;
         },
+        userReviewMovie() {
+            return this.$store.state.reviewed_list;
+        },
+        userLikedMovie() {
+            return this.$store.state.liked_list;
+        },
+        userWishMovie() {
+            return this.$store.state.wish_list;
+        },
     },
     created() {
         this.getUserDetail();
-        this.getUserWishlist();
         this.getUser();
+        this.getReviewedList();
+        this.getLikedList();
+        this.getWishlist();
+    },
+    mounted() {
+        // this.$router.go();
     },
     methods: {
+        getReviewedList() {
+            this.$store.dispatch("getReviewedList", this.$route.params.name);
+        },
+        getLikedList() {
+            this.$store.dispatch("getLikedList", this.$route.params.name);
+        },
+        getWishlist() {
+            this.$store.dispatch("getWishList");
+        },
         getUserDetail() {
             axios({
                 url: `${API_URL}/accounts/profile/${this.$route.params.name}`,
@@ -79,20 +105,6 @@ export default {
                     this.user = res.data;
                 })
                 .catch((err) => console.log(err));
-        },
-        getUserWishlist() {
-            if (this.isLogin) {
-                axios({
-                    url: `${API_URL}/accounts/wishlist/`,
-                    headers: {
-                        Authorization: `Token ${this.$store.state.token}`,
-                    },
-                })
-                    .then((res) => {
-                        this.wishlist = res.data;
-                    })
-                    .catch((err) => console.log(err));
-            }
         },
         follow() {
             axios({

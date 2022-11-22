@@ -21,6 +21,10 @@ export default new Vuex.Store({
         actorPorts: [],
         searchData: [],
         randoms: [],
+        reviewed_list: [],
+        liked_list: [],
+        wish_list: [],
+        detail_page_user: null,
     },
     getters: {
         isLogin(state) {
@@ -39,7 +43,7 @@ export default new Vuex.Store({
             state.movies = movies.slice(0, 30);
         },
         SET_MOVIE_DETAIL(state, movie) {
-            state.movie = movie
+            state.movie = movie;
         },
         SET_RECOMMENDS(state, movies) {
             state.recommends = movies;
@@ -59,8 +63,85 @@ export default new Vuex.Store({
         SET_RANDOMS(state, randoms) {
             state.randoms = randoms;
         },
+        GET_REVIEWEDLIST(state, reviewed_list) {
+            state.reviewed_list = reviewed_list;
+        },
+        GET_LIKEDLIST(state, liked_list) {
+            state.liked_list = liked_list;
+        },
+        GET_WISHLIST(state, wish_list) {
+            state.wish_list = wish_list;
+        },
     },
     actions: {
+        getWishList(context) {
+            axios({
+                url: `${API_URL}/accounts/wishlist/`,
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
+            })
+                .then((res) => {
+                    context.commit("GET_WISHLIST", res.data);
+                })
+                .catch((err) => console.log(err));
+        },
+        getLikedList(context, payload) {
+            axios({
+                url: `${API_URL}/accounts/userlist/`,
+            })
+                .then((res1) => {
+                    for (let i = 0; i < res1.data.length; i++) {
+                        if (res1.data[i].username == payload) {
+                            let temp_userId = i + 1;
+                            axios({
+                                url: `${API_URL}/accounts/likemovie_list/${temp_userId}/`,
+                                headers: {
+                                    Authorization: `Token ${this.state.token}`,
+                                },
+                            })
+                                .then((res) => {
+                                    context.commit("GET_LIKEDLIST", res.data);
+                                })
+                                .catch((err) => {
+                                    console.log(err);
+                                });
+                            break;
+                        }
+                    }
+                })
+                .catch((err) => console.log(err));
+        },
+        getReviewedList(context, payload) {
+            axios({
+                url: `${API_URL}/accounts/userlist/`,
+            })
+                .then((res1) => {
+                    for (let i = 0; i < res1.data.length; i++) {
+                        if (res1.data[i].username == payload) {
+                            let temp_userId = i + 1;
+                            axios({
+                                url: `${API_URL}/movies/reviewed_list/${temp_userId}`,
+                                headers: {
+                                    Authorization: `Token ${this.state.token}`,
+                                },
+                            })
+                                .then((res) => {
+                                    context.commit(
+                                        "GET_REVIEWEDLIST",
+                                        res.data
+                                    );
+                                })
+                                .catch((err) => {
+                                    console.log(err);
+                                });
+
+                            break;
+                        }
+                    }
+                })
+                .catch((err) => console.log(err));
+        },
         signUp(context, payload) {
             axios({
                 method: "post",
@@ -198,7 +279,7 @@ export default new Vuex.Store({
         movieLike(context, id) {
             axios({
                 method: "post",
-                url: `${API_URL}/accounts/likemovie/${id}/`,                
+                url: `${API_URL}/accounts/likemovie/${id}/`,
                 headers: {
                     Authorization: `Token ${this.state.token}`,
                 },

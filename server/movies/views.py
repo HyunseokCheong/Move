@@ -50,8 +50,8 @@ def review_delete(request, movie_pk, review_pk):
     return Response({'delete'})
 
 @api_view(['GET'])
-def reviewed_list(request):
-    user = request.user
+def reviewed_list(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
     reviews = Review.objects.filter(reviewer=user)
     movies = []
     for review in reviews:

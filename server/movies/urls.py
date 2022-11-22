@@ -14,6 +14,7 @@ urlpatterns = [
     path('recommend/', views.recommend, name="recommend"),
     path('search/', views.search, name="search"),
     path('random/', views.random, name="random"),
-    path('reviewed_list/', views.reviewed_list, name="reviewed_list"),
+    # path('reviewed_list/', views.reviewed_list, name="reviewed_list"),
+    path('reviewed_list/<int:user_pk>/', views.reviewed_list, name="reviewed_list"),
 ]
 

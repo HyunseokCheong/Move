@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 from django.shortcuts import redirect
 from rest_framework.decorators import api_view
@@ -159,8 +160,8 @@ def userlist(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-def likemovie_list(request):
-    me = request.user
-    likes = RateMovie.objects.filter(rateuser=me, state=1)
+def likemovie_list(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
+    likes = RateMovie.objects.filter(rateuser=user, state=1)
     likemovie_list_serializer = RateMovieSerializer(likes, many=True)
     return Response(likemovie_list_serializer.data, status=status.HTTP_200_OK)
