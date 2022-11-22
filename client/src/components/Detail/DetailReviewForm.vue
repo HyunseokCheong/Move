@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit.prevent="createReview">
+        <!-- <form @submit.prevent="createReview">
             <label for="content">내용: </label>
             <textarea
                 id="content"
@@ -11,7 +11,7 @@
             <label for="rate">평점 : 0 ~ 5</label>
             <input type="number" min="0" max="5" id="rate" v-model="rate" />
             <input type="submit" value="제출" />
-        </form>
+        </form> -->
     </div>
 </template>
 

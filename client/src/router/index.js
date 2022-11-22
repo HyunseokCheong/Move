@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import IndexView from "@/views/IndexView";
 import HomeView from "@/views/HomeView";
-import DetailView from "@/views/DetailView";
+import DetailMovieView from "@/views/DetailMovieView";
 import DetailUserView from "@/views/DetailUserView";
 import RankingView from "@/views/RankingView";
 import GenrePortView from "@/views/Port/GenrePortView";
@@ -34,7 +34,7 @@ const routes = [
     {
         path: "/movies/:id",
         name: "detail",
-        component: DetailView,
+        component: DetailMovieView,
         beforeEnter(to, from, next){
             if(store.getters['isLogin'] === true){
                 next()

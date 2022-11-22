@@ -32,5 +32,4 @@ export default {
 @import "./assets/styles/navbar.css";
 @import "./assets/styles/popup.css";
 @import "./assets/styles/movieslider.css";
-@import './assets/styles/moviecard.css';
 </style>
