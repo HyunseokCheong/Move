@@ -11,5 +11,4 @@ urlpatterns = [
     path('wishmovie/<int:movie_pk>/', views.wish_movie, name='wish_movie'),
     path('ranking/', views.ranking, name='ranking'),
     path('userlist/', views.userlist, name='userlist'),
-    path('likemovie_list/<int:user_pk>/', views.likemovie_list, name='likemovie_list'),
 ]

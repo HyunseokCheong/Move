@@ -49,16 +49,7 @@ def review_delete(request, movie_pk, review_pk):
         user.save()
     return Response({'delete'})
 
-@api_view(['GET'])
-def reviewed_list(request, user_pk):
-    user = get_object_or_404(User, pk=user_pk)
-    reviews = Review.objects.filter(reviewer=user)
-    movies = []
-    for review in reviews:
-        movies.append(review.movies.id)
-    reviewd_movies = Movie.objects.filter(pk__in=movies)
-    reviewd_movies_serializer = MovieSerializer(reviewd_movies, many=True)
-    return Response(reviewd_movies_serializer.data, status=status.HTTP_200_OK)
+
 
 @api_view(['GET'])
 def genreport(request, genre_pk):
@@ -175,7 +166,7 @@ def random(request):
     return Response(context, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-def test(request, user_pk):
+def liked_list(request, user_pk):
     user = User.objects.get(pk=user_pk)
     like_movies = RateMovie.objects.filter(rateuser=user, state=1)
     likelist = []
@@ -184,3 +175,14 @@ def test(request, user_pk):
     userlikemovies = Movie.objects.filter(id__in=likelist)
     serializer = MovieSerializer(userlikemovies, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def reviewed_list(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
+    reviews = Review.objects.filter(reviewer=user)
+    movies = []
+    for review in reviews:
+        movies.append(review.movies.id)
+    reviewed_movies = Movie.objects.filter(pk__in=movies)
+    reviewed_movies_serializer = MovieSerializer(reviewed_movies, many=True)
+    return Response(reviewed_movies_serializer.data, status=status.HTTP_200_OK)

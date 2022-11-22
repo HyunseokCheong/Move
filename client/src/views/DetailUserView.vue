@@ -3,6 +3,7 @@
         <SideBar />
         <div class="row-sector">
             <div v-if="user">
+                <p>movie recommed random</p>
                 <p>이름 : {{ user.profile.username }}</p>
                 <div v-if="userName != this.$route.params.name">
                     <button @click="follow">팔로우</button>
@@ -11,9 +12,9 @@
                 <!-- <p>선호 장르 : {{ user.profile.favorite_genres }}</p> -->
                 <!-- <p>선호 감독 : {{ user.profile.favorite_genres }}</p> -->
                 <!-- <p>선호 배우 : {{ user.profile.favorite_genres }}</p> -->
-                {{ userLikedMovies }}
                 <hr />
                 <!--  -->
+                <!-- {{ userLikedMovies }} -->
                 <ccarousel
                     :per-page="6"
                     :navigate-to="0"
@@ -24,10 +25,14 @@
                 >
                     <slide2
                         v-for="userLikedMovie in userLikedMovies"
-                        :key="`1-${userLikedMovie.id}`"
+                        :key="`00-${userLikedMovie.title}`"
                         :userLikedMovie="userLikedMovie"
                     >
-                        <UserLikedMovie :userLikedMovie="userLikedMovie" />
+                        <UserLikedMovie
+                            :userLikedMovie="userLikedMovie"
+                            :movies="movies"
+                            :recommend="recommend"
+                        />
                     </slide2>
                 </ccarousel>
                 <!--  -->
@@ -91,11 +96,16 @@ export default {
         return { user: null, userId: null, wishlist: null };
     },
     computed: {
-        users() {
-            return this.$store.state.users;
-        },
+        // 전체 영화 조회 어케함 ㅜㅜ
         movies() {
             return this.$store.state.movies;
+        },
+        recommend() {
+            return this.$store.state.recommend;
+        },
+        //
+        users() {
+            return this.$store.state.users;
         },
         isLogin() {
             return this.$store.getters.isLogin;
@@ -119,8 +129,17 @@ export default {
         this.getReviewedList();
         this.getLikedList();
         this.getWishlist();
+        // 전체 영화 조회 어케함 ㅜㅜ
+        this.getMovie();
+        this.getRecommend();
     },
     methods: {
+        getMovie() {
+            this.$store.dispatch("getMovie");
+        },
+        getRecommend() {
+            this.$store.dispatch("getRecommend");
+        },
         getReviewedList() {
             this.$store.dispatch("getReviewedList", this.$route.params.name);
         },
