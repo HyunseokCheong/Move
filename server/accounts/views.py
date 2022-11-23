@@ -43,14 +43,14 @@ def follow(request, username):
     return Response('okay')
 
 @api_view(['GET'])
-def like_actor(request, actor_pk):
+def like_genre(request, genre_pk):
     me = request.user
-    actor = Actor.objects.get(pk=actor_pk)
-    if me.favorite_actors.filter(pk=actor.pk).exists():
-        me.favorite_actors.remove(actor)
+    genre = Genre.objects.get(pk=genre_pk)
+    if me.favorite_genres.filter(pk=genre.pk).exists():
+        me.favorite_genres.remove(genre)
     else:
-        me.favorite_actors.add(actor)
-    return Response({'like actor'})
+        me.favorite_genres.add(genre)
+    return Response({'like genre'})
 
 @api_view(['GET'])
 def like_director(request, director_pk):
@@ -63,14 +63,14 @@ def like_director(request, director_pk):
     return Response({'like director'})
 
 @api_view(['GET'])
-def like_genre(request, genre_pk):
+def like_actor(request, actor_pk):
     me = request.user
-    genre = Genre.objects.get(pk=genre_pk)
-    if me.favorite_genres.filter(pk=genre.pk).exists():
-        me.favorite_genres.remove(genre)
+    actor = Actor.objects.get(pk=actor_pk)
+    if me.favorite_actors.filter(pk=actor.pk).exists():
+        me.favorite_actors.remove(actor)
     else:
-        me.favorite_genres.add(genre)
-    return Response({'like genre'})
+        me.favorite_actors.add(actor)
+    return Response({'like actor'})
 
 @api_view(['POST'])
 def like_movie(request, movie_pk):

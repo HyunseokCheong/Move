@@ -53,6 +53,10 @@ def review_delete(request, movie_pk, review_pk):
 
 @api_view(['GET'])
 def genreport(request, genre_pk):
+    me = request.user
+    port_state = 0
+    if me.favorite_genres.filter(id=genre_pk).exists():
+        port_state = 1
     # 해당장르의 인기영화
     genre_movie = Movie.objects.filter(genres=genre_pk, vote_count__gte=1000, vote_average__gte=7).order_by('?')
     genre_name = Genre.objects.get(pk=genre_pk).name
@@ -60,11 +64,16 @@ def genreport(request, genre_pk):
     context = {
         'movie': serializer.data,
         'name': genre_name,
+        'port_state': port_state
     }
     return Response(context, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def directorport(request, director_pk):
+    me = request.user
+    port_state = 0
+    if me.favorite_directors.filter(id=director_pk).exists():
+        port_state = 1
     # 감독의 연출영화
     directed_movie = Movie.objects.filter(directors=director_pk).order_by('?')
     director_name = Director.objects.get(pk=director_pk).name
@@ -72,11 +81,16 @@ def directorport(request, director_pk):
     context = {
         'movie': serializer.data,
         'name': director_name,
+        'port_state': port_state
     }
     return Response(context, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def actorport(request, actor_pk):
+    me = request.user
+    port_state = 0
+    if me.favorite_actors.filter(id=actor_pk).exists():
+        port_state = 1
     # 배우의 출연영화
     casted_movie = Movie.objects.filter(actors=actor_pk).order_by('?')
     actor_name = Actor.objects.get(pk=actor_pk).name
@@ -84,6 +98,7 @@ def actorport(request, actor_pk):
     context = {
         'movie': serializer.data,
         'name': actor_name,
+        'port_state': port_state
     }
     return Response(context, status=status.HTTP_200_OK)
 

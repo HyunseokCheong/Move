@@ -1,7 +1,9 @@
 <template>
     <div class="tinder-div">
-        <header class="tinder-div-header">
+        <header class="tinder-div-header" @click="likeDirector">
             {{directorName}}
+            <img v-if="portState==1" src="../../assets/images/likeActive_color.png"/>
+            <img v-if="portState==0" src="../../assets/images/like_black.png"/>
             <br>
         </header>
         <br>
@@ -75,6 +77,9 @@ export default {
         directorName() {
             return `${this.$store.state.directorPorts.name} 감독이 연출한 영화`;
         },
+        portState() {
+            return this.$store.state.directorstate;
+        },
     },
 
     methods: {
@@ -83,6 +88,9 @@ export default {
         },
         getDirectorPort() {
             this.$store.dispatch("getDirectorPort", this.$route.params.id);
+        },
+        likeDirector() {
+            this.$store.dispatch("likeDirector", this.$route.params.id);
         },
         mock(count = 5, append = true) {
             if (this.directorPorts.movie.length < 5){

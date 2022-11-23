@@ -20,7 +20,7 @@ export default new Vuex.Store({
         genrePorts: [],
         directorPorts: [],
         actorPorts: [],
-        searchData: [],
+        searchDatas: [],
         randoms: [],
         liked_list: [],
         reviewed_list: [],
@@ -28,6 +28,10 @@ export default new Vuex.Store({
         detail_page_user: null,
         is_following: null,
         state: null,
+        genrestate: null,
+        directorstate: null,
+        actorstate: null,
+        
     },
     getters: {
         isLogin(state) {
@@ -64,7 +68,7 @@ export default new Vuex.Store({
             state.actorPorts = movies;
         },
         SET_SEARCH(state, searchData) {
-            state.searchData = searchData;
+            state.searchDatas = searchData;
         },
         SET_RANDOMS(state, randoms) {
             state.randoms = randoms;
@@ -197,8 +201,13 @@ export default new Vuex.Store({
         getGenrePort(context, id) {
             axios({
                 url: `${API_URL}/movies/genre/${id}`,
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
             })
                 .then((res) => {
+                    console.log(res.data.port_state)
+                    this.state.genrestate = res.data.port_state
                     context.commit("SET_GENREPORT", res.data);
                 })
                 .catch((err) => {
@@ -208,8 +217,13 @@ export default new Vuex.Store({
         getDirectorPort(context, id) {
             axios({
                 url: `${API_URL}/movies/director/${id}`,
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
             })
                 .then((res) => {
+                    console.log(res.data.port_state)
+                    this.state.directorstate = res.data.port_state
                     context.commit("SET_DIRECTORPORT", res.data);
                 })
                 .catch((err) => {
@@ -219,14 +233,66 @@ export default new Vuex.Store({
         getActorPort(context, id) {
             axios({
                 url: `${API_URL}/movies/actor/${id}`,
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
             })
                 .then((res) => {
+                    console.log(res.data.port_state)
+                    this.state.actorstate = res.data.port_state
                     context.commit("SET_ACTORPORT", res.data);
                 })
                 .catch((err) => {
                     console.log(err);
                 });
         },
+        likeGenre(context, id) {
+            axios({
+                url: `${API_URL}/accounts/likegenre/${id}`,
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
+            })
+            .then(() => {
+                if (this.state.genrestate == 1) {
+                    this.state.genrestate = 0
+                }  else {
+                    this.state.genrestate = 1
+                }
+            })
+        },
+        likeDirector(context, id) {
+            axios({
+                url: `${API_URL}/accounts/likedirector/${id}`,
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
+            })
+            .then(() => {
+                if (this.state.directorstate == 1) {
+                    this.state.directorstate = 0
+                }  else {
+                    this.state.directorstate = 1
+                }
+            })
+        },
+        likeActor(context, id) {
+            axios({
+                url: `${API_URL}/accounts/likeactor/${id}`,
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
+            })
+            .then(() => {
+                if (this.state.actorstate == 1) {
+                    this.state.actorstate = 0
+                }  else {
+                    this.state.actorstate = 1
+                }
+                console.log(this.state.actorstate)
+            })
+        },
+
         getSearchData(context, keyword) {
             axios({
                 method: "post",

@@ -20,6 +20,10 @@
   margin-bottom: 1rem;
 }
 
+.tinder-div-header > img {
+  margin-top: -1rem;
+}
+
 .nope-pointer,
 .like-pointer {
   position: absolute;
@@ -68,7 +72,7 @@
   justify-content: center;
   min-width: 300px;
   max-width: 355px;
-  margin-top: 5rem;
+  margin-top: 18rem;
 }
 
 .btns img {

@@ -58,7 +58,7 @@
 .movie-detail-descriptions-top-left {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     width: 420%;
     height: 200%;
     padding-left: 4rem;
@@ -103,7 +103,7 @@
 .movie-detail-descriptions-overviews {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: x-start;
     padding-left: 4rem;
     padding-right: 4rem;
 }
@@ -217,14 +217,14 @@
     width: 10%;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: x-start;
 }
 .movie-review-right {
     width: 90%;
 
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: x-start;
 }
 .movie-review-top {
     display: flex;

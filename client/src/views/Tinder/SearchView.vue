@@ -1,9 +1,7 @@
 <template>
     <div class="tinder-div">
-        <header class="tinder-div-header" @click="likeActor">
-            {{actorName}} 
-            <img v-if="portState==1" src="../../assets/images/likeActive_color.png"/>
-            <img v-if="portState==0" src="../../assets/images/like_black.png"/>
+        <header class="tinder-div-header">
+            {{searchResult}} 
             <br>
         </header>
         <br>
@@ -53,7 +51,7 @@
 import TinderMain from '@/components/Tinder/TinderMain'
 
 export default {
-    name: "ActorPortView",
+    name: "SearchView",
     components: {
         TinderMain,
     },
@@ -63,22 +61,19 @@ export default {
         history: []
     }),
     created() {
-        this.getActorPort();
+        this.getSearchData();
     },
     watch: {
-    actorPorts() {
+    searchDatas() {
         this.mock()
     }
     },
     computed: {
-        actorPorts() {
-            return this.$store.state.actorPorts;
+        searchDatas() {
+            return this.$store.state.searchDatas;
         },
-        actorName() {
-            return `${this.$store.state.actorPorts.name}의 출연 영화`;
-        },
-        portState() {
-            return this.$store.state.actorstate;
+        searchResult() {
+            return `${this.$route.params.keyword}의 검색 결과`;
         },
     },
 
@@ -86,19 +81,16 @@ export default {
         refresh() {
             this.$router.go();
         },
-        getActorPort() {
-            this.$store.dispatch("getActorPort", this.$route.params.id);
-        },
-        likeActor() {
-            this.$store.dispatch("likeActor", this.$route.params.id);
+        getSearchData() {
+            this.$store.dispatch("getSearchData", this.$route.params.keyword);
         },
         mock(count = 5, append = true) {
-            if (this.actorPorts.movie.length < 5){
-                count = this.actorPorts.movie.length
+            if (this.searchDatas.length < 5){
+                count = this.searchDatas.length
             }
             const list = []
             for (let i = 0; i < count; i++) {
-                list.push({ poster_path: this.actorPorts.movie[this.offset].poster_path, movie: this.actorPorts.movie[this.offset]})
+                list.push({ poster_path: this.searchDatas[this.offset].poster_path, movie: this.searchDatas[this.offset]})
                 this.offset++
             }
             if (append) {
@@ -109,7 +101,7 @@ export default {
         },
         onSubmit({ item }) {
             if (this.queue.length < 3) {
-                if (!(this.actorPorts.movie.length < 3)) {
+                if (!(this.searchDatas.length < 3)) {
                     this.mock()
                 }   
             }

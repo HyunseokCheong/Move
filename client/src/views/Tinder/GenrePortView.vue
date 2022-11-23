@@ -1,7 +1,9 @@
 <template>
     <div class="tinder-div">
-        <header class="tinder-div-header">
-            {{genreName}}
+        <header class="tinder-div-header" @click="likeGenre">
+            {{genreName}} 
+            <img v-if="portState==1" src="../../assets/images/likeActive_color.png"/>
+            <img v-if="portState==0" src="../../assets/images/like_black.png"/>
             <br>
         </header>
         <br>
@@ -75,6 +77,9 @@ export default {
         genreName() {
             return `${this.$store.state.genrePorts.name} 장르의 인기 영화`;
         },
+        portState() {
+            return this.$store.state.genrestate;
+        },
     },
 
     methods: {
@@ -83,6 +88,9 @@ export default {
         },
         getGenrePort() {
             this.$store.dispatch("getGenrePort", this.$route.params.id);
+        },
+        likeGenre() {
+            this.$store.dispatch("likeGenre", this.$route.params.id);
         },
         mock(count = 5, append = true) {
             if (this.genrePorts.movie.length < 5){

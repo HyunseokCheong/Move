@@ -10,7 +10,7 @@ import GenrePortView from "@/views/Tinder/GenrePortView";
 import DirectorPortView from "@/views/Tinder/DirectorPortView";
 import ActorPortView from "@/views/Tinder/ActorPortView";
 import WishListView from "@/views/Tinder/WishListView";
-import SearchView from "@/views/SearchView";
+import SearchView from "@/views/Tinder/SearchView";
 import store from "@/store";
 
 Vue.use(VueRouter);
