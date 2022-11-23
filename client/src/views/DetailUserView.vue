@@ -4,11 +4,12 @@
         <div class="row-sector">
             <div v-if="user">
                 <p>이름 : {{ user.profile.username }}</p>
+                <p>리뷰 : {{ user.profile.reviews_count }}개</p>
+                <p>팔로워 : {{ user.profile.followings.length }}명</p>
                 <!-- 팔로우 관련 -->
                 <div v-if="userName != this.$route.params.name">
                     <button @click="follow">팔로우</button>
                 </div>
-                <p>현재 팔로워 수 : {{ user.profile.followings.length }}</p>
                 <p>현재 팔로워 :</p>
                 <div
                     v-for="follower in user.profile.followings"
