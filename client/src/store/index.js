@@ -12,7 +12,8 @@ export default new Vuex.Store({
     state: {
         token: null,
         loggedInUser: null,
-        users: [],
+        profile: null,
+        rankings: [],
         movies: [],
         movie: null,
         recommends: [],
@@ -36,8 +37,11 @@ export default new Vuex.Store({
             state.token = token;
             router.push({ name: "home" });
         },
-        SET_USERS(state, users) {
-            state.users = users;
+        SET_PROFILE(state, profile) {
+            state.profile = profile
+        },
+        SET_RANKINGS(state, rankings) {
+            state.rankings = rankings;
         },
         SET_MOVIES(state, movies) {
             state.movies = movies.slice(0, 30);
@@ -74,88 +78,6 @@ export default new Vuex.Store({
         },
     },
     actions: {
-        getWishedlist(context, payload) {
-            axios({
-                url: `${API_URL}/accounts/userlist/`,
-            })
-                .then((res1) => {
-                    for (let i = 0; i < res1.data.length; i++) {
-                        if (res1.data[i].username == payload) {
-                            let temp_userId = i + 1;
-                            axios({
-                                url: `${API_URL}/movies/wished_list/${temp_userId}/`,
-                                headers: {
-                                    Authorization: `Token ${this.state.token}`,
-                                },
-                            })
-                                .then((res) => {
-                                    context.commit("GET_WISHEDLIST", res.data);
-                                })
-                                .catch((err) => {
-                                    console.log(err);
-                                });
-                            break;
-                        }
-                    }
-                })
-                .catch((err) => console.log(err));
-        },
-        getLikedList(context, payload) {
-            axios({
-                url: `${API_URL}/accounts/userlist/`,
-            })
-                .then((res1) => {
-                    for (let i = 0; i < res1.data.length; i++) {
-                        if (res1.data[i].username == payload) {
-                            let temp_userId = i + 1;
-                            axios({
-                                url: `${API_URL}/movies/liked_list/${temp_userId}/`,
-                                headers: {
-                                    Authorization: `Token ${this.state.token}`,
-                                },
-                            })
-                                .then((res) => {
-                                    context.commit("GET_LIKEDLIST", res.data);
-                                })
-                                .catch((err) => {
-                                    console.log(err);
-                                });
-                            break;
-                        }
-                    }
-                })
-                .catch((err) => console.log(err));
-        },
-        getReviewedList(context, payload) {
-            axios({
-                url: `${API_URL}/accounts/userlist/`,
-            })
-                .then((res1) => {
-                    for (let i = 0; i < res1.data.length; i++) {
-                        if (res1.data[i].username == payload) {
-                            let temp_userId = i + 1;
-                            axios({
-                                url: `${API_URL}/movies/reviewed_list/${temp_userId}`,
-                                headers: {
-                                    Authorization: `Token ${this.state.token}`,
-                                },
-                            })
-                                .then((res) => {
-                                    context.commit(
-                                        "GET_REVIEWEDLIST",
-                                        res.data
-                                    );
-                                })
-                                .catch((err) => {
-                                    console.log(err);
-                                });
-
-                            break;
-                        }
-                    }
-                })
-                .catch((err) => console.log(err));
-        },
         signUp(context, payload) {
             axios({
                 method: "post",
@@ -187,12 +109,20 @@ export default new Vuex.Store({
                 })
                 .catch(() => alert("회원가입 정보가 일치하지 않습니다."));
         },
-        getUser(context) {
+        getProfile(context, name) {
+            axios({
+                method: "get",
+                url: `${API_URL}/accounts/profile/${name}`,
+            }).then((res) => {
+                context.commit("SET_PROFILE", res.data);
+            });
+        },
+        getRanking(context) {
             axios({
                 method: "get",
                 url: `${API_URL}/accounts/ranking/`,
             }).then((res) => {
-                context.commit("SET_USERS", res.data);
+                context.commit("SET_RANKINGS", res.data);
             });
         },
         getMovie(context) {
@@ -334,6 +264,88 @@ export default new Vuex.Store({
                 .catch((err) => {
                     console.log(err);
                 });
+        },
+        getWishedlist(context, payload) {
+            axios({
+                url: `${API_URL}/accounts/userlist/`,
+            })
+                .then((res1) => {
+                    for (let i = 0; i < res1.data.length; i++) {
+                        if (res1.data[i].username == payload) {
+                            let temp_userId = i + 1;
+                            axios({
+                                url: `${API_URL}/movies/wished_list/${temp_userId}/`,
+                                headers: {
+                                    Authorization: `Token ${this.state.token}`,
+                                },
+                            })
+                                .then((res) => {
+                                    context.commit("GET_WISHEDLIST", res.data);
+                                })
+                                .catch((err) => {
+                                    console.log(err);
+                                });
+                            break;
+                        }
+                    }
+                })
+                .catch((err) => console.log(err));
+        },
+        getLikedList(context, payload) {
+            axios({
+                url: `${API_URL}/accounts/userlist/`,
+            })
+                .then((res1) => {
+                    for (let i = 0; i < res1.data.length; i++) {
+                        if (res1.data[i].username == payload) {
+                            let temp_userId = i + 1;
+                            axios({
+                                url: `${API_URL}/movies/liked_list/${temp_userId}/`,
+                                headers: {
+                                    Authorization: `Token ${this.state.token}`,
+                                },
+                            })
+                                .then((res) => {
+                                    context.commit("GET_LIKEDLIST", res.data);
+                                })
+                                .catch((err) => {
+                                    console.log(err);
+                                });
+                            break;
+                        }
+                    }
+                })
+                .catch((err) => console.log(err));
+        },
+        getReviewedList(context, payload) {
+            axios({
+                url: `${API_URL}/accounts/userlist/`,
+            })
+                .then((res1) => {
+                    for (let i = 0; i < res1.data.length; i++) {
+                        if (res1.data[i].username == payload) {
+                            let temp_userId = i + 1;
+                            axios({
+                                url: `${API_URL}/movies/reviewed_list/${temp_userId}`,
+                                headers: {
+                                    Authorization: `Token ${this.state.token}`,
+                                },
+                            })
+                                .then((res) => {
+                                    context.commit(
+                                        "GET_REVIEWEDLIST",
+                                        res.data
+                                    );
+                                })
+                                .catch((err) => {
+                                    console.log(err);
+                                });
+
+                            break;
+                        }
+                    }
+                })
+                .catch((err) => console.log(err));
         },
     },
     modules: {},

@@ -33,4 +33,5 @@ export default {
 @import "./assets/styles/popup.css";
 @import "./assets/styles/movieslider.css";
 @import "./assets/styles/moviedetail.css";
+@import "./assets/styles/profile.css";
 </style>

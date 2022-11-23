@@ -3,13 +3,14 @@ import VueRouter from "vue-router";
 import IndexView from "@/views/IndexView";
 import HomeView from "@/views/HomeView";
 import DetailMovieView from "@/views/DetailMovieView";
-import DetailUserView from "@/views/DetailUserView";
+import ProfileView from "@/views/ProfileView";
 import RankingView from "@/views/RankingView";
 import GenrePortView from "@/views/Port/GenrePortView";
 import DirectorPortView from "@/views/Port/DirectorPortView";
 import ActorPortView from "@/views/Port/ActorPortView";
 import SearchView from "@/views/SearchView";
 import store from "@/store";
+import TestView from '@/views/TestView';
 
 Vue.use(VueRouter);
 
@@ -45,8 +46,8 @@ const routes = [
     },
     {
         path: "/accounts/profile/:name",
-        name: "detailuser",
-        component: DetailUserView,
+        name: "profile",
+        component: ProfileView,
         beforeEnter(to, from, next){
             if(store.getters['isLogin'] === true){
                 next()
@@ -107,6 +108,18 @@ const routes = [
         path: '/search/:keyword',
         name: 'Search',
         component: SearchView,
+        beforeEnter(to, from, next){
+            if(store.getters['isLogin'] === true){
+                next()
+            }else{
+                next('/login')
+            }
+        },
+    },
+    {
+        path: '/test/',
+        name: 'Test',
+        component: TestView,
         beforeEnter(to, from, next){
             if(store.getters['isLogin'] === true){
                 next()

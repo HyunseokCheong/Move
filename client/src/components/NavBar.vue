@@ -27,7 +27,7 @@
                     <router-link
                         v-if="isLogin"
                         :to="{
-                            name: 'detailuser',
+                            name: 'profile',
                             params: { name: userName },
                         }"
                         class="router"

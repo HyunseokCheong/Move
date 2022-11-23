@@ -1,0 +1,70 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+
+.user-infrom {
+    display: flex;
+    background-color: #df1515;
+    padding-top: 5rem;
+    padding-left: 3rem;
+    margin-bottom: 3rem;
+}
+
+.user-infrom-image {
+    width: 500px;
+    height: 500px;
+}
+
+#profile-image {
+    width: 500px;
+    height: 500px;
+}
+
+.user-inform-infromation {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    padding-left: 6rem;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+}
+
+.user-inform-infromation-name {
+    text-align: left;
+    font-size: 30px;
+    margin-bottom: 2rem;
+}
+
+.user-inform-infromation-review {
+    text-align: left;
+    font-size: 30px;
+    margin-bottom: 2rem;
+}
+
+.user-inform-infromation-follow {
+    text-align: left;
+    font-size: 30px;
+}
+.user-likes {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-liked-movies {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-reviewed-movies {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-wished-movies {
+    display: flex;
+    flex-direction: column;
+}
