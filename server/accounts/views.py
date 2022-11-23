@@ -14,7 +14,6 @@ def profile(request, username):
     person = User.objects.get(username=username)
     serializer = UserSerializer(person)
     review = Review.objects.filter(reviewer=person.pk)
-    person.reviews_count = review.count()
     review_serializer = ReviewSerializer(review, many=True)
     likemovie = RateMovie.objects.filter(rateuser=person, state=1)
     lm_serializer = RateMovieSerializer(likemovie, many=True)
