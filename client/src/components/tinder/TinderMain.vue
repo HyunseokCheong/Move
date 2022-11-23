@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import TinderCard from '@/components/tinder/TinderCard'
+import TinderCard from '@/components/Tinder/TinderCard'
 import queueHandle from './queue-handle'
 import touchEvent from './touch-event'
 import transitionEvent from './transition-event'

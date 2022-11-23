@@ -26,6 +26,8 @@ export default new Vuex.Store({
         liked_list: [],
         wished_list: [],
         detail_page_user: null,
+        is_following: null,
+        state: null,
     },
     getters: {
         isLogin(state) {
@@ -73,8 +75,8 @@ export default new Vuex.Store({
         GET_LIKEDLIST(state, liked_list) {
             state.liked_list = liked_list;
         },
-        GET_WISHEDLIST(state, wished_list) {
-            state.wished_list = wished_list;
+        SET_WISHLIST(state, movies) {
+            state.wish_list = movies;
         },
     },
     actions: {
@@ -113,9 +115,33 @@ export default new Vuex.Store({
             axios({
                 method: "get",
                 url: `${API_URL}/accounts/profile/${name}`,
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
             }).then((res) => {
+                this.state.is_following = res.data.is_following
                 context.commit("SET_PROFILE", res.data);
             });
+        },
+        userFollow(context, name) {
+            axios({
+                method: "get",
+                url: `${API_URL}/accounts/follow/${name}/`,
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
+            })
+                .then(() => {
+                    if (this.state.is_following == 1) {
+                        this.state.is_following = 0
+                    }
+                    else {
+                        this.state.is_following = 1
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         },
         getRanking(context) {
             axios({
@@ -130,6 +156,7 @@ export default new Vuex.Store({
                 url: `${API_URL}/movies/`,
             })
                 .then((res) => {
+                    
                     context.commit("SET_MOVIES", res.data);
                 })
                 .catch((err) => {
@@ -144,6 +171,7 @@ export default new Vuex.Store({
                 },
             })
                 .then((res) => {
+                    this.state.state = res.data.state
                     context.commit("SET_MOVIE_DETAIL", res.data);
                 })
                 .catch((err) => {
@@ -229,6 +257,11 @@ export default new Vuex.Store({
                 },
             })
                 .then(() => {
+                    if (this.state.state == 1) {
+                        this.state.state = 0;
+                    } else {
+                        this.state.state = 1;
+                    }
                     console.log("like");
                 })
                 .catch((err) => {
@@ -244,6 +277,11 @@ export default new Vuex.Store({
                 },
             })
                 .then(() => {
+                    if (this.state.state == 2) {
+                        this.state.state = 0;
+                    } else {
+                        this.state.state = 2;
+                    }
                     console.log("dislike");
                 })
                 .catch((err) => {
@@ -259,37 +297,28 @@ export default new Vuex.Store({
                 },
             })
                 .then(() => {
+                    if (this.state.state == 3) {
+                        this.state.state = 0;
+                    } else {
+                        this.state.state = 3;
+                    }
                     console.log("wish");
                 })
                 .catch((err) => {
                     console.log(err);
                 });
         },
-        getWishedlist(context, payload) {
+        getWishList(context, name) {
             axios({
-                url: `${API_URL}/accounts/userlist/`,
-            })
-                .then((res1) => {
-                    for (let i = 0; i < res1.data.length; i++) {
-                        if (res1.data[i].username == payload) {
-                            let temp_userId = i + 1;
-                            axios({
-                                url: `${API_URL}/movies/wished_list/${temp_userId}/`,
-                                headers: {
-                                    Authorization: `Token ${this.state.token}`,
-                                },
-                            })
-                                .then((res) => {
-                                    context.commit("GET_WISHEDLIST", res.data);
-                                })
-                                .catch((err) => {
-                                    console.log(err);
-                                });
-                            break;
-                        }
-                    }
-                })
-                .catch((err) => console.log(err));
+                method: "get",
+                url: `${API_URL}/accounts/wishlist/${name}`,
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
+            }).then((res) => {
+                this.state.is_following = res.data.is_following
+                context.commit("SET_PROFILE", res.data);
+            });
         },
         getLikedList(context, payload) {
             axios({

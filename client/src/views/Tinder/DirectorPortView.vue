@@ -1,7 +1,7 @@
 <template>
     <div class="tinder-div">
         <header>
-            <h2>{{actorName}}</h2>
+            <h2>{{directorName}}</h2>
             <br>
             <h4>좋아하는 영화라면 오른쪽, 싫어하는 영화라면 왼쪽으로 슬라이딩 해주세요.</h4>
             <small>호감도를 바탕으로 영화 추천 서비스를 제공합니다.</small>
@@ -49,10 +49,10 @@
     </div>
 </template>
 <script>
-import TinderMain from '@/components/tinder/TinderMain'
+import TinderMain from '@/components/Tinder/TinderMain'
 
 export default {
-    name: "ActorPortView",
+    name: "DirectorPortView",
     components: {
         TinderMain,
     },
@@ -62,19 +62,19 @@ export default {
         history: []
     }),
     created() {
-        this.getActorPort();
+        this.getDirectorPort();
     },
     watch: {
-    actorPorts() {
+    directorPorts() {
         this.mock()
     }
     },
     computed: {
-        actorPorts() {
-            return this.$store.state.actorPorts;
+        directorPorts() {
+            return this.$store.state.directorPorts;
         },
-        actorName() {
-            return `${this.$store.state.actorPorts.name} 배우가 출연한 영화`;
+        directorName() {
+            return `${this.$store.state.directorPorts.name} 감독이 연출한 영화`;
         },
     },
 
@@ -82,16 +82,16 @@ export default {
         refresh() {
             this.$router.go();
         },
-        getActorPort() {
-            this.$store.dispatch("getActorPort", this.$route.params.id);
+        getDirectorPort() {
+            this.$store.dispatch("getDirectorPort", this.$route.params.id);
         },
         mock(count = 5, append = true) {
-            if (this.actorPorts.movie.length < 5){
-                count = this.actorPorts.movie.length
+            if (this.directorPorts.movie.length < 5){
+                count = this.directorPorts.movie.length
             }
             const list = []
             for (let i = 0; i < count; i++) {
-                list.push({ poster_path: this.actorPorts.movie[this.offset].poster_path, movie: this.actorPorts.movie[this.offset]})
+                list.push({ poster_path: this.directorPorts.movie[this.offset].poster_path, movie: this.directorPorts.movie[this.offset]})
                 this.offset++
                 console.log(list[0].movie.id)
             }
@@ -103,7 +103,7 @@ export default {
         },
         onSubmit({ item }) {
             if (this.queue.length < 3) {
-                if (!(this.actorPorts.movie.length < 3)) {
+                if (!(this.directorPorts.movie.length < 3)) {
                     this.mock()
                 }   
             }

@@ -5,12 +5,12 @@ import HomeView from "@/views/HomeView";
 import DetailMovieView from "@/views/DetailMovieView";
 import ProfileView from "@/views/ProfileView";
 import RankingView from "@/views/RankingView";
-import GenrePortView from "@/views/Port/GenrePortView";
-import DirectorPortView from "@/views/Port/DirectorPortView";
-import ActorPortView from "@/views/Port/ActorPortView";
+import GenrePortView from "@/views/Tinder/GenrePortView";
+import DirectorPortView from "@/views/Tinder/DirectorPortView";
+import ActorPortView from "@/views/Tinder/ActorPortView";
+import WishListView from "@/views/Tinder/WishListView";
 import SearchView from "@/views/SearchView";
 import store from "@/store";
-import TestView from '@/views/TestView';
 
 Vue.use(VueRouter);
 
@@ -117,9 +117,9 @@ const routes = [
         },
     },
     {
-        path: '/test/',
-        name: 'Test',
-        component: TestView,
+        path: '/wishlist/:name',
+        name: 'wishlist',
+        component: WishListView,
         beforeEnter(to, from, next){
             if(store.getters['isLogin'] === true){
                 next()

@@ -1,7 +1,7 @@
 <template>
     <div class="tinder-div">
         <header>
-            <h2>{{directorName}}</h2>
+            <h2>위시 리스트</h2>
             <br>
             <h4>좋아하는 영화라면 오른쪽, 싫어하는 영화라면 왼쪽으로 슬라이딩 해주세요.</h4>
             <small>호감도를 바탕으로 영화 추천 서비스를 제공합니다.</small>
@@ -49,10 +49,10 @@
     </div>
 </template>
 <script>
-import TinderMain from '@/components/tinder/TinderMain'
+import TinderMain from '@/components/Tinder/TinderMain'
 
 export default {
-    name: "DirectorPortView",
+    name: "WishListView",
     components: {
         TinderMain,
     },
@@ -62,19 +62,16 @@ export default {
         history: []
     }),
     created() {
-        this.getDirectorPort();
+        this.getWishedList();
     },
     watch: {
-    directorPorts() {
-        this.mock()
-    }
+        getWishList() {
+            this.mock()
+        }
     },
     computed: {
-        directorPorts() {
-            return this.$store.state.directorPorts;
-        },
-        directorName() {
-            return `${this.$store.state.directorPorts.name} 감독이 연출한 영화`;
+        wishLists() {
+            return this.$store.state.wished_list;
         },
     },
 
@@ -82,18 +79,18 @@ export default {
         refresh() {
             this.$router.go();
         },
-        getDirectorPort() {
-            this.$store.dispatch("getDirectorPort", this.$route.params.id);
+        getWishedList() {
+            this.$store.dispatch("getWishedList", this.$route.params.name);
         },
         mock(count = 5, append = true) {
-            if (this.directorPorts.movie.length < 5){
-                count = this.directorPorts.movie.length
+            if (this.wishLists.movie.length < 5){
+                count = this.wishLists.movie.length
             }
             const list = []
+            console.log(this.WishLists)
             for (let i = 0; i < count; i++) {
-                list.push({ poster_path: this.directorPorts.movie[this.offset].poster_path, movie: this.directorPorts.movie[this.offset]})
+                list.push({ poster_path: this.wishLists.movie[this.offset].poster_path, movie: this.wishLists.movie[this.offset]})
                 this.offset++
-                console.log(list[0].movie.id)
             }
             if (append) {
                 this.queue = this.queue.concat(list)
@@ -103,7 +100,7 @@ export default {
         },
         onSubmit({ item }) {
             if (this.queue.length < 3) {
-                if (!(this.directorPorts.movie.length < 3)) {
+                if (!(this.wishLists.movie.length < 3)) {
                     this.mock()
                 }   
             }

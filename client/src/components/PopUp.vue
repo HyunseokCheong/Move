@@ -17,6 +17,7 @@
             <span v-for="(genre, i) in movieObj.genres" :key="i">
                 {{ genre.name }}
             </span>
+            
             <div v-if="state == 0">
                 <button @click="like()">좋아요</button>
                 <button @click="dislike()">싫어요</button>
@@ -43,16 +44,8 @@
 </template>
 
 <script>
-import axios from "axios";
-const API_URL = "http://127.0.0.1:8000";
-
 export default {
     name: "PopUp",
-    data() {
-        return {
-            state: null,
-        };
-    },
     props: {
         movieObj: Object,
     },
@@ -60,48 +53,29 @@ export default {
         youtube() {
             return `https://www.youtube.com/embed/${this.movieObj.youtube_key}?autoplay=1&mute=1`;
         },
+        state: {
+            set: function () {
+            },
+            get: function () {
+                return this.$store.state.state
+            }
+        },
     },
     methods: {
         getMovieDetail() {
-            axios({
-                url: `${API_URL}/movies/${this.movieObj.id}`,
-                headers: {
-                    Authorization: `Token ${this.$store.state.token}`,
-                },
-            })
-                .then((res) => {
-                    this.state = res.data.state;
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
+            this.$store.dispatch("getMovieDetail", this.movieObj.id)
         },
         closePopup() {
             this.state = null;
         },
         like() {
             this.$store.dispatch("movieLike", this.movieObj.id);
-            if (this.state == 1) {
-                this.state = 0;
-            } else {
-                this.state = 1;
-            }
         },
         dislike() {
             this.$store.dispatch("movieDislike", this.movieObj.id);
-            if (this.state == 2) {
-                this.state = 0;
-            } else {
-                this.state = 2;
-            }
         },
         addWishList() {
             this.$store.dispatch("movieWish", this.movieObj.id);
-            if (this.state == 3) {
-                this.state = 0;
-            } else {
-                this.state = 3;
-            }
         },
     },
 };

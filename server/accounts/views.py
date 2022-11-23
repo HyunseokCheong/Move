@@ -11,35 +11,37 @@ from rest_framework import status
 
 @api_view(['GET'])
 def profile(request, username):
+    me = request.user
     person = User.objects.get(username=username)
     serializer = UserSerializer(person)
     review = Review.objects.filter(reviewer=person.pk)
     review_serializer = ReviewSerializer(review, many=True)
     likemovie = RateMovie.objects.filter(rateuser=person, state=1)
     lm_serializer = RateMovieSerializer(likemovie, many=True)
+    is_following = 0
+    if me.followings.filter(pk=person.pk).exists():
+        is_following = 1
     context = {
         'profile': serializer.data,
         'reviews': review_serializer.data,
         'likemovies': lm_serializer.data,
+        'is_following': is_following,
     }
+    print(is_following)
     return Response(context, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-def follow(request, user_pk):
-    if request.user.is_authenticated:
-        me = request.user
-        you = User.objects.get(pk=user_pk)
-        if me != you:
-            # 내가(request.user) 그 사람의 팔로워 목록에 있다면
-            # if me in you.followers.all():
-            if you.followings.filter(pk=me.pk).exists():
-                # 언팔로우
-                you.followings.remove(me)
-            else:
-                # 팔로우
-                you.followings.add(me)
-        return redirect('accounts:profile', you.username)
-    return Response({'follow'})
+def follow(request, username):
+    me = request.user
+    person = User.objects.get(username=username)
+    if me != person:
+        if me.followings.filter(pk=person.pk).exists():
+            # 언팔로우
+            me.followings.remove(person)
+        else:
+            # 팔로우
+            me.followings.add(person)
+    return Response('okay')
 
 @api_view(['GET'])
 def like_actor(request, actor_pk):

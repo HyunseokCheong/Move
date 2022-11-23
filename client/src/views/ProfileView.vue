@@ -5,47 +5,148 @@
         <div class="text-info-outer">
         <div class="text-info-inner">
         <div v-if="userName != this.$route.params.name">
-            <div class="follow-button" ><h4>Follow</h4></div>
+            <div class="follow-button" v-if="is_following==0" @click="userFollow"><h4>Follow</h4></div>
+            <div class="follow-button" v-if="is_following==1" @click="userFollow"><h4>UnFollow</h4></div>
         </div>
-        <h3>ㅇㄹㄴㅇ</h3>
+        <div v-if="userName == this.$route.params.name">
+            <router-link
+                :to="{
+                    name: 'wishlist',
+                    params: { name: this.$route.params.name },
+                }"
+            >
+                <div class="wish-button" ><h4>Wish List</h4></div>
+            </router-link>
+        </div>
         <h1>{{ user.profile.username }}</h1>
         <h2>리뷰 : {{ user.profile.reviews_count }}개</h2>
         <h2>팔로워 : {{ user.profile.followings.length }}명</h2>
         <div class="profile-discription">
-            <p>선호하는 장르</p>
-            {{user.profile.favorite_genres}}
-            <div v-if="user.profile.favorite_genres">
-                <span v-for="(genre, i) in user.profile.favorite_genres" :key="i">
-                    <router-link
-                        :to="{
-                            name: 'genre',
-                            params: { id: genre.id, name: genre.name },
-                        }"
+            <div class="profile-discription-genres">
+                <p>선호하는 장르</p>
+                <div v-if="user.profile.favorite_genres.length > 0">
+                    <span v-for="(genre, i) in user.profile.favorite_genres" :key="i">
+                        <router-link
+                            :to="{
+                                name: 'genre',
+                                params: { id: genre.id, name: genre.name },
+                            }"
+                        >
+                            <span v-if="i != user.profile.favorite_genres.length - 1">
+                                {{ genre.name }} ·
+                            </span>
+                            <span v-if="i == user.profile.favorite_genres.length - 1">
+                                {{ genre.name }}
+                            </span>
+                        </router-link>
+                    </span>
+                </div>
+                <div v-if="user.profile.favorite_genres.length == 0">
+                    <span>없음</span>
+                </div>
+            </div>
+            <div class="profile-discription-directors">
+                <p>좋아하는 감독</p>
+                <div v-if="user.profile.favorite_directors.length > 0">
+                    <span v-for="(director, i) in user.profile.favorite_directors" :key="i">
+                        <router-link
+                            :to="{
+                                name: 'director',
+                                params: { id: director.id, name: director.name },
+                            }"
+                        >
+                            <span v-if="i != user.profile.favorite_directors.length - 1">
+                                {{ director.name }} ·
+                            </span>
+                            <span v-if="i == user.profile.favorite_directors.length - 1">
+                                {{ director.name }}
+                            </span>
+                        </router-link>
+                    </span>
+                </div>
+                <div v-if="user.profile.favorite_directors.length == 0">
+                    <span>없음</span>
+                </div>
+            </div>
+            <div class="profile-discription-actors">
+                <p>좋아하는 배우</p>
+                <div v-if="user.profile.favorite_actors.length > 0">
+                    <span v-for="(actor, i) in user.profile.favorite_actors" :key="i">
+                        <router-link
+                            :to="{
+                                name: 'actor',
+                                params: { id: actor.id, name: actor.name },
+                            }"
+                        >
+                            <span v-if="i != user.profile.favorite_actors.length - 1">
+                                {{ actor.name }} ·
+                            </span>
+                            <span v-if="i == user.profile.favorite_actors.length - 1">
+                                {{ actor.name }}
+                            </span>
+                        </router-link>
+                    </span>
+                </div>
+                <div v-if="user.profile.favorite_actors.length == 0">
+                    <span>없음</span>
+                </div>
+            </div>
+            <div class="user-review-list">
+                <div class="user-review-list-header">
+                    {{ user.profile.username }}이 리뷰한 영화
+                </div>
+                <div class="user-review-list-body-empty" v-if="userReviewedMovies.length == 0">
+                    <span>없음</span>
+                    
+                </div>
+                <div class="user-review-list-body" v-if="userReviewedMovies.length > 0">
+                    <ccarousel
+                        :per-page="3"
+                        :navigate-to="0"
+                        :mouse-drag="false"
+                        :paginationEnabled="false"
+                        :navigationEnabled="true"
+                        :navigationClickTargetSize="9"
                     >
-                        <span v-if="i != user.profile.favorite_genres.length - 1">
-                            {{ genre.name }} ·
-                        </span>
-                        <span v-if="i == user.profile.favorite_genres.length - 1">
-                            {{ genre.name }}
-                        </span>
-                    </router-link>
-                </span>
+                        <slide2
+                            v-for="userReviewedMovie in userReviewedMovies"
+                            :key="`00-${userReviewedMovie.id}`"
+                            :userReviewedMovie="userReviewedMovie"
+                        >
+                            <UserReviewedMovie
+                                :userReviewedMovie="userReviewedMovie"
+                            />
+                        </slide2>
+                    </ccarousel>
+                </div>
             </div>
-            <div v-if="!user.profile.favorite_genres">
-                <span>없음</span>
-            </div>
-
-            <p>좋아하는 감독</p>
-            <div>
-
-            </div>
-            <p>좋아하는 배우</p>
-            <div>
-
-            </div>
-            <span>{{ user.profile.username }}이 리뷰한 영화목록 보기</span>
-            <div v-if="userName == this.$route.params.name">
-                <span>나의 위시 리스트</span>
+            <div class="user-like-list">
+                <div class="user-like-list-header">
+                    {{ user.profile.username }}이 좋아하는 영화
+                </div>
+                <div class="user-like-list-body-empty" v-if="userLikedMovies.length == 0">
+                    <span>없음</span>
+                </div>
+                <div class="user-like-list-body" v-if="userLikedMovies.length != 0">
+                    <ccarousel
+                        :per-page="3"
+                        :navigate-to="0"
+                        :mouse-drag="false"
+                        :paginationEnabled="false"
+                        :navigationEnabled="true"
+                        :navigationClickTargetSize="9"
+                    >
+                        <slide2
+                            v-for="userLikedMovie in userLikedMovies"
+                            :key="`00-${userLikedMovie.id}`"
+                            :userLikedMovie="userLikedMovie"
+                        >
+                            <UserLikedMovie
+                                :userLikedMovie="userLikedMovie"
+                            />
+                        </slide2>
+                    </ccarousel>
+                </div>  
             </div>
         </div>
         </div>
@@ -55,27 +156,28 @@
 </template>
 
 <script>
-import axios from "axios";
-// import { Carousel as Ccarousel } from "vue-carousel";
-// import { Slide as Slide2 } from "vue-carousel";
-// import UserLikedMovie from "@/components/UserLikedMovie";
-// import UserReviewedMovie from "@/components/UserReviewedMovie";
-// import UserWishedMovie from "@/components/UserWishedMovie";
+import { Carousel as Ccarousel } from "vue-carousel";
+import { Slide as Slide2 } from "vue-carousel";
+import UserLikedMovie from "@/components/UserLikedMovie";
+import UserReviewedMovie from "@/components/UserReviewedMovie";
 
 const API_URL = "http://127.0.0.1:8000";
 
 export default {
     name: "ProfileView",
     components: {
-        // Ccarousel,
-        // Slide2,
-        // UserLikedMovie,
-        // UserReviewedMovie,
+        Ccarousel,
+        Slide2,
+        UserLikedMovie,
+        UserReviewedMovie,
         // UserWishedMovie,
     },
     computed: {
         user() {
             return this.$store.state.profile;
+        },
+        is_following() {
+            return this.$store.state.is_following
         },
         profile_image() {
             return `${API_URL}${this.$store.state.profile.profile.profile_image}`
@@ -92,16 +194,11 @@ export default {
         userLikedMovies() {
             return this.$store.state.liked_list;
         },
-        userWishedMovies() {
-            return this.$store.state.wished_list;
-        },
     },
     created() {
         this.getProfile();
-        this.getUser();
         this.getLikedList();
         this.getReviewedList();
-        this.getWishedlist();
     },
     methods: {
         getLikedList() {
@@ -110,40 +207,12 @@ export default {
         getReviewedList() {
             this.$store.dispatch("getReviewedList", this.$route.params.name);
         },
-        getWishedlist() {
-            this.$store.dispatch("getWishedlist", this.$route.params.name);
-        },
         getProfile() {
             this.$store.dispatch("getProfile", this.$route.params.name);
         },
-        follow() {
-            axios({
-                url: `${API_URL}/accounts/${this.userId}/follow/`,
-                headers: {
-                    Authorization: `Token ${this.$store.state.token}`,
-                },
-            })
-                .then(() => {
-                    this.$router.go();
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        },
-        getUser() {
-            axios({
-                url: `${API_URL}/accounts/userlist/`,
-            })
-                .then((res) => {
-                    for (let i = 0; i < res.data.length; i++) {
-                        if (res.data[i].username == this.$route.params.name) {
-                            this.userId = i + 1;
-                            break;
-                        }
-                    }
-                })
-                .catch((err) => console.log(err));
-        },
+        userFollow() {
+            this.$store.dispatch("userFollow", this.$route.params.name);
+        }
     },
 };
 </script>
@@ -152,6 +221,7 @@ export default {
     h1,h2,h3,h4{
     font-family:'Montserrat', sans-serif;
     }
+
     p{
     font-family: 'Libre Baskerville', serif;
     font-size: 20px;
@@ -161,7 +231,8 @@ export default {
     }
 
     #profile{
-        padding-top: 5rem;
+        display: flex;
+        flex-wrap: wrap;
         position:absolute;
         width:100%;
         height:100%;
@@ -177,10 +248,27 @@ export default {
                 transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
     }
     .follow-button {
+        position:absolute;
+        top:40px;
+        right:40px;
+        border-radius:10px;
+        padding: 5px 40px;
         background-color:#7b906f;
+        cursor:pointer;
+    }
+    .wish-button {
+        position:absolute;
+        top:40px;
+        right:40px;
+        border-radius:10px;
+        padding: 5px 40px;
+        background-color:#7b906f;
+        cursor:pointer;
     }
 
     .profile-card{
+        display: flex;
+        flex-wrap: wrap;
         position:absolute;
         left:0;
         right:0;
@@ -198,26 +286,27 @@ export default {
     }
 
     .photo{
-    background-position:center;
-    background-size:cover;
-    display:inline-block;
-    float:left;
-    width:40%;
-    height:100%;
-    border-radius: 20px 0 0 20px;
+        background-position:center;
+        background-size:cover;
+        display:inline-block;
+        float:left;
+        width:40%;
+        height:100%;
+        border-radius: 20px 0 0 20px;
     }
 
     .text-info-outer{
-    display:inline-block;
-    width:60%;
-    height:100%;
-    float:left;
+        display:inline-block;
+        width:60%;
+        height:100%;
+        float:left;
     }
 
     .text-info-inner{
         position:relative;
         height:100%;
         padding:30px;
+        padding-left: 0rem;
     }
     .text-info-inner > h1{
         margin:0 0 20px 0;
@@ -252,26 +341,30 @@ export default {
         top: 0;
         margin: auto;
     }
-    .text-info-inner > .follow-button{
-        position:absolute;
-        top:40px;
-        right:40px;
-        border-radius:10px;
-        padding: 5px 40px;
-        color:white;
-        cursor:pointer;
-    }
     .text-info-inner > .follow-button > h4{
         text-transform:uppercase;
         letter-spacing:.1em;
     }
 
     .profile-discription {
-        margin-top: 3rem;
         margin-left: 3rem;
         display: flex;
         flex-direction: column;
         text-align: left;
     }
+    .profile-discription-genres {
+        margin-bottom: 1rem;
+    }
+    .profile-discription-directors {
+        margin-bottom: 1rem;
+    }
+    .profile-discription-actors {
+        margin-bottom: 1rem;
+    }
+    .user-review-list-body-empty {
+        margin-top: 1rem;
+        margin-bottom: 7rem;
+    }
+
 </style>>
 
