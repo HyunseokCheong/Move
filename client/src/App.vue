@@ -34,4 +34,5 @@ export default {
 @import "./assets/styles/movieslider.css";
 @import "./assets/styles/moviedetail.css";
 @import "./assets/styles/profile.css";
+@import "./assets/styles/ranking.css";
 </style>
