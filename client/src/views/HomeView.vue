@@ -119,9 +119,9 @@ import HeadBar from "@/components/HeadBar";
 import { Carousel3d, Slide } from "vue-carousel-3d";
 import { Carousel as Ccarousel } from "vue-carousel";
 import { Slide as Slide2 } from "vue-carousel";
-import PopularMovie from "@/components/PopularMovie";
-import Random from "@/components/Random";
-import PopUp from "@/components/PopUp";
+import PopularMovie from "@/components/Main/PopularMovie";
+import Random from "@/components/Main/Random";
+import PopUp from "@/components/Main/PopUp";
 
 export default {
     name: "HomeView",
@@ -148,7 +148,6 @@ export default {
     },
     created() {
         this.getMovie();
-        this.getRecommend();
         this.getRandom();
         setTimeout(() => {
             this.load();
@@ -157,9 +156,6 @@ export default {
     computed: {
         movies() {
             return this.$store.state.movies;
-        },
-        recommends() {
-            return this.$store.state.recommends;
         },
         randoms() {
             return this.$store.state.randoms;
@@ -180,9 +176,6 @@ export default {
         },
         getMovie() {
             this.$store.dispatch("getMovie");
-        },
-        getRecommend() {
-            this.$store.dispatch("getRecommend");
         },
         getRandom() {
             this.$store.dispatch("getRandom");

@@ -157,7 +157,6 @@ export default {
             this.$store.dispatch("getMovieDetail", this.$route.params.id);
         },
         like() {
-            console.log(this.$route.params.id);
             this.$store.dispatch("movieLike", this.$route.params.id);
             this.$router.go();
         },

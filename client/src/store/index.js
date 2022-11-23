@@ -182,6 +182,9 @@ export default new Vuex.Store({
         getRecommend(context) {
             axios({
                 url: `${API_URL}/movies/recommend/`,
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
             })
                 .then((res) => {
                     context.commit("SET_RECOMMENDS", res.data);

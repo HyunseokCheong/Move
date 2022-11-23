@@ -27,7 +27,6 @@ def profile(request, username):
         'likemovies': lm_serializer.data,
         'is_following': is_following,
     }
-    print(is_following)
     return Response(context, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
@@ -76,8 +75,6 @@ def like_genre(request, genre_pk):
 @api_view(['POST'])
 def like_movie(request, movie_pk):
     me = request.user
-    print(me)
-    print(movie_pk)
     movie = Movie.objects.get(pk=movie_pk)
     if RateMovie.objects.filter(rateuser=me, ratedmovie=movie).exists():
         ratemovie = RateMovie.objects.get(rateuser=me, ratedmovie=movie)
@@ -144,12 +141,6 @@ def wish_movie(request, movie_pk):
 @api_view(['GET'])
 def ranking(request):
     users = User.objects.order_by('-reviews_count')
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
-
-@api_view(['GET'])
-def userlist(request):
-    users = User.objects.all()
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 

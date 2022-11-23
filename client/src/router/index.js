@@ -5,6 +5,7 @@ import HomeView from "@/views/HomeView";
 import DetailMovieView from "@/views/DetailMovieView";
 import ProfileView from "@/views/ProfileView";
 import RankingView from "@/views/RankingView";
+import RecommendView from "@/views/Tinder/RecommendView";
 import GenrePortView from "@/views/Tinder/GenrePortView";
 import DirectorPortView from "@/views/Tinder/DirectorPortView";
 import ActorPortView from "@/views/Tinder/ActorPortView";
@@ -16,7 +17,7 @@ Vue.use(VueRouter);
 
 const routes = [
     {
-        path: "/",
+        path: "/",  
         name: "index",
         component: IndexView,
     },
@@ -60,6 +61,18 @@ const routes = [
         path: "/ranking",
         name: "ranking",
         component: RankingView,
+        beforeEnter(to, from, next){
+            if(store.getters['isLogin'] === true){
+                next()
+            }else{
+                next('/login')
+            }
+        },
+    },
+    {
+        path: "/recommend",
+        name: "recommend",
+        component: RecommendView,
         beforeEnter(to, from, next){
             if(store.getters['isLogin'] === true){
                 next()

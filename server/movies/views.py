@@ -89,8 +89,7 @@ def actorport(request, actor_pk):
 
 @api_view(['GET'])
 def recommend(request):
-    user = User.objects.get(pk=1)
-    # user = request.user
+    user = request.user
     excepts = []
     follows = []
     actors = []
@@ -154,7 +153,6 @@ def random(request):
     genre_serializer = MovieSerializer(genre_random, many=True)
     director_serializer = MovieSerializer(director_random, many=True)
     actor_serializer = MovieSerializer(actor_random, many=True)
-    print(actor_random)
     context = {
         'genre': genre_serializer.data,
         'genre_name': random_genre.name,

@@ -185,7 +185,7 @@ export default {
 .tinder-card {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 150%;
   overflow: hidden;
   background: #fefefe;
   border-radius: 10px;

@@ -158,8 +158,8 @@
 <script>
 import { Carousel as Ccarousel } from "vue-carousel";
 import { Slide as Slide2 } from "vue-carousel";
-import UserLikedMovie from "@/components/UserLikedMovie";
-import UserReviewedMovie from "@/components/UserReviewedMovie";
+import UserLikedMovie from "@/components/Profile/UserLikedMovie";
+import UserReviewedMovie from "@/components/Profile/UserReviewedMovie";
 
 const API_URL = "http://127.0.0.1:8000";
 
@@ -170,7 +170,6 @@ export default {
         Slide2,
         UserLikedMovie,
         UserReviewedMovie,
-        // UserWishedMovie,
     },
     computed: {
         user() {

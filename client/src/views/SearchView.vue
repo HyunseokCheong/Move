@@ -39,7 +39,6 @@ export default {
     },
     methods: {
         getSearchData() {
-            console.log(this.$route.params.keyword);
             this.$store.dispatch("getSearchData", this.$route.params.keyword);
         },
     },

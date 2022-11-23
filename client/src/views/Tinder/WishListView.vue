@@ -87,7 +87,6 @@ export default {
                 count = this.wishList.length
             }
             const list = []
-            console.log(this.wishList)
             for (let i = 0; i < count; i++) {
                 list.push({ poster_path: this.wishList[this.offset].poster_path, movie: this.wishList[this.offset]})
                 this.offset++
@@ -108,7 +107,6 @@ export default {
         },
         async decide(choice) {
             if (choice === 'rewind') {
-                console.log(this.history.length)
                 if (this.history.length) {
                     this.$refs.tinder.rewind(
                         this.history.splice(-Math.ceil(Math.random() * 3))
@@ -126,7 +124,6 @@ export default {
                 this.$store.dispatch('movieWish', this.$refs.tinder.list[0].movie.id)
                 this.$refs.tinder.decide(choice)
             } else {
-                console.log(this.$refs.tinder.list[0].movie.id)
                 this.$router.push(`/movies/${this.$refs.tinder.list[0].movie.id}`)
             }
         }

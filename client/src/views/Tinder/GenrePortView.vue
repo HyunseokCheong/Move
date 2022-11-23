@@ -93,7 +93,6 @@ export default {
             for (let i = 0; i < count; i++) {
                 list.push({ poster_path: this.genrePorts.movie[this.offset].poster_path, movie: this.genrePorts.movie[this.offset]})
                 this.offset++
-                console.log(list[0].movie.id)
             }
             if (append) {
                 this.queue = this.queue.concat(list)
@@ -111,7 +110,6 @@ export default {
         },
         async decide(choice) {
             if (choice === 'rewind') {
-                console.log(this.history.length)
                 if (this.history.length) {
                     this.$refs.tinder.rewind(
                         this.history.splice(-Math.ceil(Math.random() * 3))
@@ -129,7 +127,6 @@ export default {
                 this.$store.dispatch('movieWish', this.$refs.tinder.list[0].movie.id)
                 this.$refs.tinder.decide(choice)
             } else {
-                console.log(this.$refs.tinder.list[0].movie.id)
                 this.$router.push(`/movies/${this.$refs.tinder.list[0].movie.id}`)
             }
         }
