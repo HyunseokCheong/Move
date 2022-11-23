@@ -10,6 +10,7 @@
     <slot name="like" />
     <slot name="super" />
     <slot name="down" />
+
     <transition name="tinder-rewind">
       <slot name="rewind" v-if="scopedRewind !== false" />
     </transition>
@@ -181,20 +182,5 @@ export default {
 }
 </script>
 
-<style scoped>
-.tinder-card {
-  position: absolute;
-  width: 100%;
-  height: 150%;
-  overflow: hidden;
-  background: #fefefe;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-}
-.tinder-rewind-leave-active {
-  transition: all 0.5s ease;
-}
-.tinder-rewind-leave-to {
-  opacity: 0;
-}
+<style>
 </style>

@@ -1,15 +1,14 @@
 <template>
     <div class="tinder-div">
-        <header>
-            <h2>{{directorName}}</h2>
+        <header class="tinder-div-header">
+            {{directorName}}
             <br>
-            <h4>좋아하는 영화라면 오른쪽, 싫어하는 영화라면 왼쪽으로 슬라이딩 해주세요.</h4>
-            <small>호감도를 바탕으로 영화 추천 서비스를 제공합니다.</small>
-            <br>
-            <h5>호감을 표시한 영화 : </h5>
         </header>
         <br>
         <div v-if="queue.length>0">
+            <div class="tinder-card-header">
+                {{queue[0].movie.title}}
+            </div>
             <TinderMain
             ref="tinder"
             key-name="poster_path"
@@ -33,17 +32,17 @@
             <div class="btns">
                 <img src="../../assets/images/rewind.png" @click="decide('rewind')" />
                 <img src="../../assets/images/nope.png" @click="decide('nope')" />
-                <img src="../../assets/images/wish.png" @click="decide('go')"/>
+                <img src="../../assets/images/upArrow_black.png" @click="decide('go')"/>
                 <img src="../../assets/images/wish.png" @click="decide('wish')" />
                 <img src="../../assets/images/like.png" @click="decide('like')" />
             </div>
         </div>
-        <div v-if="queue.length == 0">
+        <div class="end-tinder" v-if="queue.length == 0">
             <img @click="refresh" src="../../assets/images/rewind.png" />
             <router-link
                 :to="{ name: 'home'}"
             >
-                <h1>집이미지</h1>
+                <img src="../../assets/images/home.png" />
             </router-link>
         </div>
     </div>
