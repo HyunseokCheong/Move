@@ -1,8 +1,5 @@
 <template>
     <div class="movie-detail-card">
-        <div class="movie-detail-upbody">
-            <h1>logo</h1>
-        </div>
         <div class="movie-detail-downbody">
             <div class="movie-detail-poster">
                 <img id="poster" :src="poster_path" alt="poster" />
@@ -11,7 +8,9 @@
                 <div class="movie-detail-descriptions-top">
                     <div class="movie-detail-descriptions-top-left">
                         <div class="movie-detail-title">
-                            {{ movie.movie.title }}
+                            <span style="text-align: left">
+                                {{ movie.movie.title }}
+                            </span>
                             <div class="titie-star-rate">
                                 <span class="fa fa-star movie-star"></span>
                                 <span style="margin-left: 10px">
@@ -97,25 +96,73 @@
             </div>
         </div>
 
-        <div v-if="state == 0">
-            <button @click="like()">좋아요</button>
-            <button @click="dislike()">싫어요</button>
-            <button @click="addWishList()">찜하기</button>
+        <div v-if="state == 0" class="buttons-box">
+            <img
+                src="./../../assets/images/like_black.png"
+                alt=""
+                @click="like()"
+            />
+            <img
+                src="./../../assets/images/dislike_black.png"
+                alt=""
+                @click="dislike()"
+            />
+            <img
+                src="./../../assets/images/bookmark_black.png"
+                alt=""
+                @click="addWishList()"
+            />
         </div>
-        <div v-if="state == 1">
-            <button @click="like()">좋아요 취소</button>
-            <button @click="dislike()">싫어요</button>
-            <button @click="addWishList()">찜하기</button>
+        <div v-if="state == 1" class="buttons-box">
+            <img
+                src="./../../assets/images/likeActive_color.png"
+                alt=""
+                @click="like()"
+            />
+            <img
+                src="./../../assets/images/dislike_black.png"
+                alt=""
+                @click="dislike()"
+            />
+            <img
+                src="./../../assets/images/bookmark_black.png"
+                alt=""
+                @click="addWishList()"
+            />
         </div>
-        <div v-if="state == 2">
-            <button @click="like()">좋아요</button>
-            <button @click="dislike()">싫어요 취소</button>
-            <button @click="addWishList()">찜하기</button>
+        <div v-if="state == 2" class="buttons-box">
+            <img
+                src="./../../assets/images/like_black.png"
+                alt=""
+                @click="like()"
+            />
+            <img
+                src="./../../assets/images/dislikeActive_color.png"
+                alt=""
+                @click="dislike()"
+            />
+            <img
+                src="./../../assets/images/bookmark_black.png"
+                alt=""
+                @click="addWishList()"
+            />
         </div>
-        <div v-if="state == 3">
-            <button @click="like()">좋아요</button>
-            <button @click="dislike()">싫어요</button>
-            <button @click="addWishList()">찜하기 취소</button>
+        <div v-if="state == 3" class="buttons-box">
+            <img
+                src="./../../assets/images/like_black.png"
+                alt=""
+                @click="like()"
+            />
+            <img
+                src="./../../assets/images/dislike_black.png"
+                alt=""
+                @click="dislike()"
+            />
+            <img
+                src="./../../assets/images/removeBookmark_black.png"
+                alt=""
+                @click="addWishList()"
+            />
         </div>
     </div>
 </template>
@@ -157,6 +204,7 @@ export default {
             this.$store.dispatch("getMovieDetail", this.$route.params.id);
         },
         like() {
+            console.log(this.$route.params.id);
             this.$store.dispatch("movieLike", this.$route.params.id);
             this.$router.go();
         },
