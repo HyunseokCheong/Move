@@ -1,28 +1,34 @@
 <template>
-  <div class="movie-detail">
-        <DetailMovie/>
-        <DetailReviewList/>
-        <DetailReviewForm/>
-        <!-- <SideBar/> -->
-  </div>
+    <div>
+        <!--  -->
+        <!--  -->
+        <div class="movie-detail">
+            <DetailMovie />
+        </div>
+        <div class="movie-review-detail">
+            <hr />
+            <h1>리뷰</h1>
+            <hr />
+            <DetailReviewForm />
+            <hr />
+            <DetailReviewList />
+        </div>
+    </div>
 </template>
 
 <script>
-// import SideBar from '@/components/SideBar'
-import DetailMovie from '@/components/Detail/DetailMovie'
-import DetailReviewList from '@/components/Detail/DetailReviewList'
-import DetailReviewForm from '@/components/Detail/DetailReviewForm'
+import DetailMovie from "@/components/Detail/DetailMovie";
+import DetailReviewList from "@/components/Detail/DetailReviewList";
+import DetailReviewForm from "@/components/Detail/DetailReviewForm";
 
 export default {
-    name: 'DatailMovieView',
+    name: "DatailMovieView",
     components: {
-        // SideBar,
         DetailMovie,
         DetailReviewList,
-        DetailReviewForm
-    }
-}
+        DetailReviewForm,
+    },
+};
 </script>
 
-<style>
-</style>
+<style></style>

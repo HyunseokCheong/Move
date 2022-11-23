@@ -1,7 +1,8 @@
 .movie-detail {
     display: flex;
+    background-color: grey;
     flex-direction: column;
-    background-color: #000000;
+    /* background-color: white; */
     margin-left: 10rem;
     margin-right: 10rem;
 }
@@ -20,26 +21,25 @@
     padding-top: 1rem;
 }
 
-.movie-detail-downbody{
+.movie-detail-downbody {
     display: flex;
     flex-direction: row;
-
 }
 
-.movie-detail-poster{
+.movie-detail-poster {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
 }
 
-.movie-detail-descriptions{
+.movie-detail-descriptions {
     display: flex;
     flex-direction: column;
     justify-items: left;
     padding-top: 2rem;
 }
 
-.movie-detail-descriptions-top{
+.movie-detail-descriptions-top {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -52,7 +52,7 @@
     color: var(--header-text-color);
 }
 
-.movie-detail-descriptions-top-left{
+.movie-detail-descriptions-top-left {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -62,38 +62,37 @@
 }
 
 .movie-genres {
-    font-size: 16px
+    font-size: 16px;
 }
 
 .movie-release-date {
-    margin-bottom:1rem;
+    margin-bottom: 1rem;
 }
 
 .movie-directors {
-    font-size: 22px
+    font-size: 22px;
 }
 
 .movie-actors {
-    font-size: 16px
+    font-size: 16px;
 }
 
-.movie-detail-descriptions-top-right{
+.movie-detail-descriptions-top-right {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
 }
 
-#movie-star {
+/* #movie-star {
     margin-top: 1rem;
     width: 10%;
-}
+} */
 
 #movie-score {
     font-size: 25px;
 }
 
-
-.movie-detail-descriptions-overviews{
+.movie-detail-descriptions-overviews {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -101,12 +100,12 @@
     padding-right: 4rem;
 }
 
-.movie-detail-overview-header{
+.movie-detail-overview-header {
     font-size: 30px;
     margin-bottom: 1rem;
 }
 
-.movie-detail-overview-body{
+.movie-detail-overview-body {
     font-size: 16px;
     text-align: left;
 }
@@ -114,5 +113,75 @@
 #poster {
     height: 650px;
     width: 450px;
-    
+    border: solid 1px solid;
+}
+/* star test */
+.movie-star {
+    color: orange;
+    font-size: 50px;
+}
+.checked {
+    color: orange;
+    font-size: 20px;
+}
+.unchecked {
+    font-size: 20px;
+}
+/* review */
+.movie-review-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.movie-reviews-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.movie-reviews {
+    width: 70%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.movie-review {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    padding: 20px;
+    margin: 10px;
+}
+.movie-review-left {
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.movie-review-right {
+    width: 90%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.movie-review-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+.movie-review-top-username {
+}
+.movie-review-top-star {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.movie-review-bottom {
+    width: 90%;
+
+    word-wrap: break-word;
+    text-align: left;
 }

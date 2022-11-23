@@ -5,7 +5,7 @@
         </div>
         <div class="movie-detail-downbody">
             <div class="movie-detail-poster">
-                <img id="poster"  :src="poster_path" alt="poster"/>
+                <img id="poster" :src="poster_path" alt="poster" />
             </div>
             <div class="movie-detail-descriptions">
                 <div class="movie-detail-descriptions-top">
@@ -18,7 +18,10 @@
                                 <router-link
                                     :to="{
                                         name: 'genre',
-                                        params: { id: genre.id, name: genre.name },
+                                        params: {
+                                            id: genre.id,
+                                            name: genre.name,
+                                        },
                                     }"
                                 >
                                     <span v-if="i != genres.length - 1">
@@ -34,11 +37,14 @@
                             개봉 : {{ movie.movie.release_date }}
                         </div>
                         <div class="movie-directors">
-                            <span v-for="(director,i) in directors" :key="i">
+                            <span v-for="(director, i) in directors" :key="i">
                                 <router-link
                                     :to="{
                                         name: 'director',
-                                        params: { id: director.id, name: director.name },
+                                        params: {
+                                            id: director.id,
+                                            name: director.name,
+                                        },
                                     }"
                                 >
                                     <span v-if="i != directors.length - 1">
@@ -55,14 +61,17 @@
                                 <router-link
                                     :to="{
                                         name: 'actor',
-                                        params: { id: actor.id, name: actor.name },
+                                        params: {
+                                            id: actor.id,
+                                            name: actor.name,
+                                        },
                                     }"
                                 >
-                                   <span v-if="i != actors.length - 1">
+                                    <span v-if="i != actors.length - 1">
                                         {{ actor.name }} ·
                                     </span>
                                     <span v-if="i == actors.length - 1">
-                                        {{ actor.name }}  
+                                        {{ actor.name }}
                                     </span>
                                 </router-link>
                             </span>
@@ -70,7 +79,7 @@
                     </div>
                     <div class="movie-detial-decriptions-top-right">
                         <div>
-                            <img id="movie-star" src="@/assets/images/star.png">
+                            <span class="fa fa-star movie-star"></span>
                             <div id="movie-score">
                                 {{ movie.movie.vote_average }}
                             </div>
@@ -78,9 +87,7 @@
                     </div>
                 </div>
                 <div class="movie-detail-descriptions-overviews">
-                    <div class="movie-detail-overview-header">
-                        줄거리
-                    </div>
+                    <div class="movie-detail-overview-header">줄거리</div>
                     <div class="movie-detail-overview-body">
                         {{ movie.movie.overview }}
                     </div>
@@ -138,7 +145,6 @@
 </template>
 
 <script>
-
 export default {
     name: "DetailMovie",
     computed: {
@@ -175,10 +181,10 @@ export default {
     },
     methods: {
         getMovieDetail() {
-            this.$store.dispatch("getMovieDetail", this.$route.params.id)
+            this.$store.dispatch("getMovieDetail", this.$route.params.id);
         },
         like() {
-            console.log(this.$route.params.id)
+            console.log(this.$route.params.id);
             this.$store.dispatch("movieLike", this.$route.params.id);
             this.$router.go();
         },
@@ -194,6 +200,4 @@ export default {
 };
 </script>
 
-<style>
-
-</style>
+<style></style>
