@@ -4,7 +4,7 @@
             <div class="col-sector">
                 <SideBar />
                 <div class="row-sector">
-                    <HeadBar msg="인기 영화1" />
+                    <HeadBar msg="추천 영화" />
                     <div id="popular">
                         <carousel-3d
                             :height="510"

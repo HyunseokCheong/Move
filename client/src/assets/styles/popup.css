@@ -13,21 +13,25 @@
 }
 .popupBox {
     width: 375px;
+    /* width: 400px; */
     height: 320.5px;
-}
-.popupImage {
-    width: 375px;
-    height: 220.5px;
 }
 .popupContent {
     width: 375px;
     height: 100px;
 
-    background-color: lightgrey;
+    background-color: var(--comment-bg-color);
+}
+.popup-content-title {
+    color: var(--paragraph-text-color);
+    font-size: var(--paragraph-font-size);
+}
+.popup-content-genre {
+    color: var(--comment-text-color);
+    font-size: var(--comment-font-size);
 }
 .video-frame {
     max-width: 650px;
-    border: 4px solid red;
 }
 .video {
     height: 0;

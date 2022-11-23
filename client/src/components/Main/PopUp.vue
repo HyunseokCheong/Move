@@ -10,33 +10,94 @@
                 ></iframe>
             </div>
         </div>
+
         <div class="popupContent">
-            <router-link :to="{ name: 'detail', params: { id: movieObj.id } }">
-                <h2>{{ movieObj.title }}</h2>
-            </router-link>
-            <span v-for="(genre, i) in movieObj.genres" :key="i">
-                {{ genre.name }}
-            </span>
-            
-            <div v-if="state == 0">
-                <button @click="like()">좋아요</button>
-                <button @click="dislike()">싫어요</button>
-                <button @click="addWishList()">찜하기</button>
+            <div class="popup-content-bottom">
+                <router-link
+                    :to="{ name: 'detail', params: { id: movieObj.id } }"
+                >
+                    <span class="popup-content-title">{{
+                        movieObj.title
+                    }}</span>
+                </router-link>
+                <!-- 공간 부족 : 장르 빼야하나 -->
+                <!-- <br />
+                <span
+                    class="popup-content-genre"
+                    v-for="(genre, i) in movieObj.genres"
+                    :key="i"
+                >
+                    {{ genre.name }}
+                </span> -->
             </div>
-            <div v-if="state == 1">
-                <button @click="like()">좋아요 취소</button>
-                <button @click="dislike()">싫어요</button>
-                <button @click="addWishList()">찜하기</button>
+
+            <div v-if="state == 0" class="buttons-box">
+                <img
+                    src="./../../assets/images/like_black.png"
+                    alt=""
+                    @click="like()"
+                />
+                <img
+                    src="./../../assets/images/dislike_black.png"
+                    alt=""
+                    @click="dislike()"
+                />
+                <img
+                    src="./../../assets/images/bookmark_black.png"
+                    alt=""
+                    @click="addWishList()"
+                />
             </div>
-            <div v-if="state == 2">
-                <button @click="like()">좋아요</button>
-                <button @click="dislike()">싫어요 취소</button>
-                <button @click="addWishList()">찜하기</button>
+            <div v-if="state == 1" class="buttons-box">
+                <img
+                    src="./../../assets/images/likeActive_color.png"
+                    alt=""
+                    @click="like()"
+                />
+                <img
+                    src="./../../assets/images/dislike_black.png"
+                    alt=""
+                    @click="dislike()"
+                />
+                <img
+                    src="./../../assets/images/bookmark_black.png"
+                    alt=""
+                    @click="addWishList()"
+                />
             </div>
-            <div v-if="state == 3">
-                <button @click="like()">좋아요</button>
-                <button @click="dislike()">싫어요</button>
-                <button @click="addWishList()">찜하기 취소</button>
+            <div v-if="state == 2" class="buttons-box">
+                <img
+                    src="./../../assets/images/like_black.png"
+                    alt=""
+                    @click="like()"
+                />
+                <img
+                    src="./../../assets/images/dislikeActive_color.png"
+                    alt=""
+                    @click="dislike()"
+                />
+                <img
+                    src="./../../assets/images/bookmark_black.png"
+                    alt=""
+                    @click="addWishList()"
+                />
+            </div>
+            <div v-if="state == 3" class="buttons-box">
+                <img
+                    src="./../../assets/images/like_black.png"
+                    alt=""
+                    @click="like()"
+                />
+                <img
+                    src="./../../assets/images/dislike_black.png"
+                    alt=""
+                    @click="dislike()"
+                />
+                <img
+                    src="./../../assets/images/removeBookmark_black.png"
+                    alt=""
+                    @click="addWishList()"
+                />
             </div>
             <br />
         </div>
@@ -54,16 +115,15 @@ export default {
             return `https://www.youtube.com/embed/${this.movieObj.youtube_key}?autoplay=1&mute=1`;
         },
         state: {
-            set: function () {
-            },
+            set: function () {},
             get: function () {
-                return this.$store.state.state
-            }
+                return this.$store.state.state;
+            },
         },
     },
     methods: {
         getMovieDetail() {
-            this.$store.dispatch("getMovieDetail", this.movieObj.id)
+            this.$store.dispatch("getMovieDetail", this.movieObj.id);
         },
         closePopup() {
             this.state = null;

@@ -1,0 +1,11 @@
+.headbar {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.headbar-title {
+    font-size: var(--subheader-font-size);
+    margin-left: 10px;
+}
