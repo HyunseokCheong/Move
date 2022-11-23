@@ -5,7 +5,7 @@
         </div>
         <div class="movie-detail-downbody">
             <div class="movie-detail-poster">
-                <img width="100%" :src="poster_path" alt="poster"/>
+                <img id="poster"  :src="poster_path" alt="poster"/>
             </div>
             <div class="movie-detail-descriptions">
                 <div class="movie-detail-descriptions-top">
@@ -14,14 +14,19 @@
                             {{ movie.movie.title }}
                         </div>
                         <div class="movie-genres">
-                            <span v-for="genre in genres" :key="genre.id">
+                            <span v-for="(genre, i) in genres" :key="i">
                                 <router-link
                                     :to="{
                                         name: 'genre',
                                         params: { id: genre.id, name: genre.name },
                                     }"
                                 >
-                                    {{ genre.name }}·
+                                    <span v-if="i != genres.length - 1">
+                                        {{ genre.name }} ·
+                                    </span>
+                                    <span v-if="i == genres.length - 1">
+                                        {{ genre.name }}
+                                    </span>
                                 </router-link>
                             </span>
                         </div>
@@ -29,26 +34,36 @@
                             개봉 : {{ movie.movie.release_date }}
                         </div>
                         <div class="movie-directors">
-                            <span v-for="director in directors" :key="director.id">
+                            <span v-for="(director,i) in directors" :key="i">
                                 <router-link
                                     :to="{
                                         name: 'director',
                                         params: { id: director.id, name: director.name },
                                     }"
                                 >
-                                    {{ director.name }}·
+                                    <span v-if="i != directors.length - 1">
+                                        {{ director.name }} ·
+                                    </span>
+                                    <span v-if="i == directors.length - 1">
+                                        {{ director.name }}
+                                    </span>
                                 </router-link>
                             </span>
                         </div>
                         <div class="movie-actors">
-                            <span v-for="actor in actors" :key="actor.id">
+                            <span v-for="(actor, i) in actors" :key="i">
                                 <router-link
                                     :to="{
                                         name: 'actor',
                                         params: { id: actor.id, name: actor.name },
                                     }"
                                 >
-                                    {{ actor.name }}·
+                                   <span v-if="i != actors.length - 1">
+                                        {{ actor.name }} ·
+                                    </span>
+                                    <span v-if="i == actors.length - 1">
+                                        {{ actor.name }}  
+                                    </span>
                                 </router-link>
                             </span>
                         </div>
@@ -62,11 +77,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="movie-detail-descriptions-casts">
-                    <h1>a</h1>
-                </div>
                 <div class="movie-detail-descriptions-overviews">
-                    <h1>a</h1>
+                    <div class="movie-detail-overview-header">
+                        줄거리
+                    </div>
+                    <div class="movie-detail-overview-body">
+                        {{ movie.movie.overview }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,37 +99,6 @@
                             
                         </div>
                         
-                        <span v-for="director in directors" :key="director.id">
-                            <router-link
-                                :to="{
-                                    name: 'director',
-                                    params: { id: director.id, name: director.name },
-                                }"
-                            >
-                                {{ director.name }},
-                            </router-link>
-                        </span>
-                        <br>
-                        <span v-for="genre in genres" :key="genre.id">
-                            <router-link
-                                :to="{
-                                    name: 'genre',
-                                    params: { id: genre.id, name: genre.name },
-                                }"
-                            >
-                                {{ genre.name }}, 
-                            </router-link>
-                        </span>
-                        <br>
-                        <span v-for="actor in actors" :key="actor.id">
-                            <router-link
-                                :to="{
-                                    name: 'actor',
-                                    params: { id: actor.id, name: actor.name },
-                                }"
-                            >
-                                {{ actor.name }},
-                            </router-link>
                         </span>
                         <div class="movie-score">
                             

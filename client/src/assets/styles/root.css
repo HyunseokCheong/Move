@@ -4,7 +4,7 @@
     /* --bg-color: #240046; */
     --callout-bg-color: hsl(0, 0%, 90%);
     /* text */
-    --header-text-color: hsl(0, 0%, 20%);
+    --header-text-color: hsl(0, 75%, 46%);
     --subheader-text-color: hsl(0, 0%, 40%);
     --paragraph-text-color: hsl(0, 0%, 20%);
 }

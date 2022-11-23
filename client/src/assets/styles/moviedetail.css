@@ -9,7 +9,6 @@
 .movie-detail-card {
     display: flex;
     flex-direction: column;
-    background-color: red;
     margin-left: 5rem;
     margin-right: 5rem;
     margin-bottom: 5em;
@@ -18,47 +17,52 @@
 .movie-detail-upbody {
     display: flex;
     justify-content: left;
-    background-color:blue;
     padding-top: 1rem;
 }
 
 .movie-detail-downbody{
     display: flex;
+    flex-direction: row;
 
 }
 
 .movie-detail-poster{
-    background-color:gray;
-    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .movie-detail-descriptions{
     display: flex;
     flex-direction: column;
-    background-color:pink;
     justify-items: left;
+    padding-top: 2rem;
 }
 
 .movie-detail-descriptions-top{
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     height: 18%;
-    margin-bottom: 6rem;
+    margin-bottom: 15rem;
 }
 .movie-detail-title {
     margin-top: 1rem;
     font-size: 40px;
+    color: var(--header-text-color);
 }
 
 .movie-detail-descriptions-top-left{
-    background-color:rgb(41, 22, 213);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
     width: 420%;
-    height: 200%
-
+    height: 200%;
+    padding-left: 4rem;
 }
 
 .movie-genres {
-    font-size: 15px
+    font-size: 16px
 }
 
 .movie-release-date {
@@ -70,7 +74,7 @@
 }
 
 .movie-actors {
-    font-size: 15px
+    font-size: 16px
 }
 
 .movie-detail-descriptions-top-right{
@@ -88,10 +92,27 @@
     font-size: 25px;
 }
 
-.movie-detail-descriptions-casts{
-    background-color:rgb(69, 132, 20);
-}
 
 .movie-detail-descriptions-overviews{
-    background-color:rgb(219, 225, 40);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+.movie-detail-overview-header{
+    font-size: 30px;
+    margin-bottom: 1rem;
+}
+
+.movie-detail-overview-body{
+    font-size: 16px;
+    text-align: left;
+}
+
+#poster {
+    height: 650px;
+    width: 450px;
+    
 }
