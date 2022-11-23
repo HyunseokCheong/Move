@@ -14,12 +14,6 @@
     margin-bottom: 5em;
 }
 
-.movie-detail-upbody {
-    display: flex;
-    justify-content: left;
-    padding-top: 1rem;
-}
-
 .movie-detail-downbody {
     display: flex;
     flex-direction: row;
@@ -29,6 +23,7 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    padding-top: 6rem;
 }
 
 .movie-detail-descriptions {
