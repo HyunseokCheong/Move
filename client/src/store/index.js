@@ -22,8 +22,8 @@ export default new Vuex.Store({
         actorPorts: [],
         searchData: [],
         randoms: [],
-        reviewed_list: [],
         liked_list: [],
+        reviewed_list: [],
         wish_list: [],
         detail_page_user: null,
         is_following: null,
@@ -69,15 +69,16 @@ export default new Vuex.Store({
         SET_RANDOMS(state, randoms) {
             state.randoms = randoms;
         },
-        GET_REVIEWEDLIST(state, reviewed_list) {
-            state.reviewed_list = reviewed_list;
-        },
-        GET_LIKEDLIST(state, liked_list) {
+        SET_LIKEDLIST(state, liked_list) {
             state.liked_list = liked_list;
+        },
+        SET_REVIEWEDLIST(state, reviewed_list) {
+            state.reviewed_list = reviewed_list;
         },
         SET_WISHLIST(state, movies) {
             state.wish_list = movies;
         },
+
     },
     actions: {
         signUp(context, payload) {
@@ -315,65 +316,26 @@ export default new Vuex.Store({
                 headers: {
                     Authorization: `Token ${this.state.token}`,
                 },
-            }).then((res) => {
+            })
+                .then((res) => {
                 context.commit("SET_WISHLIST", res.data);
             });
         },
-        getLikedList(context, payload) {
+        getLikedList(context, name) {
             axios({
-                url: `${API_URL}/accounts/userlist/`,
+                url: `${API_URL}/movies/liked_list/${name}/`,
             })
-                .then((res1) => {
-                    for (let i = 0; i < res1.data.length; i++) {
-                        if (res1.data[i].username == payload) {
-                            let temp_userId = i + 1;
-                            axios({
-                                url: `${API_URL}/movies/liked_list/${temp_userId}/`,
-                                headers: {
-                                    Authorization: `Token ${this.state.token}`,
-                                },
-                            })
-                                .then((res) => {
-                                    context.commit("GET_LIKEDLIST", res.data);
-                                })
-                                .catch((err) => {
-                                    console.log(err);
-                                });
-                            break;
-                        }
-                    }
-                })
-                .catch((err) => console.log(err));
+                .then((res) => {
+                context.commit("SET_LIKEDLIST", res.data);
+            });
         },
-        getReviewedList(context, payload) {
+        getReviewedList(context, name) {
             axios({
-                url: `${API_URL}/accounts/userlist/`,
+                url: `${API_URL}/movies/reviewed_list/${name}/`,
             })
-                .then((res1) => {
-                    for (let i = 0; i < res1.data.length; i++) {
-                        if (res1.data[i].username == payload) {
-                            let temp_userId = i + 1;
-                            axios({
-                                url: `${API_URL}/movies/reviewed_list/${temp_userId}`,
-                                headers: {
-                                    Authorization: `Token ${this.state.token}`,
-                                },
-                            })
-                                .then((res) => {
-                                    context.commit(
-                                        "GET_REVIEWEDLIST",
-                                        res.data
-                                    );
-                                })
-                                .catch((err) => {
-                                    console.log(err);
-                                });
-
-                            break;
-                        }
-                    }
-                })
-                .catch((err) => console.log(err));
+                .then((res) => {
+                context.commit("SET_REVIEWEDLIST", res.data);
+            });
         },
     },
     modules: {},
