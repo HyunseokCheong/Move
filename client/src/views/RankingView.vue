@@ -4,7 +4,7 @@
             <SideBar />
             <div class="row-sector">
                 <UserRank
-                    v-for="(user, index) in users"
+                    v-for="(user, index) in rankings"
                     :key="index"
                     :index="index"
                     :user="user"
@@ -26,16 +26,16 @@ export default {
         UserRank,
     },
     created() {
-        this.getUser();
+        this.getRanking();
     },
     computed: {
-        users() {
-            return this.$store.state.users;
+        rankings() {
+            return this.$store.state.rankings;
         },
     },
     methods: {
-        getUser() {
-            this.$store.dispatch("getUser");
+        getRanking() {
+            this.$store.dispatch("getRanking");
         },
     },
 };
