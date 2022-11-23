@@ -187,6 +187,7 @@ export default new Vuex.Store({
                 },
             })
                 .then((res) => {
+                    console.log(1)
                     context.commit("SET_RECOMMENDS", res.data);
                 })
                 .catch((err) => {

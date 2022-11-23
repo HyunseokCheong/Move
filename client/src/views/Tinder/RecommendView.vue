@@ -79,16 +79,17 @@ export default {
             this.$router.go();
         },
         getRecommend() {
+            console.log(1)
             this.$store.dispatch("getRecommend");
         },
         mock(count = 5, append = true) {
-            console.log(this.recommends)
-            if (this.recommends.movie.length < 5){
-                count = this.recommends.movie.length
+            console.log(this.recommends.length)
+            if (this.recommends.length < 5){
+                count = this.recommends.length
             }
             const list = []
             for (let i = 0; i < count; i++) {
-                list.push({ poster_path: this.recommends.movie[this.offset].poster_path, movie: this.recommends.movie[this.offset]})
+                list.push({ poster_path: this.recommends[this.offset].poster_path, movie: this.recommends[this.offset]})
                 this.offset++
             }
             if (append) {
@@ -99,7 +100,7 @@ export default {
         },
         onSubmit({ item }) {
             if (this.queue.length < 3) {
-                if (!(this.recommends.movie.length < 3)) {
+                if (!(this.recommends.length < 3)) {
                     this.mock()
                 }   
             }

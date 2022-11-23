@@ -4,9 +4,8 @@
             <div class="left">
                 <div class="routers">
                     <router-link to="/home" class="router">MAIN</router-link>
-                    <router-link to="/ranking" class="router"
-                        >RANKING</router-link
-                    >
+                    <router-link to="/ranking" class="router">RANKING</router-link>
+                    <router-link to="/recommend" class="router">추천 영화</router-link>
                 </div>
             </div>
             <div class="right">
