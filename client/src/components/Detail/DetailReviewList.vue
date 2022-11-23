@@ -41,7 +41,12 @@
                         </div>
                     </div>
                     <div v-if="review.reviewer.username == loggedInUser">
-                        <button @click="DeleteReview(review.id)">X</button>
+                        <img
+                            src="../../assets/images/delete_black.png"
+                            @click="DeleteReview(review.id)"
+                            alt=""
+                            height="40"
+                        />
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <template>
     <div class="movie-review-form-box">
-        <form @submit.prevent="createReview" class="movie-review-form">
+        <form @submit.prevent class="movie-review-form">
             <div id="myform" class="movie-review-form-rate">
                 <fieldset>
                     <input
@@ -58,16 +58,10 @@
                     v-model="content"
                     placeholder="리뷰를 입력하세요"
                 ></textarea>
-                <input
-                    class="movie-review-form-submit"
-                    type="submit"
-                    value="제출"
-                />
-                <!-- <input
-                    type="image"
+                <img
                     src="./../../assets/images/enter_black.png"
-                    alt=""
-                /> -->
+                    @click="createReview()"
+                />
             </div>
         </form>
     </div>
