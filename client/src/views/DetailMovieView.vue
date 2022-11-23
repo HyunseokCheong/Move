@@ -1,16 +1,10 @@
 <template>
     <div>
-        <!--  -->
-        <!--  -->
         <div class="movie-detail">
             <DetailMovie />
         </div>
         <div class="movie-review-detail">
-            <hr />
-            <h1>리뷰</h1>
-            <hr />
             <DetailReviewForm />
-            <hr />
             <DetailReviewList />
         </div>
     </div>

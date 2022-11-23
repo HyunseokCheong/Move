@@ -1,16 +1,69 @@
 <template>
-    <div>
-        <form @submit.prevent="createReview">
-            <label for="content">내용: </label>
-            <textarea
-                id="content"
-                cols="30"
-                rows="1"
-                v-model="content"
-            ></textarea>
-            <label for="rate">평점 : 0 ~ 5</label>
-            <input type="number" min="0" max="5" id="rate" v-model="rate" />
-            <input type="submit" value="제출" />
+    <div class="movie-review-form-box">
+        <form @submit.prevent="createReview" class="movie-review-form">
+            <div id="myform" class="movie-review-form-rate">
+                <fieldset>
+                    <input
+                        type="radio"
+                        name="rating"
+                        value="5"
+                        id="rate1"
+                        v-model="rate"
+                    /><label for="rate1">
+                        <span class="fa fa-star"></span>
+                    </label>
+                    <input
+                        type="radio"
+                        name="rating"
+                        value="4"
+                        id="rate2"
+                        v-model="rate"
+                    /><label for="rate2">
+                        <span class="fa fa-star"></span
+                    ></label>
+                    <input
+                        type="radio"
+                        name="rating"
+                        value="3"
+                        id="rate3"
+                        v-model="rate"
+                    /><label for="rate3">
+                        <span class="fa fa-star"></span
+                    ></label>
+                    <input
+                        type="radio"
+                        name="rating"
+                        value="2"
+                        id="rate4"
+                        v-model="rate"
+                    /><label for="rate4">
+                        <span class="fa fa-star"></span
+                    ></label>
+                    <input
+                        type="radio"
+                        name="rating"
+                        value="1"
+                        id="rate5"
+                        v-model="rate"
+                    /><label for="rate5">
+                        <span class="fa fa-star"></span
+                    ></label>
+                </fieldset>
+            </div>
+            <div class="movie-review-form-bottom">
+                <textarea
+                    class="movie-review-form-content"
+                    cols="30"
+                    rows="1"
+                    v-model="content"
+                    placeholder="리뷰를 입력하세요"
+                ></textarea>
+                <input
+                    class="movie-review-form-submit"
+                    type="submit"
+                    value="제출"
+                />
+            </div>
         </form>
     </div>
 </template>

@@ -12,8 +12,15 @@
                     <div class="movie-detail-descriptions-top-left">
                         <div class="movie-detail-title">
                             {{ movie.movie.title }}
+                            <div class="titie-star-rate">
+                                <span class="fa fa-star movie-star"></span>
+                                <span style="margin-left: 10px">
+                                    {{ movie.movie.vote_average }}
+                                </span>
+                            </div>
                         </div>
                         <div class="movie-genres">
+                            <span class="movie-sub">개요</span>
                             <span v-for="(genre, i) in genres" :key="i">
                                 <router-link
                                     :to="{
@@ -34,9 +41,11 @@
                             </span>
                         </div>
                         <div class="movie-release-date">
-                            개봉 : {{ movie.movie.release_date }}
+                            <span class="movie-sub">개봉</span>
+                            {{ movie.movie.release_date }}
                         </div>
                         <div class="movie-directors">
+                            <span class="movie-sub">감독</span>
                             <span v-for="(director, i) in directors" :key="i">
                                 <router-link
                                     :to="{
@@ -57,6 +66,7 @@
                             </span>
                         </div>
                         <div class="movie-actors">
+                            <span class="movie-sub">출연</span>
                             <span v-for="(actor, i) in actors" :key="i">
                                 <router-link
                                     :to="{
@@ -77,17 +87,9 @@
                             </span>
                         </div>
                     </div>
-                    <div class="movie-detial-decriptions-top-right">
-                        <div>
-                            <span class="fa fa-star movie-star"></span>
-                            <div id="movie-score">
-                                {{ movie.movie.vote_average }}
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="movie-detail-descriptions-overviews">
-                    <div class="movie-detail-overview-header">줄거리</div>
+                    <div class="movie-sub">줄거리</div>
                     <div class="movie-detail-overview-body">
                         {{ movie.movie.overview }}
                     </div>
@@ -95,52 +97,26 @@
             </div>
         </div>
 
-        <!-- <div class="movie-detail-body" v-if="movie">
-            <div class="movie-detail-poster" >
-                
-            </div>
-            <div class="movie-detail-info">
-                <div class="movie-detail-info-header">
-                    <div class="movie-detail-info-header-left">
-                        
-                            
-                        </div>
-                        
-                        </span>
-                        <div class="movie-score">
-                            
-                        </div>
-                        <div v-if="state == 0">
-                            <button @click="like()">좋아요</button>
-                            <button @click="dislike()">싫어요</button>
-                            <button @click="addWishList()">찜하기</button>
-                        </div>
-                        <div v-if="state == 1">
-                            <button @click="like()">좋아요 취소</button>
-                            <button @click="dislike()">싫어요</button>
-                            <button @click="addWishList()">찜하기</button>
-                        </div>
-                        <div v-if="state == 2">
-                            <button @click="like()">좋아요</button>
-                            <button @click="dislike()">싫어요 취소</button>
-                            <button @click="addWishList()">찜하기</button>
-                        </div>
-                        <div v-if="state == 3">
-                            <button @click="like()">좋아요</button>
-                            <button @click="dislike()">싫어요</button>
-                            <button @click="addWishList()">찜하기 취소</button>
-                        </div>
-                        <div class="movie-detail-overview-header">
-                            줄거리
-                        </div>
-                        <hr>
-                        <div class="movie-detail-overview-body">
-                            {{ movie.movie.overview }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+        <div v-if="state == 0">
+            <button @click="like()">좋아요</button>
+            <button @click="dislike()">싫어요</button>
+            <button @click="addWishList()">찜하기</button>
+        </div>
+        <div v-if="state == 1">
+            <button @click="like()">좋아요 취소</button>
+            <button @click="dislike()">싫어요</button>
+            <button @click="addWishList()">찜하기</button>
+        </div>
+        <div v-if="state == 2">
+            <button @click="like()">좋아요</button>
+            <button @click="dislike()">싫어요 취소</button>
+            <button @click="addWishList()">찜하기</button>
+        </div>
+        <div v-if="state == 3">
+            <button @click="like()">좋아요</button>
+            <button @click="dislike()">싫어요</button>
+            <button @click="addWishList()">찜하기 취소</button>
+        </div>
     </div>
 </template>
 
@@ -165,9 +141,6 @@ export default {
         },
         poster_path() {
             return `https://www.themoviedb.org/t/p/original${this.movie.movie.poster_path}`;
-        },
-        backdrop_path() {
-            return `https://www.themoviedb.org/t/p/original${this.movie.movie.backdrop_path}`;
         },
         isLogin() {
             return this.$store.getters.isLogin;

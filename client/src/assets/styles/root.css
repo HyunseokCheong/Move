@@ -1,10 +1,16 @@
 :root {
     /* bg */
     --bg-color: hsl(0, 0%, 100%);
-    /* --bg-color: #240046; */
     --callout-bg-color: hsl(0, 0%, 90%);
-    /* text */
-    --header-text-color: hsl(0, 75%, 46%);
+    --comment-bg-color: hsl(0, 0%, 80%);
+    /* text-color */
+    --header-text-color: hsl(0, 0%, 60%);
     --subheader-text-color: hsl(0, 0%, 40%);
     --paragraph-text-color: hsl(0, 0%, 20%);
+    --comment-text-color: hsl(0, 0%, 0%);
+    /* text-font-size */
+    --header-font-size: 65px;
+    --subheader-font-size: 35px;
+    --paragraph-font-size: 20px;
+    --comment-font-size: 15px;
 }

@@ -1,8 +1,7 @@
 .movie-detail {
     display: flex;
-    background-color: grey;
     flex-direction: column;
-    /* background-color: white; */
+    background-color: var(--callout-bg-color);
     margin-left: 10rem;
     margin-right: 10rem;
 }
@@ -47,11 +46,20 @@
     margin-bottom: 15rem;
 }
 .movie-detail-title {
-    margin-top: 1rem;
-    font-size: 40px;
-    color: var(--header-text-color);
+    color: var(--header-font-size);
+    font-size: var(--header-font-size);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
-
+.titie-star-rate {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
 .movie-detail-descriptions-top-left {
     display: flex;
     flex-direction: column;
@@ -60,21 +68,33 @@
     height: 200%;
     padding-left: 4rem;
 }
-
+.movie-sub {
+    color: var(--paragraph-font-size);
+    font-size: var(--paragraph-font-size);
+    font-weight: bold;
+}
 .movie-genres {
-    font-size: 16px;
+    color: var(--paragraph-font-size);
+    font-size: var(--paragraph-font-size);
+    margin-bottom: 5px;
 }
 
 .movie-release-date {
-    margin-bottom: 1rem;
+    color: var(--paragraph-font-size);
+    font-size: var(--paragraph-font-size);
+    margin-bottom: 5px;
 }
 
 .movie-directors {
-    font-size: 22px;
+    color: var(--paragraph-font-size);
+    font-size: var(--paragraph-font-size);
+    margin-bottom: 5px;
 }
 
 .movie-actors {
-    font-size: 16px;
+    color: var(--paragraph-font-size);
+    font-size: var(--paragraph-font-size);
+    margin-bottom: 5px;
 }
 
 .movie-detail-descriptions-top-right {
@@ -82,16 +102,9 @@
     flex-flow: row nowrap;
     align-items: center;
 }
-
-/* #movie-star {
-    margin-top: 1rem;
-    width: 10%;
-} */
-
 #movie-score {
     font-size: 25px;
 }
-
 .movie-detail-descriptions-overviews {
     display: flex;
     flex-direction: column;
@@ -106,7 +119,8 @@
 }
 
 .movie-detail-overview-body {
-    font-size: 16px;
+    color: var(--comment-text-color);
+    font-size: var(--comment-font-size);
     text-align: left;
 }
 
@@ -115,7 +129,6 @@
     width: 450px;
     border: solid 1px solid;
 }
-/* star test */
 .movie-star {
     color: orange;
     font-size: 50px;
@@ -127,11 +140,63 @@
 .unchecked {
     font-size: 20px;
 }
-/* review */
 .movie-review-detail {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+.movie-review-form-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.movie-review-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.movie-review-form-rate {
+    width: 700px;
+    height: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.movie-review-form-content {
+    width: 600px;
+    height: 50px;
+}
+
+.movie-review-form-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.movie-review-form-submit {
+}
+#myform fieldset {
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    direction: rtl; /* 이모지 순서 반전 */
+    border: 0; /* 필드셋 테두리 제거 */
+}
+#myform input[type="radio"] {
+    display: none; /* 라디오박스 감춤 */
+}
+#myform label {
+    color: transparent; /* 기존 이모지 컬러 제거 */
+    text-shadow: 0 0 0 gray; /* 새 이모지 색상 부여 */
+    font-size: 50px;
+}
+#myform label:hover {
+    text-shadow: 0 0 0 orange; /* 마우스 호버 */
+}
+#myform label:hover ~ label {
+    text-shadow: 0 0 0 orange; /* 마우스 호버 뒤에오는 이모지들 */
+}
+#myform input[type="radio"]:checked ~ label {
+    text-shadow: 0 0 0 orange; /* 마우스 클릭 체크 */
 }
 .movie-reviews-box {
     display: flex;
@@ -139,7 +204,7 @@
     justify-content: center;
 }
 .movie-reviews {
-    width: 70%;
+    width: 700px;
 
     display: flex;
     flex-direction: column;
@@ -172,6 +237,8 @@
     justify-content: left;
 }
 .movie-review-top-username {
+    font-size: var(--comment-font-size);
+    color: var(--comment-text-color);
 }
 .movie-review-top-star {
     margin-left: 10px;
@@ -183,5 +250,8 @@
     width: 90%;
 
     word-wrap: break-word;
+    font-size: var(--comment-font-size);
+    color: var(--comment-text-color);
+    margin-top: 10px;
     text-align: left;
 }

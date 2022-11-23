@@ -3,8 +3,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    background-color: var(--bg-color);
-    color: var(--paragraph-text-color);
     z-index: 2;
 }
 .col-sector {
@@ -21,4 +19,8 @@
 }
 .tmp {
     height: 68px;
+}
+a {
+    text-decoration: none;
+    color: var(--paragraph-text-color);
 }
