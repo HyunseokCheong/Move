@@ -65,9 +65,9 @@ export default {
         this.getWishList();
     },
     watch: {
-        getWishList() {
-            this.mock()
-        }
+    wishList() {
+        this.mock()       
+    }
     },
     computed: {
         wishList() {
@@ -83,13 +83,13 @@ export default {
             this.$store.dispatch("getWishList");
         },
         mock(count = 5, append = true) {
-            if (this.wishList.movie.length < 5){
-                count = this.wishList.movie.length
+            if (this.wishList.length < 5){
+                count = this.wishList.length
             }
             const list = []
             console.log(this.wishList)
             for (let i = 0; i < count; i++) {
-                list.push({ poster_path: this.wishList.movie[this.offset].poster_path, movie: this.wishList.movie[this.offset]})
+                list.push({ poster_path: this.wishList[this.offset].poster_path, movie: this.wishList[this.offset]})
                 this.offset++
             }
             if (append) {
@@ -100,7 +100,7 @@ export default {
         },
         onSubmit({ item }) {
             if (this.queue.length < 3) {
-                if (!(this.wishList.movie.length < 3)) {
+                if (!(this.wishList.length < 3)) {
                     this.mock()
                 }   
             }
