@@ -166,8 +166,8 @@ def random(request):
     return Response(context, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-def liked_list(request, user_pk):
-    user = User.objects.get(pk=user_pk)
+def liked_list(request, username):
+    user = User.objects.get(username=username)
     like_movies = RateMovie.objects.filter(rateuser=user, state=1)
     likelist = []
     for like_movie in like_movies.all():
@@ -177,8 +177,8 @@ def liked_list(request, user_pk):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-def reviewed_list(request, user_pk):
-    user = get_object_or_404(User, pk=user_pk)
+def reviewed_list(request, username):
+    user = get_object_or_404(User, username=username)
     reviews = Review.objects.filter(reviewer=user)
     movies = []
     for review in reviews:
