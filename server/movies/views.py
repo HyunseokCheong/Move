@@ -188,8 +188,8 @@ def reviewed_list(request, user_pk):
     return Response(reviewed_movies_serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-def wished_list(request, user_pk):
-    user = User.objects.get(pk=user_pk)
+def wishlist(request):
+    user = request.user
     wish_movies = RateMovie.objects.filter(rateuser=user, state=3)
     wishlist = []
     for wish_movie in wish_movies.all():

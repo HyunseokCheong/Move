@@ -24,7 +24,7 @@ export default new Vuex.Store({
         randoms: [],
         reviewed_list: [],
         liked_list: [],
-        wished_list: [],
+        wish_list: [],
         detail_page_user: null,
         is_following: null,
         state: null,
@@ -308,16 +308,15 @@ export default new Vuex.Store({
                     console.log(err);
                 });
         },
-        getWishList(context, name) {
+        getWishList(context) {
             axios({
                 method: "get",
-                url: `${API_URL}/accounts/wishlist/${name}`,
+                url: `${API_URL}/movies/wishlist/`,
                 headers: {
                     Authorization: `Token ${this.state.token}`,
                 },
             }).then((res) => {
-                this.state.is_following = res.data.is_following
-                context.commit("SET_PROFILE", res.data);
+                context.commit("SET_WISHLIST", res.data);
             });
         },
         getLikedList(context, payload) {
