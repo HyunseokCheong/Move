@@ -1,14 +1,14 @@
 <template>
     <div>
-        <div class="col-sector ranking-height">
+        <div class="col-sector">
             <div v-if="index == 0" class="ranking-left">
-                <img src="../assets/images/goldMedal.png" height="40" />
+                <img src="../assets/images/goldMedal.png" height="35" />
             </div>
             <div v-else-if="index == 1" class="ranking-left">
-                <img src="../assets/images/silverMedal.png" height="40" />
+                <img src="../assets/images/silverMedal.png" height="35" />
             </div>
             <div v-else-if="index == 2" class="ranking-left">
-                <img src="../assets/images/bronzeMedal.png" height="40" />
+                <img src="../assets/images/bronzeMedal.png" height="35" />
             </div>
             <div v-else class="ranking-left">
                 <span>{{ index + 1 }}</span>
