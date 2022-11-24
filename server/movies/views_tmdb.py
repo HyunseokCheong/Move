@@ -5,15 +5,8 @@ from .models import Genre, Movie, Actor, Director
 API_KEY = '2f838d7eacf38adb7504971b083228bf'
 GENRE_URL = 'https://api.themoviedb.org/3/genre/movie/list'
 POPULAR_MOVIE_URL = 'https://api.themoviedb.org/3/movie/popular'
-# CLIENT_ID = 'Lx1trkp9HH9SazNbG55l'
-# CLIENT_SECRET = 'eKScj3bUTK'
 CLIENT_ID = 'xmDJGcXpIFNrLeWkL49T'
 CLIENT_SECRET = 'ztZxi3PlsI'
-# CLIENT_ID = 'UWJrnTy2ZdYkLQh6zYwh'
-# CLIENT_SECRET = 'UKjrxp00_e'
-# CLIENT_ID = 'gNmOLzQIq3HuBt4kZVO1'
-# CLIENT_SECRET = 'ZyrHNYH9HU'
-
 
 def translation(word):      # 네이버 파파고 api를 이용한 영어 -> 한글 번역
     encText = urllib.parse.quote(word)

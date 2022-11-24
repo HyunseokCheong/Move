@@ -4,8 +4,6 @@ from movies.models import Genre, Actor, Director, Movie
 # Create your models here.
 class User(AbstractUser):
     profile_image = models.ImageField(default='images/default.png', upload_to='images/')
-    date_of_birth = models.DateField(blank=True, null=True)
-    rank = models.IntegerField(default=1)
     followings = models.ManyToManyField('self', blank=True, symmetrical=False, related_name='followers')
     favorite_genres = models.ManyToManyField(Genre, blank=True, symmetrical=False, related_name='user')
     favorite_actors = models.ManyToManyField(Actor, blank=True, symmetrical=False, related_name='user')
