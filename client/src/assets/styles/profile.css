@@ -1,0 +1,83 @@
+.profile-card {
+    margin: auto;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 1500px;
+    height: 90%;
+    background-color: white;
+    -webkit-box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+    -moz-box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+    box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+}
+.profile {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.profile-left {
+    width: 30%;
+    height: 100%;
+}
+
+.profile-left-photo {
+    width: 600px;
+}
+.profile-right {
+    margin-left: 50px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.profile-right-top {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.profile-right-top-left {
+    width: 50%;
+}
+.profile-right-top-right {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.profile-right-top-right-1 {
+    width: 100%;
+}
+.profile-right-top-right-2 {
+    width: 100%;
+}
+.profile-right-mid {
+    margin-top: 30px;
+    text-align: left;
+}
+.profile-right-bottom {
+    text-align: left;
+}
+.profile-mid-text {
+    font-size: 20px;
+    color: var(--paragraph-text-color);
+}
+.profile-small-text {
+    margin-left: 10px;
+    font-size: 15px;
+    color: var(--comment-text-color);
+}
+/* button */
+.profile-button {
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+
+    background: var(--gradation-bg-color);
+    color: white;
+    border: 0px;
+    outline: 0px;
+    border-radius: 7px;
+}
