@@ -17,7 +17,7 @@
                             :controls-height="30"
                         >
                             <slide
-                                v-for="(popularmovie, i) in movies"
+                                v-for="(popularmovie, i) in popularMovies"
                                 :index="i"
                                 :key="i"
                             >
@@ -147,15 +147,15 @@ export default {
         };
     },
     created() {
-        this.getMovie();
+        this.getPopularMovie();
         this.getRandom();
         setTimeout(() => {
             this.load();
         }, 3000);
     },
     computed: {
-        movies() {
-            return this.$store.state.movies;
+        poplularMovies() {
+            return this.$store.state.popularMovies;
         },
         randoms() {
             return this.$store.state.randoms;
@@ -174,11 +174,11 @@ export default {
         load() {
             this.isLoaded = true;
         },
-        getMovie() {
-            this.$store.dispatch("getMovie");
+        getPopularMovie() {
+            this.$store.dispatch("getPopularMovie");
         },
-        getRandom() {
-            this.$store.dispatch("getRandom");
+        getRandoms() {
+            this.$store.dispatch("getRandoms");
         },
         booleanChange(popupView) {
             this.popupView = popupView[0];

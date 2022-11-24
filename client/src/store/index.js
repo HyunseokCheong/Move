@@ -14,7 +14,7 @@ export default new Vuex.Store({
         loggedInUser: null,
         profile: null,
         rankings: [],
-        movies: [],
+        popularMovies: [],
         movie: null,
         recommends: [],
         genrePorts: [],
@@ -49,8 +49,8 @@ export default new Vuex.Store({
         SET_RANKINGS(state, rankings) {
             state.rankings = rankings;
         },
-        SET_MOVIES(state, movies) {
-            state.movies = movies.slice(0, 30);
+        SET_POPULAR_MOVIES(state, movies) {
+            state.popularMovies = movies.slice(0, 30);
         },
         SET_MOVIE_DETAIL(state, movie) {
             state.movie = movie;
@@ -167,13 +167,13 @@ export default new Vuex.Store({
                 context.commit("SET_RANKINGS", res.data);
             });
         },
-        getMovie(context) {
+        getPopularMovie(context) {
             axios({
-                url: `${API_URL}/movies/`,
+                url: `${API_URL}/movies/popularmovie/`,
             })
                 .then((res) => {
                     
-                    context.commit("SET_MOVIES", res.data);
+                    context.commit("SET_POPULAR_MOVIES", res.data);
                 })
                 .catch((err) => {
                     console.log(err);

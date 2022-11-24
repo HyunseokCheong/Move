@@ -8,7 +8,7 @@ from rest_framework import status
 from django.db.models import Q
 
 @api_view(['GET'])
-def index(request):
+def popularmovie(request):
     movies = Movie.objects.filter(vote_count__gte=1000, vote_average__gte=7).order_by('?')
     serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
