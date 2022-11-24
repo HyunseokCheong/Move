@@ -64094,5 +64094,497 @@
             3773187
         ]
     }
+},
+{
+    "model": "movies.review",
+    "pk": 1,
+    "fields": {
+        "movies": 22,
+        "reviewer": 2,
+        "content": "추천합니다",
+        "created_at": "2022-11-24T13:06:30.904Z",
+        "updated_at": "2022-11-24T13:06:30.904Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 3,
+    "fields": {
+        "movies": 207703,
+        "reviewer": 2,
+        "content": "재밌어요",
+        "created_at": "2022-11-24T13:07:37.126Z",
+        "updated_at": "2022-11-24T13:07:37.126Z",
+        "rate": 4
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 4,
+    "fields": {
+        "movies": 190859,
+        "reviewer": 2,
+        "content": "추천합니다",
+        "created_at": "2022-11-24T13:07:55.939Z",
+        "updated_at": "2022-11-24T13:07:55.939Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 5,
+    "fields": {
+        "movies": 833097,
+        "reviewer": 3,
+        "content": "재밌어요",
+        "created_at": "2022-11-24T13:11:46.478Z",
+        "updated_at": "2022-11-24T13:11:46.478Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 6,
+    "fields": {
+        "movies": 10625,
+        "reviewer": 3,
+        "content": "최고에요",
+        "created_at": "2022-11-24T13:12:18.286Z",
+        "updated_at": "2022-11-24T13:12:18.286Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 8,
+    "fields": {
+        "movies": 833097,
+        "reviewer": 4,
+        "content": "볼만해요",
+        "created_at": "2022-11-24T13:39:20.241Z",
+        "updated_at": "2022-11-24T13:39:20.241Z",
+        "rate": 4
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 9,
+    "fields": {
+        "movies": 979924,
+        "reviewer": 5,
+        "content": "재밌어요",
+        "created_at": "2022-11-24T13:44:22.217Z",
+        "updated_at": "2022-11-24T13:44:22.217Z",
+        "rate": 4
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 10,
+    "fields": {
+        "movies": 642885,
+        "reviewer": 5,
+        "content": "별로에요",
+        "created_at": "2022-11-24T13:44:41.414Z",
+        "updated_at": "2022-11-24T13:44:41.414Z",
+        "rate": 1
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 11,
+    "fields": {
+        "movies": 408,
+        "reviewer": 6,
+        "content": "그럭저럭이에요",
+        "created_at": "2022-11-24T13:46:37.960Z",
+        "updated_at": "2022-11-24T13:46:37.960Z",
+        "rate": 2
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 12,
+    "fields": {
+        "movies": 406759,
+        "reviewer": 7,
+        "content": "재미없어요",
+        "created_at": "2022-11-24T13:47:44.852Z",
+        "updated_at": "2022-11-24T13:47:44.852Z",
+        "rate": 1
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 13,
+    "fields": {
+        "movies": 399579,
+        "reviewer": 8,
+        "content": "또 보고싶어요",
+        "created_at": "2022-11-24T13:48:57.923Z",
+        "updated_at": "2022-11-24T13:48:57.923Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 14,
+    "fields": {
+        "movies": 773975,
+        "reviewer": 8,
+        "content": "재미없어요",
+        "created_at": "2022-11-24T13:49:17.715Z",
+        "updated_at": "2022-11-24T13:49:17.715Z",
+        "rate": 1
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 15,
+    "fields": {
+        "movies": 497698,
+        "reviewer": 9,
+        "content": "추천해요",
+        "created_at": "2022-11-24T13:49:55.608Z",
+        "updated_at": "2022-11-24T13:49:55.608Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 16,
+    "fields": {
+        "movies": 140300,
+        "reviewer": 11,
+        "content": "별로에요",
+        "created_at": "2022-11-24T14:13:19.380Z",
+        "updated_at": "2022-11-24T14:13:19.380Z",
+        "rate": 1
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 17,
+    "fields": {
+        "movies": 474350,
+        "reviewer": 11,
+        "content": "무서워요",
+        "created_at": "2022-11-24T14:13:42.819Z",
+        "updated_at": "2022-11-24T14:13:42.819Z",
+        "rate": 1
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 18,
+    "fields": {
+        "movies": 522402,
+        "reviewer": 12,
+        "content": "적당해요",
+        "created_at": "2022-11-24T14:14:36.204Z",
+        "updated_at": "2022-11-24T14:14:36.204Z",
+        "rate": 3
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 19,
+    "fields": {
+        "movies": 482373,
+        "reviewer": 13,
+        "content": "무서워요",
+        "created_at": "2022-11-24T14:15:21.911Z",
+        "updated_at": "2022-11-24T14:15:21.911Z",
+        "rate": 4
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 20,
+    "fields": {
+        "movies": 111332,
+        "reviewer": 13,
+        "content": "재미없어요",
+        "created_at": "2022-11-24T14:15:44.119Z",
+        "updated_at": "2022-11-24T14:15:44.119Z",
+        "rate": 1
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 21,
+    "fields": {
+        "movies": 155,
+        "reviewer": 14,
+        "content": "명작이에요",
+        "created_at": "2022-11-24T14:16:28.577Z",
+        "updated_at": "2022-11-24T14:16:28.577Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 22,
+    "fields": {
+        "movies": 4232,
+        "reviewer": 14,
+        "content": "재밌어요",
+        "created_at": "2022-11-24T14:16:52.703Z",
+        "updated_at": "2022-11-24T14:16:52.703Z",
+        "rate": 4
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 23,
+    "fields": {
+        "movies": 353081,
+        "reviewer": 15,
+        "content": "최고에요",
+        "created_at": "2022-11-24T14:17:22.211Z",
+        "updated_at": "2022-11-24T14:17:22.211Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 24,
+    "fields": {
+        "movies": 1018648,
+        "reviewer": 16,
+        "content": "감동이에요",
+        "created_at": "2022-11-24T14:18:57.344Z",
+        "updated_at": "2022-11-24T14:18:57.344Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 25,
+    "fields": {
+        "movies": 351286,
+        "reviewer": 17,
+        "content": "즐거워요",
+        "created_at": "2022-11-24T14:20:00.069Z",
+        "updated_at": "2022-11-24T14:20:00.069Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 26,
+    "fields": {
+        "movies": 12230,
+        "reviewer": 19,
+        "content": "재밌어요",
+        "created_at": "2022-11-24T14:20:41.501Z",
+        "updated_at": "2022-11-24T14:20:41.501Z",
+        "rate": 4
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 27,
+    "fields": {
+        "movies": 862965,
+        "reviewer": 21,
+        "content": "또 보고싶어요",
+        "created_at": "2022-11-24T14:21:37.614Z",
+        "updated_at": "2022-11-24T14:21:37.614Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 28,
+    "fields": {
+        "movies": 400160,
+        "reviewer": 20,
+        "content": "볼만해요",
+        "created_at": "2022-11-24T14:22:57.377Z",
+        "updated_at": "2022-11-24T14:22:57.377Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 29,
+    "fields": {
+        "movies": 613504,
+        "reviewer": 18,
+        "content": "또 보고싶어요",
+        "created_at": "2022-11-24T14:23:49.341Z",
+        "updated_at": "2022-11-24T14:23:49.341Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 30,
+    "fields": {
+        "movies": 9806,
+        "reviewer": 2,
+        "content": "별로에요",
+        "created_at": "2022-11-24T14:24:52.321Z",
+        "updated_at": "2022-11-24T14:24:52.321Z",
+        "rate": 1
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 31,
+    "fields": {
+        "movies": 118,
+        "reviewer": 2,
+        "content": "싫어요",
+        "created_at": "2022-11-24T14:25:05.176Z",
+        "updated_at": "2022-11-24T14:25:05.176Z",
+        "rate": 1
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 32,
+    "fields": {
+        "movies": 1865,
+        "reviewer": 2,
+        "content": "명작이에요",
+        "created_at": "2022-11-24T14:25:19.476Z",
+        "updated_at": "2022-11-24T14:25:19.476Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 33,
+    "fields": {
+        "movies": 15165,
+        "reviewer": 2,
+        "content": "최악이에요",
+        "created_at": "2022-11-24T14:25:38.031Z",
+        "updated_at": "2022-11-24T14:25:38.031Z",
+        "rate": 1
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 34,
+    "fields": {
+        "movies": 1771,
+        "reviewer": 2,
+        "content": "볼만해요",
+        "created_at": "2022-11-24T14:27:14.141Z",
+        "updated_at": "2022-11-24T14:27:14.141Z",
+        "rate": 4
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 35,
+    "fields": {
+        "movies": 299536,
+        "reviewer": 2,
+        "content": "명작이에요",
+        "created_at": "2022-11-24T14:34:20.702Z",
+        "updated_at": "2022-11-24T14:34:20.702Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 36,
+    "fields": {
+        "movies": 299536,
+        "reviewer": 3,
+        "content": "또 보고싶어요",
+        "created_at": "2022-11-24T14:34:55.825Z",
+        "updated_at": "2022-11-24T14:34:55.825Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 37,
+    "fields": {
+        "movies": 299536,
+        "reviewer": 4,
+        "content": "지루했어요",
+        "created_at": "2022-11-24T14:35:21.626Z",
+        "updated_at": "2022-11-24T14:35:21.626Z",
+        "rate": 1
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 38,
+    "fields": {
+        "movies": 299536,
+        "reviewer": 5,
+        "content": "볼만했어요",
+        "created_at": "2022-11-24T14:35:56.451Z",
+        "updated_at": "2022-11-24T14:35:56.451Z",
+        "rate": 4
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 39,
+    "fields": {
+        "movies": 299536,
+        "reviewer": 6,
+        "content": "최고의 영화에요",
+        "created_at": "2022-11-24T14:36:26.655Z",
+        "updated_at": "2022-11-24T14:36:26.655Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 40,
+    "fields": {
+        "movies": 566525,
+        "reviewer": 2,
+        "content": "괜찮아요",
+        "created_at": "2022-11-24T14:36:57.691Z",
+        "updated_at": "2022-11-24T14:36:57.691Z",
+        "rate": 4
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 41,
+    "fields": {
+        "movies": 58,
+        "reviewer": 2,
+        "content": "볼만해요",
+        "created_at": "2022-11-24T14:37:10.973Z",
+        "updated_at": "2022-11-24T14:37:10.973Z",
+        "rate": 3
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 42,
+    "fields": {
+        "movies": 11970,
+        "reviewer": 2,
+        "content": "명작이에요",
+        "created_at": "2022-11-24T14:37:26.508Z",
+        "updated_at": "2022-11-24T14:37:26.508Z",
+        "rate": 5
+    }
+},
+{
+    "model": "movies.review",
+    "pk": 43,
+    "fields": {
+        "movies": 19995,
+        "reviewer": 2,
+        "content": "최고였어요",
+        "created_at": "2022-11-24T14:37:44.322Z",
+        "updated_at": "2022-11-24T14:37:44.322Z",
+        "rate": 5
+    }
 }
 ]
