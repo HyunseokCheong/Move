@@ -1,7 +1,10 @@
 <template>
     <div class="nav">
         <span>
-            <router-link to="/home" class="nav-font">메인</router-link>
+            <router-link to="/home" class="nav-font">
+                <span style="color: red">M</span>
+                <span style="color: white">ove</span>
+            </router-link>
         </span>
         <span
             ><router-link to="/ranking" class="nav-font">랭킹</router-link>

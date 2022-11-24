@@ -4,19 +4,20 @@
             <div class="index-box-top">
                 <span
                     :class="{ login: !loginForm }"
-                    class="index-box-title"
+                    class="index-box-top-title"
                     @click="loginForm = false"
                     >로그인</span
                 >
                 <span
                     :class="{ login: loginForm }"
-                    class="index-box-title"
+                    class="index-box-top-title"
                     @click="loginForm = true"
                     >회원가입</span
                 >
             </div>
-            <div class="loginbox" v-if="!loginForm">
+            <div class="index-box-mid">
                 <input
+                    class="index-box-mid-input"
                     type="text"
                     @keyup.enter.prevent="logIn"
                     v-model="login.username"
@@ -35,18 +36,18 @@
             <div class="index-box-top">
                 <span
                     :class="{ login: !loginForm }"
-                    class="index-box-title"
+                    class="index-box-top-title"
                     @click="loginForm = false"
                     >로그인</span
                 >
                 <span
                     :class="{ login: loginForm }"
-                    class="index-box-title"
+                    class="index-box-top-title"
                     @click="loginForm = true"
                     >회원가입</span
                 >
             </div>
-            <div id="kayit" class="loginbox" v-if="loginForm">
+            <div class="index-box-mid">
                 <input
                     type="text"
                     v-model="signup.username"
@@ -62,7 +63,7 @@
                     v-model="signup.password2"
                     placeholder="비밀번호 확인"
                 />
-                <button @click.prevent="signUp">회원 가입</button>
+                <button @click.prevent="signUp">회원가입</button>
             </div>
         </div>
     </div>
