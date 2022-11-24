@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="col-sector">
+        <div class="col-sector ranking-height">
             <div v-if="index == 0" class="ranking-left">
                 <img src="../assets/images/goldMedal.png" height="40" />
             </div>
