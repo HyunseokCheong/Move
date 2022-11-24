@@ -109,6 +109,7 @@
                 </div>
                 <SideBar />
             </div>
+            <Footer />
         </div>
     </div>
 </template>
@@ -122,6 +123,7 @@ import { Slide as Slide2 } from "vue-carousel";
 import PopularMovie from "@/components/Main/PopularMovie";
 import Random from "@/components/Main/Random";
 import PopUp from "@/components/Main/PopUp";
+import Footer from "@/components/Footer";
 
 export default {
     name: "HomeView",
@@ -135,6 +137,7 @@ export default {
         PopularMovie,
         Random,
         PopUp,
+        Footer,
     },
     data() {
         return {

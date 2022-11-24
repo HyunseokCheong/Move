@@ -19,18 +19,21 @@
             </div>
             <SideBar />
         </div>
+        <Footer/>
     </div>
 </template>
 
 <script>
 import UserRank from "@/components/UserRank";
 import SideBar from "@/components/SideBar";
+import Footer from '@/components/Footer';
 
 export default {
     name: "RankingView",
     components: {
         SideBar,
         UserRank,
+        Footer,
     },
     created() {
         this.getRanking();
