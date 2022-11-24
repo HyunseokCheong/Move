@@ -218,11 +218,9 @@ export default {
 
 <style scoped>
     h1,h2,h3,h4{
-    font-family:'Montserrat', sans-serif;
     }
 
     p{
-    font-family: 'Libre Baskerville', serif;
     font-size: 20px;
     }
     html,body{

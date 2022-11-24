@@ -32,4 +32,5 @@ export default {
 @import "./assets/styles/moviedetail.css";
 @import "./assets/styles/profile.css";
 @import "./assets/styles/ranking.css";
+@import "./assets/styles/index.css";
 </style>

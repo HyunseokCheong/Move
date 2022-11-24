@@ -1,13 +1,13 @@
 <template>
     <div class="Ranking">
-        <hr />
         <div class="col-sector">
             <SideBar />
             <div class="row-sector ranking-box">
+                <hr />
                 <div class="col-sector">
                     <span class="ranking-left ranking-index">랭킹</span>
                     <span class="ranking-mid ranking-index">ID</span>
-                    <span class="ranking-right ranking-index">리뷰 수</span>
+                    <span class="ranking-right ranking-index">리뷰</span>
                 </div>
                 <hr />
                 <UserRank

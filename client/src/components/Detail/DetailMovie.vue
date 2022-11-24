@@ -8,15 +8,13 @@
                 <div class="movie-detail-descriptions-top">
                     <div class="movie-detail-descriptions-top-left">
                         <div class="movie-detail-title">
-                            <span style="text-align: left">
-                                {{ movie.movie.title }}
+                            <span class="movie-title">{{
+                                movie.movie.title
+                            }}</span>
+                            <span class="fa fa-star movie-star"></span>
+                            <span class="movie-title-vote">
+                                {{ movie.movie.vote_average }}
                             </span>
-                            <div class="titie-star-rate">
-                                <span class="fa fa-star movie-star"></span>
-                                <span style="margin-left: 10px">
-                                    {{ movie.movie.vote_average }}
-                                </span>
-                            </div>
                         </div>
                         <div class="movie-genres">
                             <span class="movie-sub">개요</span>
@@ -41,7 +39,7 @@
                         </div>
                         <div class="movie-release-date">
                             <span class="movie-sub">개봉</span>
-                            {{ movie.movie.release_date }}
+                            <span> {{ movie.movie.release_date }}</span>
                         </div>
                         <div class="movie-directors">
                             <span class="movie-sub">감독</span>
@@ -85,84 +83,85 @@
                                 </router-link>
                             </span>
                         </div>
-                    </div>
-                </div>
-                <div class="movie-detail-descriptions-overviews">
-                    <div class="movie-sub">줄거리</div>
-                    <div class="movie-detail-overview-body">
-                        {{ movie.movie.overview }}
+                        <div class="movie-overview">
+                            <span class="movie-sub">줄거리</span>
+                            <span class="movie-description">{{
+                                movie.movie.overview
+                            }}</span>
+                        </div>
+                        <div class="button-box">
+                            <div v-if="state == 0">
+                                <img
+                                    src="./../../assets/images/like_black.png"
+                                    alt=""
+                                    @click="like()"
+                                />
+                                <img
+                                    src="./../../assets/images/dislike_black.png"
+                                    alt=""
+                                    @click="dislike()"
+                                />
+                                <img
+                                    src="./../../assets/images/bookmark_black.png"
+                                    alt=""
+                                    @click="addWishList()"
+                                />
+                            </div>
+                            <div v-if="state == 1">
+                                <img
+                                    src="./../../assets/images/likeActive_color.png"
+                                    alt=""
+                                    @click="like()"
+                                />
+                                <img
+                                    src="./../../assets/images/dislike_black.png"
+                                    alt=""
+                                    @click="dislike()"
+                                />
+                                <img
+                                    src="./../../assets/images/bookmark_black.png"
+                                    alt=""
+                                    @click="addWishList()"
+                                />
+                            </div>
+                            <div v-if="state == 2">
+                                <img
+                                    src="./../../assets/images/like_black.png"
+                                    alt=""
+                                    @click="like()"
+                                />
+                                <img
+                                    src="./../../assets/images/dislikeActive_color.png"
+                                    alt=""
+                                    @click="dislike()"
+                                />
+                                <img
+                                    src="./../../assets/images/bookmark_black.png"
+                                    alt=""
+                                    @click="addWishList()"
+                                />
+                            </div>
+                            <div v-if="state == 3">
+                                <img
+                                    src="./../../assets/images/like_black.png"
+                                    alt=""
+                                    @click="like()"
+                                />
+                                <img
+                                    src="./../../assets/images/dislike_black.png"
+                                    alt=""
+                                    @click="dislike()"
+                                />
+                                <img
+                                    src="./../../assets/images/removeBookmark_color.png"
+                                    alt=""
+                                    @click="addWishList()"
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div v-if="state == 0" class="buttons-box">
-            <img
-                src="./../../assets/images/like_black.png"
-                alt=""
-                @click="like()"
-            />
-            <img
-                src="./../../assets/images/dislike_black.png"
-                alt=""
-                @click="dislike()"
-            />
-            <img
-                src="./../../assets/images/bookmark_black.png"
-                alt=""
-                @click="addWishList()"
-            />
-        </div>
-        <div v-if="state == 1" class="buttons-box">
-            <img
-                src="./../../assets/images/likeActive_color.png"
-                alt=""
-                @click="like()"
-            />
-            <img
-                src="./../../assets/images/dislike_black.png"
-                alt=""
-                @click="dislike()"
-            />
-            <img
-                src="./../../assets/images/bookmark_black.png"
-                alt=""
-                @click="addWishList()"
-            />
-        </div>
-        <div v-if="state == 2" class="buttons-box">
-            <img
-                src="./../../assets/images/like_black.png"
-                alt=""
-                @click="like()"
-            />
-            <img
-                src="./../../assets/images/dislikeActive_color.png"
-                alt=""
-                @click="dislike()"
-            />
-            <img
-                src="./../../assets/images/bookmark_black.png"
-                alt=""
-                @click="addWishList()"
-            />
-        </div>
-        <div v-if="state == 3" class="buttons-box">
-            <img
-                src="./../../assets/images/like_black.png"
-                alt=""
-                @click="like()"
-            />
-            <img
-                src="./../../assets/images/dislike_black.png"
-                alt=""
-                @click="dislike()"
-            />
-            <img
-                src="./../../assets/images/removeBookmark_black.png"
-                alt=""
-                @click="addWishList()"
-            />
         </div>
     </div>
 </template>

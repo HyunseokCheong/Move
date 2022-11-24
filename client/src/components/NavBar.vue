@@ -1,44 +1,34 @@
 <template>
     <div class="nav">
-        <div class="items">
-            <div class="left">
-                <div class="routers">
-                    <router-link to="/home" class="router">MAIN</router-link>
-                    <router-link to="/ranking" class="router">RANKING</router-link>
-                    <router-link to="/recommend" class="router">추천 영화</router-link>
-                </div>
-            </div>
-            <div class="right">
-                <div class="routers">
-                    <input
-                        v-model="keyword"
-                        id="keyword"
-                        @keypress.enter="search(keyword)"
-                        class="searchInput"
-                        type="search"
-                        placeholder="Search"
-                    />
-                    <img
-                        class="searchButton"
-                        @click="search(keyword)"
-                        type="submit"
-                    />
-                    <router-link
-                        v-if="isLogin"
-                        :to="{
-                            name: 'profile',
-                            params: { name: userName },
-                        }"
-                        class="router"
-                        >{{ userName }}</router-link
-                    >
-                    <p v-if="isLogin" @click="logOut" class="router">LOGOUT</p>
-                    <router-link v-if="!isLogin" to="/" class="router"
-                        >LOGIN</router-link
-                    >
-                </div>
-            </div>
-        </div>
+        <span>
+            <router-link to="/home" class="nav-font">메인</router-link>
+        </span>
+        <span
+            ><router-link to="/ranking" class="nav-font">랭킹</router-link>
+        </span>
+        <span>
+            <router-link to="/recommend" class="nav-font">추천</router-link>
+        </span>
+        <input
+            v-model="keyword"
+            id="keyword"
+            @keypress.enter="search(keyword)"
+            type="search"
+            placeholder="검색"
+            class="searchInput"
+        />
+        <img @click="search(keyword)" type="submit" class="searchButton" />
+        <span>
+            <router-link
+                :to="{
+                    name: 'profile',
+                    params: { name: userName },
+                }"
+                class="nav-font-right"
+                >{{ userName }}</router-link
+            ></span
+        >
+        <span @click="logOut" class="nav-font-right">로그아웃</span>
     </div>
 </template>
 

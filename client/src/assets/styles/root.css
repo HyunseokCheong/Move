@@ -3,12 +3,15 @@
     --bg-color: hsl(0, 0%, 100%);
     --callout-bg-color: hsl(0, 0%, 90%);
     --comment-bg-color: hsl(0, 0%, 80%);
+    --navbar-bg-color: rgb(135, 18, 251);
     /* text-color */
+    --navbar-text-color: hsl(0, 0%, 100%);
     --header-text-color: hsl(0, 0%, 60%);
     --subheader-text-color: hsl(0, 0%, 40%);
     --paragraph-text-color: hsl(0, 0%, 20%);
     --comment-text-color: hsl(0, 0%, 0%);
     /* text-font-size */
+    --navbar-font-size: 35px;
     --header-font-size: 65px;
     --subheader-font-size: 35px;
     --paragraph-font-size: 20px;

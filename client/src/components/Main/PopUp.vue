@@ -10,9 +10,8 @@
                 ></iframe>
             </div>
         </div>
-
         <div class="popupContent">
-            <div class="popup-content-bottom">
+            <div class="popup-content-top">
                 <router-link
                     :to="{ name: 'detail', params: { id: movieObj.id } }"
                 >
@@ -20,32 +19,32 @@
                         movieObj.title
                     }}</span>
                 </router-link>
-                <!-- 공간 부족 : 장르 빼야하나 -->
-                <!-- <br />
                 <span
                     class="popup-content-genre"
                     v-for="(genre, i) in movieObj.genres"
                     :key="i"
                 >
                     {{ genre.name }}
-                </span> -->
+                </span>
             </div>
-
-            <div v-if="state == 0" class="buttons-box">
+            <div v-if="state == 0" class="popup-content-bottom">
                 <img
-                    src="./../../assets/images/like_black.png"
+                    src="./../../assets/images/like_white.png"
                     alt=""
                     @click="like()"
+                    style="height: 40px"
                 />
                 <img
-                    src="./../../assets/images/dislike_black.png"
+                    src="./../../assets/images/dislike_white.png"
                     alt=""
                     @click="dislike()"
+                    style="height: 40px; margin-left: 10px; margin-right: 10px"
                 />
                 <img
-                    src="./../../assets/images/bookmark_black.png"
+                    src="./../../assets/images/bookmark_white.png"
                     alt=""
                     @click="addWishList()"
+                    style="height: 40px"
                 />
             </div>
             <div v-if="state == 1" class="buttons-box">
@@ -53,50 +52,59 @@
                     src="./../../assets/images/likeActive_color.png"
                     alt=""
                     @click="like()"
+                    style="height: 40px"
                 />
                 <img
-                    src="./../../assets/images/dislike_black.png"
+                    src="./../../assets/images/dislike_white.png"
                     alt=""
                     @click="dislike()"
+                    style="height: 40px; margin-left: 10px; margin-right: 10px"
                 />
                 <img
-                    src="./../../assets/images/bookmark_black.png"
+                    src="./../../assets/images/bookmark_white.png"
                     alt=""
                     @click="addWishList()"
+                    style="height: 40px"
                 />
             </div>
             <div v-if="state == 2" class="buttons-box">
                 <img
-                    src="./../../assets/images/like_black.png"
+                    src="./../../assets/images/like_white.png"
                     alt=""
                     @click="like()"
+                    style="height: 40px"
                 />
                 <img
                     src="./../../assets/images/dislikeActive_color.png"
                     alt=""
                     @click="dislike()"
+                    style="height: 40px; margin-left: 10px; margin-right: 10px"
                 />
                 <img
-                    src="./../../assets/images/bookmark_black.png"
+                    src="./../../assets/images/bookmark_white.png"
                     alt=""
                     @click="addWishList()"
+                    style="height: 40px"
                 />
             </div>
             <div v-if="state == 3" class="buttons-box">
                 <img
-                    src="./../../assets/images/like_black.png"
+                    src="./../../assets/images/like_white.png"
                     alt=""
                     @click="like()"
+                    style="height: 40px"
                 />
                 <img
-                    src="./../../assets/images/dislike_black.png"
+                    src="./../../assets/images/dislike_white.png"
                     alt=""
                     @click="dislike()"
+                    style="height: 40px; margin-left: 10px; margin-right: 10px"
                 />
                 <img
-                    src="./../../assets/images/removeBookmark_black.png"
+                    src="./../../assets/images/removeBookmark_color.png"
                     alt=""
                     @click="addWishList()"
+                    style="height: 40px"
                 />
             </div>
             <br />

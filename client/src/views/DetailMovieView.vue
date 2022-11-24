@@ -5,6 +5,7 @@
         </div>
         <div class="movie-review-detail">
             <DetailReviewForm />
+            <hr />
             <DetailReviewList />
         </div>
     </div>
