@@ -150,6 +150,7 @@ export default {
         };
     },
     created() {
+        this.getProfile()
         this.getPopularMovie();
         this.getRandom();
         setTimeout(() => {
@@ -176,6 +177,9 @@ export default {
     methods: {
         load() {
             this.isLoaded = true;
+        },
+        getProfile() {
+            this.$store.dispatch("getProfile", this.$store.state.loggedInUser);
         },
         getPopularMovie() {
             this.$store.dispatch("getPopularMovie");

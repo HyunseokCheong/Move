@@ -18,7 +18,7 @@
 }
 .popupContent {
     width: 375px;
-    height: 100px;
+    height: 140px;
     background-color: black;
     display: flex;
     flex-direction: column;
@@ -26,6 +26,7 @@
 }
 .popup-content-top {
     text-align: left;
+    margin-top:3rem;
     margin-bottom: 10px;
 }
 .popup-content-bottom {
