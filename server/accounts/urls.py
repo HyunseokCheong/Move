@@ -4,6 +4,7 @@ from . import views
 app_name = 'accounts'
 urlpatterns = [
     path('profile/<str:username>/', views.profile, name='profile'),
+    path('image_update/', views.image_update, name="image_update"),
     path('follow/<str:username>/', views.follow, name='follow'),
     path('likegenre/<int:genre_pk>/', views.like_genre, name="likegenre"),
     path('likedirector/<int:director_pk>/', views.like_director, name="likedirector"),

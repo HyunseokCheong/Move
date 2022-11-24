@@ -35,8 +35,8 @@
                 <img src="../../assets/images/rewind.png" @click="decide('rewind')" />
                 <img src="../../assets/images/nope.png" @click="decide('nope')" />
                 <img src="../../assets/images/upArrow_black.png" @click="decide('go')"/>
-                <img src="../../assets/images/wish.png" @click="decide('wish')" />
                 <img src="../../assets/images/like.png" @click="decide('like')" />
+                <img src="../../assets/images/wish.png" @click="decide('wish')" />
             </div>
         </div>
         <div class="end-tinder" v-if="queue.length == 0">

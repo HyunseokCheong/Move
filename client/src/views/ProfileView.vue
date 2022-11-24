@@ -148,6 +148,13 @@
                     </ccarousel>
                 </div>  
             </div>
+            <div v-if="userName == this.$route.params.name" class="user-profile-update">
+                <p v-if="!update_image" @click="imageToggle">프로필 사진 변경하기</p>
+                <div v-if="update_image">
+                    <input type="file" accept="image/*" @change="imageChange"/>
+                    <p @click="imageUpdate">버튼</p>
+                </div>
+            </div>
         </div>
         </div>
         </div>
@@ -170,6 +177,12 @@ export default {
         Slide2,
         UserLikedMovie,
         UserReviewedMovie,
+    },
+    data() {
+        return {
+            update_image: false,
+            file: null,
+        }
     },
     computed: {
         user() {
@@ -211,9 +224,33 @@ export default {
         },
         userFollow() {
             this.$store.dispatch("userFollow", this.$route.params.name);
+        },
+        imageToggle() {
+            this.update_image = true;
+        },
+        imageChange(e) {
+            const file = e.target.files;
+            this.file = file
+            },
+        imageUpdate() {
+            if (this.file == null) {
+                alert("선택된 파일이 없습니다.")
+            }
+            else {
+                const profile_image = new FormData()
+                profile_image.append('profile_image', this.file[0])
+                this.$store.dispatch("imageUpdate", profile_image);
+                this.file = null;
+                this.update_image = false;
+                setTimeout(() => {
+                this.$router.go();
+                }, 1000);
+            }
+
+            
         }
     },
-};
+}
 </script>
 
 <style scoped>

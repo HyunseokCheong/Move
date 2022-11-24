@@ -128,6 +128,17 @@ export default new Vuex.Store({
                 context.commit("SET_PROFILE", res.data);
             });
         },
+        imageUpdate(context, formdata) {
+            axios.post(`${API_URL}/accounts/image_update/`, formdata, {
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+            .then((res) => {
+                console.log(res.data)
+            });
+        },
         userFollow(context, name) {
             axios({
                 method: "get",

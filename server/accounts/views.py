@@ -8,6 +8,7 @@ from .serializers import UserSerializer, RateMovieSerializer
 from movies.serializers import ReviewSerializer
 from movies.models import Review, Actor, Director, Genre, Movie
 from rest_framework import status
+from django.core.files.storage import FileSystemStorage
 
 @api_view(['GET'])
 def profile(request, username):
@@ -29,6 +30,16 @@ def profile(request, username):
     }
     return Response(context, status=status.HTTP_200_OK)
 
+@api_view(['POST', 'FILES'])
+def image_update(request):
+    me = request.user
+    profile_image = request.FILES['profile_image']
+    fs =  FileSystemStorage(location="media/images", base_url="/media/images")
+    fs.save(profile_image, profile_image)
+    me.profile_image = profile_image
+    me.save()
+    return Response('update')
+
 @api_view(['GET'])
 def follow(request, username):
     me = request.user
@@ -40,7 +51,7 @@ def follow(request, username):
         else:
             # 팔로우
             me.followings.add(person)
-    return Response('okay')
+    return Response('follow')
 
 @api_view(['GET'])
 def like_genre(request, genre_pk):
