@@ -21,16 +21,9 @@
             class="searchInput"
         />
         <img @click="search(keyword)" type="submit" class="searchButton" />
-        <span>
-            <router-link
-                :to="{
-                    name: 'profile',
-                    params: { name: userName },
-                }"
-                class="nav-font-right"
-                >{{ userName }}</router-link
-            ></span
-        >
+        <span class="nav-font-right" @click="goProfile">
+            {{ userName }}
+        </span>
         <span @click="logOut" class="nav-font-right">로그아웃</span>
     </div>
 </template>
@@ -68,6 +61,10 @@ export default {
         search(keyword) {
             this.$router.push(`/search/${keyword}`);
         },
+        goProfile() {
+            this.$store.dispatch("getProfile", this.$store.state.loggedInUser);
+            this.$router.push(`/accounts/profile/${this.$store.state.loggedInUser}`);
+        }
     },
 };
 </script>
