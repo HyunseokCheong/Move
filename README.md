@@ -1,143 +1,69 @@
-# PJT
+# MOVE
 
-## [notion](https://www.notion.so/hyunseokcheong/951e458b9ed94af4aeaf30cd5686828b)
+## 목차
 
-## [화면명세서](https://docs.google.com/spreadsheets/d/1I8YnAQ61vXXyNTdPYR1ohM2wtAn5kQncXv8pTv03QeM/edit?usp=sharing)
+1. [개요](#1.개요)
+2. [프로젝트 기간](#2.프로젝트_기간)
+3. [기술 스택](#3.기술_스택)
+4. [팀원](#4.팀원)
+5. [DataBase 설계](#5.DataBase_설계)
+6. [주요 기능](#6.주요_기능)
 
-## [테이블명세서](https://docs.google.com/spreadsheets/d/1iFfvZCt1Z3qaKHjGJlX-Bj7FMwHzMBRPNV4u7omuIBg/edit?usp=sharing)
+ <hr>
 
-## 221110 미팅 01
+## 1. 개요
 
--   영화 추천 아이디어
-    -   영화에 댓글식으로 평점 부여하고 관련 영화 추천
-    -   평점 다수 부여한 유저를 추천하고 해당 유저 관련 영화 추천
--   디자인 계획
-    -   라이트, 다크 테마 + 핑크 + 그레이
-    -   move : 걸어다니는 영화관
--   일정 계획
-    -   기획2, 프론트3, 백3, 테스트2, PT준비1
-    -   ~22.11.13 : 프론트 화면 설계, 백 DB 설계
+-   유저의 취향을 기반으로 영화 추천 서비스 제공
+-   팔로우한 유저를 기반으로 영화 추천 서비스 제공
+-   작성한 리뷰의 개수로 랭킹을 부여하는 커뮤니티 서비스 제공
 
-### Client
+## 2. 프로젝트 기간
 
-> 1. Vue 생성
-> 2. components, views 생성
+-   2022년 11월 17일 ~ 2022년 11월 24일
 
-## 221112
+## 3. 기술 스택
 
-### Client
+-   Framework : [Django 3.2.13](https://docs.djangoproject.com/en/4.1/releases/3.2.13/)
+-   Framework : [Vue 2.7.14](https://github.com/vuejs/vue/releases)
+-   API : [Naver Papago 번역](https://developers.naver.com/products/papago/nmt/nmt.md)
+-   API : [TMDB 영화 조회](https://developers.themoviedb.org/3/movies/get-movie-details)
+-   Language : [Python 3.10.6](https://www.python.org/downloads/release/python-3106/)
+-   Database : [sqlite](https://www.sqlite.org/index.html)
 
-> 1.  axios 설치
-> 2.  API KEY 설정
-> 3.  Vuex 추가
-> 4.  bootstrap 적용
-> 5.  가로스크롤 추가
+## 4. 팀원
 
-## 221115
+-   정현석 (팀장)
+    -   Front-End
+    -   화면 및 데이터 설계
+-   김원웅 (팀원)
+    -   Back-End
+    -   DB 및 API 설계
 
-### Client
+## 5. DataBase 설계
 
-> 1. store/index.js 여러 페이지 추출 적용
-> 2. dispatch 인자에 따라 다른 URL 제공
-> 3. detail 페이지
-> 4. 랭킹 페이지
+![ERD](./readme_assets/ERD.png)
 
-### Server
+## 6. 주요 기능
 
-> 1. movies 앱 작성
-> 2. accounts 앱 작성
-> 3. tmdb api를 이용해 db생성
-> 4. serializer 작성
+`추가예정`
 
-## 221116
-
-### Client
-
-> 1. 구획 표시
-> 2. 랭킹 페이지 구현
-> 3. 디테일 페이지 리뷰 추가
-
-### Server
-
-> 1. reviews 앱 추가
-> 2. db 테이블 수정
-> 3. 프로필 구현
-> 4. 팔로우 기능 구현
-> 5. 감독, 배우, 장르 맞춤 영화 구현
-> 6. 감독, 배우, 장르 좋아요 기능 구현
-
-## 221117
-
-### Client
-
-> 1. 디테일 페이지 새로고침 오류 해결
-> 2. 디테일 페이지 감독, 장르, 배우 추가
-> 3. 리뷰 작성
-> 4. 리뷰에 닉네임 타고 유저디테일 이동
-> 5. 마이페이지 이동
-> 6. 로그인, 로그아웃, 토큰 생성 + 삭제 구현
-> 7. 디테일 페이지 분리
-> 8. 랭킹 구현
-
-### Server
-
-> 1. 영화 좋아요, 싫어요 기능 구현
-> 2. 리뷰 작성 및 삭제 구현
-> 3. db 테이블 수정
-> 4. 영화 추천 알고리즘 구현
-
-## 221118
-
-### Client
-
-> 1. 리뷰 삭제 구현
-> 2. 유저별 리뷰 카운트 구현
-> 3. 프로필 -> 영화
-> 4. 좋아요, 싫어요, 찜하기
-> 5. 팔로우, 언팔로우
-> 6. 감독, 배우, 장르 맞춤 영화 구현
-
-### Server
-
-> 1. 리뷰 카운트 수정
-> 2. 인기영화, 추천영화 노출방식 수정
-> 3. 영화 좋아요, 싫어요 수정 및 찜하기 추가
-> 4. db의 감독 및 배우 데이터 한글로 번역
-
-## 221119
-
-### Client
-
-> 1. nav \*
-> 2. card \*
-> 3. 포트 클릭 인자 전달 \*
-
-### Server
-
-> 1. 유저 모델 수정
-> 2. 영화 모델 수정
-> 3. 검색 기능 추가
-
-## 221120
-
-### Client
-
-> 1. 포트 인자 노출
-> 2. 메인페이지 구성
-> 3. 네비 바
-> 4. 인덱스 페이지
-> 5. 로그인 및 회원가입 변경
-
-### Server
-
-> 1. 랜덤 기능 추가
-
-## 221121
-
-### Client
-
-> 1. 팝업창 구현
-> 2. 틴더 구현
-
-### Server
-
+-   나중에 추가
+-   로그인 / 회원가입
+-   메인 페이지
+    -   팝업
+    -   팝업 좋/싫/찜
+    -   무비 디테일
+    -   무비 디테일 좋/싫/찜
+    -   무비 디테일 리뷰
+    -   무비 디테일 틴더로 이동
+-   틴더
+    -   틴더 좋/싫/찜
+    -   틴더 선호 장르/배우/감독
+-   랭킹
+    -   유저 디테일로 이동
+    -   팔로우
+-   추천
+    -   좋/싫/찜/롤백
+    -   선호 장르 추가
+-   마이 페이지로 이동
+    -   프로필 사진 변경
