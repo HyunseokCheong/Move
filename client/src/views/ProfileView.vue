@@ -10,7 +10,7 @@
                         <span style="font-size: var(--header-font-size)">{{ user.profile.username }}</span
                         ><br />
                         <span style="color: var(--paragraph-text-color); font-size: var(--paragraph-font-size); margin-right: 5px">리뷰 : {{ user.profile.reviews_count }}개 ·</span>
-                        <span style="color: var(--paragraph-text-color); font-size: var(--paragraph-font-size); margin-left: 5px">팔로워 : {{ user.profile.followings.length }}명</span>
+                        <span style="color: var(--paragraph-text-color); font-size: var(--paragraph-font-size); margin-left: 5px">팔로워 : {{follower}}명</span>
                     </div>
                     <!-- 로그인 유저와 페이지 유저 불일치 -->
                     <div v-if="userName != this.$route.params.name" class="profile-right-top-right">
@@ -150,6 +150,9 @@ export default {
         user() {
             return this.$store.state.profile;
         },
+        follower() {
+            return this.$store.state.follower;
+        },
         is_following() {
             return this.$store.state.is_following;
         },
@@ -171,18 +174,22 @@ export default {
     },
     created() {
         this.getProfile();
+        this.getfollowers()
         this.getLikedList();
         this.getReviewedList();
     },
     methods: {
+        getProfile() {
+            this.$store.dispatch("getProfile", this.$route.params.name);
+        },
+        getfollowers() {
+            this.$store.dispatch("getfollowers", this.$route.params.name);
+        },
         getLikedList() {
             this.$store.dispatch("getLikedList", this.$route.params.name);
         },
         getReviewedList() {
             this.$store.dispatch("getReviewedList", this.$route.params.name);
-        },
-        getProfile() {
-            this.$store.dispatch("getProfile", this.$route.params.name);
         },
         userFollow() {
             this.$store.dispatch("userFollow", this.$route.params.name);

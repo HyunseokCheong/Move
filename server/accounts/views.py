@@ -30,6 +30,12 @@ def profile(request, username):
     }
     return Response(context, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def follower(request, username):
+    person = User.objects.get(username=username)
+    follower = User.objects.filter(followings=person).count()
+    return Response(follower, status=status.HTTP_200_OK)
+
 @api_view(['POST', 'FILES'])
 def image_update(request):
     me = request.user

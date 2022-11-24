@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ('username', 'profile_image', 'date_of_birth', 'followings', 'favorite_genres', 'favorite_actors', 'favorite_directors', 'reviews_count')
+        fields = ('username', 'profile_image', 'followings', 'favorite_genres', 'favorite_actors', 'favorite_directors', 'reviews_count')
 
 class RateMovieSerializer(serializers.ModelSerializer):
 

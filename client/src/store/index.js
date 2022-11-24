@@ -13,6 +13,7 @@ export default new Vuex.Store({
         token: null,
         loggedInUser: null,
         profile: null,
+        follower: null,
         rankings: [],
         popularMovies: [],
         movie: null,
@@ -45,6 +46,9 @@ export default new Vuex.Store({
         },
         SET_PROFILE(state, profile) {
             state.profile = profile
+        },
+        SET_FOLLOWERS(state, follower) {
+            state.follower = follower
         },
         SET_RANKINGS(state, rankings) {
             state.rankings = rankings;
@@ -128,6 +132,17 @@ export default new Vuex.Store({
                 context.commit("SET_PROFILE", res.data);
             });
         },
+        getfollowers(context, name) {
+            axios({
+                method: "get",
+                url: `${API_URL}/accounts/profile/follower/${name}`,
+                headers: {
+                    Authorization: `Token ${this.state.token}`,
+                },
+            }).then((res) => {
+                context.commit("SET_FOLLOWERS", res.data);
+            });
+        },
         imageUpdate(context, formdata) {
             axios.post(`${API_URL}/accounts/image_update/`, formdata, {
                 headers: {
@@ -150,9 +165,11 @@ export default new Vuex.Store({
                 .then(() => {
                     if (this.state.is_following == 1) {
                         this.state.is_following = 0
+                        this.state.follower -= 1
                     }
                     else {
                         this.state.is_following = 1
+                        this.state.follower += 1
                     }
                 })
                 .catch((err) => {
