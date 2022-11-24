@@ -28,6 +28,14 @@
     padding-bottom: 50px; */
 }
 .index-box-top {
+    height: auto;
+    background: var(--gradation-bg-color);
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: space-between;
 }
 .index-box-title {
     font-size: var(--subheader-font-size);

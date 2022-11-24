@@ -46,21 +46,24 @@
                     >회원가입</span
                 >
             </div>
-        </div>
-        <div id="kayit" class="loginbox" v-if="loginForm">
-            <h1>회원가입</h1>
-            <input type="text" v-model="signup.username" placeholder="아이디" />
-            <input
-                type="password"
-                v-model="signup.password1"
-                placeholder="비밀번호"
-            />
-            <input
-                type="password"
-                v-model="signup.password2"
-                placeholder="비밀번호 확인"
-            />
-            <button @click.prevent="signUp">회원 가입</button>
+            <div id="kayit" class="loginbox" v-if="loginForm">
+                <input
+                    type="text"
+                    v-model="signup.username"
+                    placeholder="아이디"
+                />
+                <input
+                    type="password"
+                    v-model="signup.password1"
+                    placeholder="비밀번호"
+                />
+                <input
+                    type="password"
+                    v-model="signup.password2"
+                    placeholder="비밀번호 확인"
+                />
+                <button @click.prevent="signUp">회원 가입</button>
+            </div>
         </div>
     </div>
 </template>

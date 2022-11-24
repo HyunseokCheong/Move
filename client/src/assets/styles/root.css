@@ -16,4 +16,10 @@
     --subheader-font-size: 35px;
     --paragraph-font-size: 20px;
     --comment-font-size: 15px;
+    /* gradation */
+    --gradation-bg-color: linear-gradient(
+        to right bottom,
+        rgb(59, 52, 134),
+        rgb(119, 67, 219)
+    );
 }

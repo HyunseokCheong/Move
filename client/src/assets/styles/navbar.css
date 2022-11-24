@@ -11,11 +11,7 @@
     align-items: center;
 
     z-index: 1;
-    background: linear-gradient(
-        to right bottom,
-        rgb(59, 52, 134),
-        rgb(119, 67, 219)
-    );
+    background: var(--gradation-bg-color);
 }
 .nav-font {
     color: var(--navbar-text-color);
