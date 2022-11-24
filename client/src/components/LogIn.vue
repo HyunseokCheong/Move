@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- <div class="index-box" v-if="!loginForm">
+        <div class="index-box" v-if="!loginForm">
             <div class="index-box-top">
                 <span
                     :class="{ login: !loginForm }"
@@ -61,7 +61,7 @@
                 placeholder="비밀번호 확인"
             />
             <button @click.prevent="signUp">회원 가입</button>
-        </div> -->
+        </div>
     </div>
 </template>
 
