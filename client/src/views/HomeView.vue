@@ -154,7 +154,7 @@ export default {
         }, 3000);
     },
     computed: {
-        poplularMovies() {
+        popularMovies() {
             return this.$store.state.popularMovies;
         },
         randoms() {
@@ -177,8 +177,8 @@ export default {
         getPopularMovie() {
             this.$store.dispatch("getPopularMovie");
         },
-        getRandoms() {
-            this.$store.dispatch("getRandoms");
+        getRandom() {
+            this.$store.dispatch("getRandom");
         },
         booleanChange(popupView) {
             this.popupView = popupView[0];
