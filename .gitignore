@@ -1,3 +1,14 @@
+.gitignore
+
+venv/
+.idea/
+.DS_Store/
+production/
+
+venv
+.idea
+.DS_Store
+production
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,vue,vuejs,django,python,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,vue,vuejs,django,python,visualstudiocode
 
